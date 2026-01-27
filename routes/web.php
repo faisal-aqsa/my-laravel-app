@@ -9,6 +9,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\SettingController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -47,6 +48,15 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/update-invoice', 'updateInvoice')->name('update-invoice');
 
             Route::post('/delete-invoice', 'deleteInvoice')->name('delete-invoice');
+        });
+
+        Route::controller(SettingController::class)->group(function() {
+            Route::get('/settings', 'index')->name('settings');
+            Route::get('/add-setting', 'create')->name('add-setting');
+            Route::post('/store-setting', 'storeSetting')->name('store-setting');
+            Route::get('/edit-setting', 'editSetting')->name('edit-setting');
+            Route::post('/update-setting', 'updateSetting')->name('update-setting');
+            Route::post('/delete-client', 'deleteClient')->name('delete-client');
         });
     });
 });

@@ -16,14 +16,20 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.all-clients') }}">
-                        <i data-feather="shopping-cart"></i>
+                        <i class="fas fa-users fa-sm"></i>
                         <span data-key="t-cart">Clients</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('admin.all-invoices') }}">
-                        <i data-feather="shopping-cart"></i>
+                        <i class="fas fa-file-invoice fa-sm"></i>
                         <span data-key="t-cart">Invoice</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.settings') }}">
+                        <i class="fas fa-cog fa-sm"></i>
+                        <span data-key="t-cart">Settings</span>
                     </a>
                 </li>
             </ul>
