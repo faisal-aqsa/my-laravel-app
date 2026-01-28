@@ -23,9 +23,9 @@
         <div class="col-12">
             <div class="card">
                 <x-form-alerts></x-form-alerts>
-                <div class="card-header">
+                <!-- <div class="card-header">
                     <a href="{{ route('admin.add-setting') }}" class="btn btn-primary waves-effect waves-light">Create Setting</a>
-                </div>
+                </div> -->
                 <div class="card-body">
 
                     <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">

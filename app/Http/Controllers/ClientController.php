@@ -40,7 +40,8 @@ class ClientController extends Controller
             'client_name' => 'required|unique:clients,name',
             'client_phone' => 'required|unique:clients,phone',
             'client_email' => 'required|unique:clients,email',
-            'client_address' => 'required'
+            'client_address' => 'required',
+            'client_gst_no' => 'required|unique:clients,gst_no'
         ], [
             'client_name.required' => 'Enter client name', 
             'client_name.unique' => 'This client name is already taken',
@@ -49,6 +50,8 @@ class ClientController extends Controller
             'client_email.required' => 'Enter client email', 
             'client_email.unique' => 'This client email is already taken',
             'client_address.required' => 'Enter Client Address',
+            'client_gst_no.required' => 'Enter GST Number',
+            'client_gst_no.unique' => 'This GST number is already taken',
         ]);
 
         $client = new Client();
@@ -56,6 +59,7 @@ class ClientController extends Controller
         $client->phone = $request->client_phone;
         $client->email = $request->client_email;
         $client->address = $request->client_address;
+        $client->gst_no = $request->client_gst_no;
         $saved = $client->save();
         if($saved) {
             return response()->json(['status' => 1, 'msg' => 'Client Added Successfully']);
@@ -100,7 +104,8 @@ class ClientController extends Controller
             'client_name' => 'required|unique:clients,name,'.$client->id,
             'client_phone' => 'required|unique:clients,phone,'.$client->id,
             'client_email' => 'required|unique:clients,email,'.$client->id,
-            'client_address' => 'required'
+            'client_address' => 'required',
+            'client_gst_no' => 'required|unique:clients,gst_no,'.$client->id
         ], [
             'client_name.required' => 'Enter client name', 
             'client_name.unique' => 'This client name is already taken',
@@ -109,12 +114,15 @@ class ClientController extends Controller
             'client_email.required' => 'Enter client email', 
             'client_email.unique' => 'This client email is already taken',
             'client_address.required' => 'Enter Client Address',
+            'client_gst_no.required' => 'Enter GST Number',
+            'client_gst_no.unique' => 'This GST number is already taken',
         ]);
 
         $client->name = $request->client_name;
         $client->phone = $request->client_phone;
         $client->email = $request->client_email;
         $client->address = $request->client_address;
+        $client->gst_no = $request->client_gst_no;
         $updated = $client->save();
 
         if($updated) {

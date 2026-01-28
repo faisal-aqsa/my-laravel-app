@@ -38,11 +38,23 @@ class SettingController extends Controller
             'setting_gst_no' => 'nullable|string|max:50',
             'setting_website_url' => 'nullable|url|max:255',
             'setting_signature' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'setting_sgst' => 'nullable|numeric|min:0|max:100',
+            'setting_cgst' => 'nullable|numeric|min:0|max:100',
+            'setting_igst' => 'nullable|numeric|min:0|max:100',
         ], [
             'setting_signature.image' => 'The signature must be an image file (png, jpg, jpeg).',
             'setting_signature.mimes' => 'The signature must be a file of type: png, jpg, jpeg.',
             'setting_signature.max' => 'The signature may not be greater than 2MB.',
             'setting_website_url.url' => 'Please enter a valid website URL (including http:// or https://).',
+            'setting_sgst.numeric' => 'SGST must be a number.',
+            'setting_cgst.numeric' => 'CGST must be a number.',
+            'setting_igst.numeric' => 'IGST must be a number.',
+            'setting_sgst.min' => 'SGST cannot be less than 0%.',
+            'setting_cgst.min' => 'CGST cannot be less than 0%.',
+            'setting_igst.min' => 'IGST cannot be less than 0%.',
+            'setting_sgst.max' => 'SGST cannot be more than 100%.',
+            'setting_cgst.max' => 'CGST cannot be more than 100%.',
+            'setting_igst.max' => 'IGST cannot be more than 100%.',
         ]);
 
         if ($validator->fails()) {
@@ -53,7 +65,6 @@ class SettingController extends Controller
         }
 
         try {
-            // Prepare data for storage
             $data = [
                 'name' => $request->setting_name,
                 'phone' => $request->setting_phone,
@@ -61,25 +72,23 @@ class SettingController extends Controller
                 'address' => $request->setting_address,
                 'gst_no' => $request->setting_gst_no,
                 'website_url' => $request->setting_website_url,
+                'sgst' => $request->setting_sgst ?? 9.00,
+                'cgst' => $request->setting_cgst ?? 9.00,
+                'igst' => $request->setting_igst ?? 18.00,
             ];
 
-            // Handle signature image upload
             if ($request->hasFile('setting_signature')) {
-                // Delete old signature if exists (if updating)
                 $existingSetting = Setting::first();
                 if ($existingSetting && $existingSetting->signature) {
-                    Storage::delete($existingSetting->signature);
+                    Storage::delete('public/' . $existingSetting->signature);
                 }
                 
-                // Store new signature
                 $signaturePath = $request->file('setting_signature')->store('uploads', 'public');
                 $data['signature'] = $signaturePath;
             }
 
-            // Since this is settings (typically single record), use firstOrCreate
             $setting = Setting::firstOrCreate([], $data);
             
-            // If setting already exists, update it
             if ($setting->wasRecentlyCreated === false) {
                 $setting->update($data);
             }

@@ -52,6 +52,9 @@
                                                 colspan="1" style="width: 279.2px;"
                                                 aria-label="Position: activate to sort column ascending">Client Email</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                colspan="1" style="width: 279.2px;"
+                                                aria-label="Position: activate to sort column ascending">Client GST Number</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 136.2px;"
                                                 aria-label="Office: activate to sort column ascending">Client Address</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
@@ -69,6 +72,7 @@
                                                 <td class="dtr-control sorting_1" tabindex="0">{{ $client->name }}</td>
                                                 <td>{{ $client->phone }}</td>
                                                 <td>{{ $client->email }}</td>
+                                                <td>{{ $client->gst_no }}</td>
                                                 <td>{{ $client->address }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.edit-client', ['id' => $client->id]) }}" class="text-primary">

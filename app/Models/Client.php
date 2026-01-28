@@ -10,7 +10,8 @@ class Client extends Model
         'name',
         'phone',
         'email',
-        'address'
+        'address',
+        'gst_no'
     ];
 
 }
