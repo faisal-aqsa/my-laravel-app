@@ -44,9 +44,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::get('/add-invoice', 'create')->name('add-invoice');
             Route::post('/store-invoice', 'storeInvoice')->name('store-invoice');
             Route::get('/invoice/{id}/download', 'downloadPDF')->name('invoice-download');
+            Route::get('/invoice/{id}/view', 'viewPDF')->name('invoice-view');
             Route::get('/edit-invoice', 'editInvoice')->name('edit-invoice');
             Route::post('/update-invoice', 'updateInvoice')->name('update-invoice');
-
+            Route::post('/invoices/update-payment', 'updateInvoicePayment')->name('update-invoice-payment');
+            Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
             Route::post('/delete-invoice', 'deleteInvoice')->name('delete-invoice');
         });
 
@@ -61,6 +63,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
     });
 });
 
-
+// Route::get('/test-pdf', function () {
+//     $pdf = \Barryvdh\Snappy\Facades\SnappyPdf::loadHTML('<h1>Hello World!</h1>')
+//         ->setOption('enable-local-file-access', true);
+    
+//     return $pdf->inline('test.pdf');
+// });
 
 
