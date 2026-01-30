@@ -22,9 +22,10 @@
 
         .container {
             width: 100%;
+            height: 297mm;
             /* border: 1px solid black; */
             position: relative;
-            min-height: 297mm; /* A4 height */
+            min-height: 100vh; /* A4 height */
             display: flex;
             flex-direction: column;
         }
@@ -95,7 +96,7 @@
         }
 
         .header-info-table .value-cell {
-            width: 80%;
+            width: 70%;
             text-align: right;
             font-weight: normal;
         }
@@ -323,10 +324,13 @@
 
         /* Footer - FIXED AT BOTTOM */
         .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             background: #000;
             color: #fff;
             padding: 20px 30px;
-            margin-top: auto; 
         }
 
         .footer td {

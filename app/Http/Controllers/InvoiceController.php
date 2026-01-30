@@ -150,7 +150,8 @@ class InvoiceController extends Controller
             ->setOption('margin-bottom', 0)
             ->setOption('margin-left', 0)
             ->setOption('margin-right', 0)
-            ->setOption('page-size', 'A4');
+            ->setOption('page-size', 'A4')
+            ->setOption('disable-smart-shrinking', true);
         
         return $pdf->download('invoice-' . $invoice->invoice_number . '.pdf');
     }
@@ -166,7 +167,8 @@ class InvoiceController extends Controller
             ->setOption('margin-left', 0)
             ->setOption('margin-right', 0)
             ->setOption('page-size', 'A4')
-            ->setOption('orientation', 'Portrait');
+            ->setOption('orientation', 'Portrait')
+            ->setOption('disable-smart-shrinking', true);
         
         // Display inline in browser
         return $pdf->inline('invoice-' . $invoice->invoice_number . '.pdf');

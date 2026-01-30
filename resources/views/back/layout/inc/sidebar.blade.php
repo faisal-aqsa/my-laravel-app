@@ -27,6 +27,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.all-challans') }}">
+                        <i class="fas fa-truck fa-sm"></i>
+                        <span data-key="t-cart">Delivery Challans</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.settings') }}">
                         <i class="fas fa-cog fa-sm"></i>
                         <span data-key="t-cart">Settings</span>

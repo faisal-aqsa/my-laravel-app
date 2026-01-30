@@ -8,8 +8,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DeliveryChallanController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -51,6 +52,18 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
             Route::post('/delete-invoice', 'deleteInvoice')->name('delete-invoice');
             Route::post('/email-invoice', 'emailInvoice')->name('email-invoice');
+        });
+
+        Route::controller(DeliveryChallanController::class)->group(function() {
+            Route::get('/all-challans', 'index')->name('all-challans');
+            Route::get('/add-delivery-challan', 'create')->name('add-delivery-challan');
+            Route::post('/store-delivery-challan', 'storeChallan')->name('store-delivery-challan');
+            Route::get('/delivery-challan/{id}/download', 'downloadPDF')->name('download-delivery-challan');
+            Route::get('/delivery-challan/{id}/view', 'viewPDF')->name('delivery-challan-view');
+            Route::get('/edit-delivery-challan/{id}', 'editDelievryChallan')->name('edit-delivery-challan');
+            Route::post('/update-delivery-challan/{id}', 'updateDeliveryChallan')->name('update-delivery-challan');
+            Route::post('/delete-delivery-challan/{id}', 'destroy')->name('delete-delivery-challan');
+            Route::post('/email-delivery-challan', 'emailDeliveryChallan')->name('email-delivery-challan');
         });
 
         Route::controller(SettingController::class)->group(function() {
