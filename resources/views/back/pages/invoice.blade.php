@@ -1,3 +1,13 @@
+{{-- 
+==============================================================================
+UPDATED INDEX.BLADE.PHP - WITH EMAIL FUNCTIONALITY
+==============================================================================
+
+This shows your COMPLETE index page with email functionality added.
+Changes are marked with ⭐ NEW comments
+==============================================================================
+--}}
+
 @extends('back.layout.pages-layout')
 
 @section('pageTitle', isset($pageTitle) ? $pageTitle : '')
@@ -148,6 +158,7 @@
                                                 <td>{{ $invoice->invoice_date->format('d-m-Y') }}</td>
                                                 <td>{{ $invoice->due_date->format('d-m-Y') }}</td>
                                                 
+                                                {{-- ⭐ NEW: Updated Action Buttons with Email Button --}}
                                                 <td>
                                                     <div class="btn-group" role="group">
                                                         <a href="{{ route('admin.edit-invoice', ['id' => $invoice->id]) }}" 
@@ -155,6 +166,20 @@
                                                            data-bs-toggle="tooltip" title="Edit Invoice">
                                                             <i class="mdi mdi-square-edit-outline"></i>
                                                         </a>
+                                                        
+                                                        {{-- ⭐ NEW: Email Invoice Button --}}
+                                                        <button type="button"
+                                                                class="btn btn-sm btn-outline-info email-invoice-btn"
+                                                                data-invoice-id="{{ $invoice->id }}"
+                                                                data-client-name="{{ $invoice->getClient->name ?? 'N/A' }}"
+                                                                data-client-email="{{ $invoice->getClient->email ?? '' }}"
+                                                                data-invoice-number="{{ $invoice->invoice_number }}"
+                                                                data-grand-total="{{ $invoice->grand_total }}"
+                                                                data-status="{{ ucfirst(str_replace('_', ' ', $invoice->status)) }}"
+                                                                data-bs-toggle="tooltip" title="Email Invoice">
+                                                            <i class="mdi mdi-email-outline"></i>
+                                                        </button>
+                                                        
                                                         <a href="{{ route('admin.invoice-download', $invoice->id) }}" 
                                                            class="btn btn-sm btn-outline-success"
                                                            data-bs-toggle="tooltip" title="Download Invoice">
@@ -276,6 +301,103 @@
         </div>
     </div>
 
+    {{-- ⭐ NEW: Email Invoice Modal --}}
+    <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="emailModalLabel">
+                        <i class="fas fa-envelope me-2"></i>Send Invoice via Email
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="emailInvoiceForm">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" id="email_invoice_id" name="invoice_id">
+                        
+                        <!-- Invoice Information Display -->
+                        <div class="alert alert-info">
+                            <h6 class="alert-heading mb-2">
+                                <i class="fas fa-file-invoice me-1"></i>Invoice Details
+                            </h6>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small class="text-muted">Invoice Number:</small>
+                                    <p class="mb-1"><strong id="email_invoice_number"></strong></p>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Client:</small>
+                                    <p class="mb-1"><strong id="email_client_name"></strong></p>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <small class="text-muted">Amount:</small>
+                                    <p class="mb-0"><strong id="email_grand_total"></strong></p>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Status:</small>
+                                    <p class="mb-0"><strong id="email_status"></strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Email Address Field -->
+                        <div class="mb-3">
+                            <label for="recipient_email" class="form-label">
+                                <i class="fas fa-at me-1"></i>Recipient Email Address <span class="text-danger">*</span>
+                            </label>
+                            <input type="email" class="form-control" id="recipient_email" name="recipient_email" 
+                                   placeholder="Enter email address" required>
+                            <small class="text-muted">
+                                The invoice will be sent to this email address. You can change the default client email if needed.
+                            </small>
+                        </div>
+                        
+                        <!-- CC Email (Optional) -->
+                        <div class="mb-3">
+                            <label for="cc_email" class="form-label">
+                                <i class="fas fa-copy me-1"></i>CC Email (Optional)
+                            </label>
+                            <input type="email" class="form-control" id="cc_email" name="cc_email" 
+                                   placeholder="Enter CC email address (optional)">
+                            <small class="text-muted">Send a copy to another email address.</small>
+                        </div>
+                        
+                        <!-- Custom Message -->
+                        <div class="mb-3">
+                            <label for="email_message" class="form-label">
+                                <i class="fas fa-comment-dots me-1"></i>Custom Message (Optional)
+                            </label>
+                            <textarea class="form-control" id="email_message" name="email_message" rows="3" 
+                                      placeholder="Add a personal message to include in the email..."></textarea>
+                            <small class="text-muted">This message will be displayed in the email body.</small>
+                        </div>
+                        
+                        <!-- Email Preview Info -->
+                        <div class="alert alert-secondary mb-0">
+                            <h6 class="mb-2"><i class="fas fa-info-circle me-1"></i>What will be sent:</h6>
+                            <ul class="mb-0 ps-3">
+                                <li>Professional email template with invoice details</li>
+                                <li>Invoice PDF as attachment</li>
+                                <li>Your custom message (if provided)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-1"></i>Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane me-1"></i>Send Email
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('custom-scripts')
@@ -283,6 +405,8 @@
     $(document).ready(function() {
         // Initialize tooltips
         $('[data-bs-toggle="tooltip"]').tooltip();
+        
+        // ========== EXISTING PAYMENT CODE (Keep as is) ==========
         
         // Show payment modal when edit button is clicked
         $(document).on('click', '.edit-paid-amount', function() {
@@ -513,6 +637,111 @@
         
         // Run overdue check on page load
         checkOverdueInvoices();
+        
+        // ⭐ NEW: Email Invoice Functionality
+        
+        // Handle email invoice button click
+        $(document).on('click', '.email-invoice-btn', function() {
+            var invoiceId = $(this).data('invoice-id');
+            var clientName = $(this).data('client-name');
+            var clientEmail = $(this).data('client-email');
+            var invoiceNumber = $(this).data('invoice-number');
+            var grandTotal = $(this).data('grand-total');
+            var status = $(this).data('status');
+            
+            // Set modal values
+            $('#email_invoice_id').val(invoiceId);
+            $('#email_invoice_number').text(invoiceNumber);
+            $('#email_client_name').text(clientName);
+            $('#email_grand_total').text('₹' + parseFloat(grandTotal).toFixed(2));
+            $('#email_status').text(status.toUpperCase());
+            
+            // Pre-fill recipient email with client's email
+            $('#recipient_email').val(clientEmail);
+            
+            // Clear CC and message fields
+            $('#cc_email').val('');
+            $('#email_message').val('');
+            
+            // Show modal
+            var emailModal = new bootstrap.Modal(document.getElementById('emailModal'));
+            emailModal.show();
+        });
+        
+        // Handle email form submission
+        $('#emailInvoiceForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            var formData = $(this).serialize();
+            var url = "{{ route('admin.email-invoice') }}";
+            
+            // Show loading state
+            var submitBtn = $(this).find('button[type="submit"]');
+            var originalText = submitBtn.html();
+            submitBtn.html('<i class="fas fa-spinner fa-spin me-1"></i>Sending Email...');
+            submitBtn.prop('disabled', true);
+            
+            // Disable cancel button
+            var cancelBtn = $(this).find('button[data-bs-dismiss="modal"]');
+            cancelBtn.prop('disabled', true);
+            
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    submitBtn.html(originalText);
+                    submitBtn.prop('disabled', false);
+                    cancelBtn.prop('disabled', false);
+                    
+                    if (response.status == 1) {
+                        // Close modal
+                        var emailModal = bootstrap.Modal.getInstance(document.getElementById('emailModal'));
+                        emailModal.hide();
+                        
+                        // Show success toast
+                        $('#success .toast-body').text(response.message);
+                        var successToast = new bootstrap.Toast(document.getElementById('success'));
+                        successToast.show();
+                        
+                        // Reset form
+                        $('#emailInvoiceForm')[0].reset();
+                    } else {
+                        $('#danger .toast-body').text(response.message);
+                        var dangerToast = new bootstrap.Toast(document.getElementById('danger'));
+                        dangerToast.show();
+                    }
+                },
+                error: function(xhr) {
+                    submitBtn.html(originalText);
+                    submitBtn.prop('disabled', false);
+                    cancelBtn.prop('disabled', false);
+                    
+                    var errorMessage = 'An error occurred. Please try again.';
+                    
+                    if (xhr.status === 422) {
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessages = [];
+                        $.each(errors, function(field, messages) {
+                            errorMessages.push(messages.join(', '));
+                        });
+                        errorMessage = errorMessages.join('\n');
+                    } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    }
+                    
+                    $('#danger .toast-body').text(errorMessage);
+                    var dangerToast = new bootstrap.Toast(document.getElementById('danger'));
+                    dangerToast.show();
+                }
+            });
+        });
+        
+        // Reset form when modal is hidden
+        $('#emailModal').on('hidden.bs.modal', function () {
+            $('#emailInvoiceForm')[0].reset();
+        });
     });
 </script>
 @endpush

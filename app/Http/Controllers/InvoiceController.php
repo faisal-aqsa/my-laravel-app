@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Setting;
+use App\Mail\InvoiceMail;
 use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Support\Facades\Validator;
 
@@ -349,4 +351,69 @@ class InvoiceController extends Controller
         }
     }
     
+    public function emailInvoice(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'invoice_id' => 'required|exists:invoices,id',
+                'recipient_email' => 'required|email',
+                'cc_email' => 'nullable|email',
+                'email_message' => 'nullable|string|max:1000',
+            ]);
+
+            $invoice = Invoice::with(['invoiceItems', 'getClient'])->findOrFail($validated['invoice_id']);
+
+            $pdf = SnappyPdf::loadView('back.pdf.invoice-pdf', compact('invoice'))
+                ->setOption('enable-local-file-access', true)
+                ->setOption('margin-top', 0)
+                ->setOption('margin-bottom', 0)
+                ->setOption('margin-left', 0)
+                ->setOption('margin-right', 0)
+                ->setOption('page-size', 'A4');
+
+            $tempDir = storage_path('app/temp');
+            if (!file_exists($tempDir)) {
+                mkdir($tempDir, 0755, true);
+            }
+
+            $tempPath = $tempDir . '/invoice-' . $invoice->invoice_number . '-' . time() . '.pdf';
+            $pdf->save($tempPath);
+
+            $customMessage = $validated['email_message'] ?? null;
+
+            // ✅ CORRECT WAY - Build the mail instance first, then send
+            $mail = Mail::to($validated['recipient_email']);
+            
+            if (!empty($validated['cc_email'])) {
+                $mail->cc($validated['cc_email']);
+            }
+            
+            $mail->send(new InvoiceMail($invoice, $tempPath, $customMessage));
+
+            // Clean up temp file
+            if (file_exists($tempPath)) {
+                unlink($tempPath);
+            }
+
+            return response()->json([
+                'status' => 1,
+                'message' => 'Invoice emailed successfully to ' . $validated['recipient_email']
+            ]);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+            
+        } catch (\Exception $e) {
+            Log::error('Invoice Email Error: ' . $e->getMessage());
+            
+            return response()->json([
+                'status' => 0,
+                'message' => 'Failed to send email. Please try again later.'
+            ], 500);
+        }
+    }
 }

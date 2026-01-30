@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Invoice #{{ $invoice->invoice_number }}</title>
+    <link rel="shortcut icon" href="/back/assets/images/favicon.ico">
     <style>
         * {
             margin: 0;

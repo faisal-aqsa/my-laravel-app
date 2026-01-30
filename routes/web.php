@@ -50,6 +50,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/invoices/update-payment', 'updateInvoicePayment')->name('update-invoice-payment');
             Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
             Route::post('/delete-invoice', 'deleteInvoice')->name('delete-invoice');
+            Route::post('/email-invoice', 'emailInvoice')->name('email-invoice');
         });
 
         Route::controller(SettingController::class)->group(function() {
