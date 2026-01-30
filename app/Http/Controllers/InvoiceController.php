@@ -145,14 +145,14 @@ class InvoiceController extends Controller
         $invoice = Invoice::with(['invoiceItems', 'getClient'])->findOrFail($id);
         
         $pdf = SnappyPdf::loadView('back.pdf.invoice-pdf', compact('invoice'))
-            ->setOption('enable-local-file-access', true)
-            ->setOption('margin-top', 0)
-            ->setOption('margin-bottom', 0)
-            ->setOption('margin-left', 0)
-            ->setOption('margin-right', 0)
-            ->setOption('page-size', 'A4')
-            ->setOption('disable-smart-shrinking', true);
-        
+                ->setOption('enable-local-file-access', true)
+                ->setOption('margin-top', 0)
+                ->setOption('margin-bottom', 0)
+                ->setOption('margin-left', 0)
+                ->setOption('margin-right', 0)
+                ->setOption('page-size', 'A4')
+                ->setOption('disable-smart-shrinking', true);
+            
         return $pdf->download('invoice-' . $invoice->invoice_number . '.pdf');
     }
 
@@ -161,14 +161,14 @@ class InvoiceController extends Controller
         $invoice = Invoice::with(['invoiceItems', 'getClient'])->findOrFail($id);
         
         $pdf = SnappyPdf::loadView('back.pdf.invoice-pdf', compact('invoice'))
-            ->setOption('enable-local-file-access', true)
-            ->setOption('margin-top', 0)
-            ->setOption('margin-bottom', 0)
-            ->setOption('margin-left', 0)
-            ->setOption('margin-right', 0)
-            ->setOption('page-size', 'A4')
-            ->setOption('orientation', 'Portrait')
-            ->setOption('disable-smart-shrinking', true);
+                ->setOption('enable-local-file-access', true)
+                ->setOption('margin-top', 0)
+                ->setOption('margin-bottom', 0)
+                ->setOption('margin-left', 0)
+                ->setOption('margin-right', 0)
+                ->setOption('page-size', 'A4')
+                ->setOption('orientation', 'Portrait')
+                ->setOption('disable-smart-shrinking', true);
         
         // Display inline in browser
         return $pdf->inline('invoice-' . $invoice->invoice_number . '.pdf');
@@ -366,12 +366,14 @@ class InvoiceController extends Controller
             $invoice = Invoice::with(['invoiceItems', 'getClient'])->findOrFail($validated['invoice_id']);
 
             $pdf = SnappyPdf::loadView('back.pdf.invoice-pdf', compact('invoice'))
-                ->setOption('enable-local-file-access', true)
-                ->setOption('margin-top', 0)
-                ->setOption('margin-bottom', 0)
-                ->setOption('margin-left', 0)
-                ->setOption('margin-right', 0)
-                ->setOption('page-size', 'A4');
+                    ->setOption('enable-local-file-access', true)
+                    ->setOption('margin-top', 0)
+                    ->setOption('margin-bottom', 0)
+                    ->setOption('margin-left', 0)
+                    ->setOption('margin-right', 0)
+                    ->setOption('page-size', 'A4')
+                    ->setOption('orientation', 'Portrait')
+                    ->setOption('disable-smart-shrinking', true);
 
             $tempDir = storage_path('app/temp');
             if (!file_exists($tempDir)) {

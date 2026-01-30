@@ -214,14 +214,14 @@ class DeliveryChallanController extends Controller
         $settings = \App\Models\Setting::first();
 
         $pdf = SnappyPdf::loadView('back.pdf.delivery-challan-pdf', compact('challan', 'settings'))
-            ->setOption('enable-local-file-access', true)
-            ->setOption('margin-top', 0)
-            ->setOption('margin-bottom', 0)
-            ->setOption('margin-left', 0)
-            ->setOption('margin-right', 0)
-            ->setOption('page-size', 'A4')
-            ->setOption('orientation', 'Portrait')
-            ->setOption('disable-smart-shrinking', true);
+                ->setOption('enable-local-file-access', true)
+                ->setOption('margin-top', 0)
+                ->setOption('margin-bottom', 0)
+                ->setOption('margin-left', 0)
+                ->setOption('margin-right', 0)
+                ->setOption('page-size', 'A4')
+                ->setOption('orientation', 'Portrait')
+                ->setOption('disable-smart-shrinking', true);
 
         return $pdf->download('delivery-challan-' . $challan->challan_number . '.pdf');
     }
@@ -232,14 +232,14 @@ class DeliveryChallanController extends Controller
         $settings = \App\Models\Setting::first();
 
         $pdf = SnappyPdf::loadView('back.pdf.delivery-challan-pdf', compact('challan', 'settings'))
-            ->setOption('enable-local-file-access', true)
-            ->setOption('margin-top', 0)
-            ->setOption('margin-bottom', 0)
-            ->setOption('margin-left', 0)
-            ->setOption('margin-right', 0)
-            ->setOption('page-size', 'A4')
-            ->setOption('orientation', 'Portrait')
-            ->setOption('disable-smart-shrinking', true);
+                ->setOption('enable-local-file-access', true)
+                ->setOption('margin-top', 0)
+                ->setOption('margin-bottom', 0)
+                ->setOption('margin-left', 0)
+                ->setOption('margin-right', 0)
+                ->setOption('page-size', 'A4')
+                ->setOption('orientation', 'Portrait')
+                ->setOption('disable-smart-shrinking', true);
 
         return $pdf->inline('delivery-challan-' . $challan->challan_number . '.pdf');
     }
@@ -261,14 +261,14 @@ class DeliveryChallanController extends Controller
 
             // Generate PDF
             $pdf = SnappyPdf::loadView('back.pdf.delivery-challan-pdf', compact('challan', 'settings'))
-                ->setOption('enable-local-file-access', true)
-                ->setOption('margin-top', 0)
-                ->setOption('margin-bottom', 0)
-                ->setOption('margin-left', 0)
-                ->setOption('margin-right', 0)
-                ->setOption('page-size', 'A4')
-                ->setOption('orientation', 'Portrait')
-                ->setOption('disable-smart-shrinking', true);
+                    ->setOption('enable-local-file-access', true)
+                    ->setOption('margin-top', 0)
+                    ->setOption('margin-bottom', 0)
+                    ->setOption('margin-left', 0)
+                    ->setOption('margin-right', 0)
+                    ->setOption('page-size', 'A4')
+                    ->setOption('orientation', 'Portrait')
+                    ->setOption('disable-smart-shrinking', true);
 
             // Create temp directory if it doesn't exist
             $tempDir = storage_path('app/temp');
