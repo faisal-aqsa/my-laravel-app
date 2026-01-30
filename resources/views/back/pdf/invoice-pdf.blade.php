@@ -25,7 +25,6 @@
             height: 297mm;
             /* border: 1px solid black; */
             position: relative;
-            min-height: 100vh; /* A4 height */
             display: flex;
             flex-direction: column;
         }

@@ -226,23 +226,54 @@ class DeliveryChallanController extends Controller
         return $pdf->download('delivery-challan-' . $challan->challan_number . '.pdf');
     }
 
+    // public function viewPDF($id)
+    // {
+    //     $challan = DeliveryChallan::with(['items', 'client'])->findOrFail($id);
+    //     $settings = \App\Models\Setting::first();
+
+    //     $pdf = SnappyPdf::loadView('back.pdf.delivery-challan-pdf', compact('challan', 'settings'))
+    //             ->setOption('enable-local-file-access', true)
+    //             ->setOption('margin-top', 0)
+    //             ->setOption('margin-bottom', 0)
+    //             ->setOption('margin-left', 0)
+    //             ->setOption('margin-right', 0)
+    //             ->setOption('page-size', 'A4')
+    //             ->setOption('orientation', 'Portrait')
+    //             ->setOption('disable-smart-shrinking', true);
+
+    //     return $pdf->inline('delivery-challan-' . $challan->challan_number . '.pdf');
+    // }
+
     public function viewPDF($id)
     {
         $challan = DeliveryChallan::with(['items', 'client'])->findOrFail($id);
         $settings = \App\Models\Setting::first();
 
-        $pdf = SnappyPdf::loadView('back.pdf.delivery-challan-pdf', compact('challan', 'settings'))
-                ->setOption('enable-local-file-access', true)
-                ->setOption('margin-top', 0)
-                ->setOption('margin-bottom', 0)
-                ->setOption('margin-left', 0)
-                ->setOption('margin-right', 0)
-                ->setOption('page-size', 'A4')
-                ->setOption('orientation', 'Portrait')
-                ->setOption('disable-smart-shrinking', true);
+        $pdf = SnappyPdf::loadView(
+                'back.pdf.delivery-challan-pdf',
+                compact('challan', 'settings')
+            )
+            ->setOption('enable-local-file-access', true)
+            ->setOption('page-size', 'A4')
+            ->setOption('orientation', 'Portrait')
+
+            // margins
+            ->setOption('margin-top', 0)
+            ->setOption('margin-left', 0)
+            ->setOption('margin-right', 0)
+            ->setOption('margin-bottom', 20)
+
+            // footer
+            ->setOption(
+                'footer-html',
+                view('back.pdf.footer', compact('settings'))->render()
+            )
+
+            ->setOption('disable-smart-shrinking', true);
 
         return $pdf->inline('delivery-challan-' . $challan->challan_number . '.pdf');
     }
+
 
     public function emailDeliveryChallan(Request $request)
     {
