@@ -156,21 +156,55 @@ class InvoiceController extends Controller
         return $pdf->download('invoice-' . $invoice->invoice_number . '.pdf');
     }
 
+    // public function viewPDF($id)
+    // {
+    //     $invoice = Invoice::with(['invoiceItems', 'getClient'])->findOrFail($id);
+        
+    //     $pdf = SnappyPdf::loadView('back.pdf.invoice-pdf', compact('invoice'))
+    //             ->setOption('enable-local-file-access', true)
+    //             ->setOption('margin-top', 0)
+    //             ->setOption('margin-bottom', 0)
+    //             ->setOption('margin-left', 0)
+    //             ->setOption('margin-right', 0)
+    //             ->setOption('page-size', 'A4')
+    //             ->setOption('orientation', 'Portrait')
+    //             ->setOption('disable-smart-shrinking', true);
+        
+    //     // Display inline in browser
+    //     return $pdf->inline('invoice-' . $invoice->invoice_number . '.pdf');
+    // }
+
     public function viewPDF($id)
     {
         $invoice = Invoice::with(['invoiceItems', 'getClient'])->findOrFail($id);
         
         $pdf = SnappyPdf::loadView('back.pdf.invoice-pdf', compact('invoice'))
-                ->setOption('enable-local-file-access', true)
-                ->setOption('margin-top', 0)
-                ->setOption('margin-bottom', 0)
-                ->setOption('margin-left', 0)
-                ->setOption('margin-right', 0)
-                ->setOption('page-size', 'A4')
-                ->setOption('orientation', 'Portrait')
-                ->setOption('disable-smart-shrinking', true);
+            // File access
+            ->setOption('enable-local-file-access', true)
+            
+            // Page settings
+            ->setOption('page-size', 'A4')
+            ->setOption('orientation', 'Portrait')
+            
+            // Margins
+            ->setOption('margin-top', 0)
+            ->setOption('margin-bottom', 0)
+            ->setOption('margin-left', 0)
+            ->setOption('margin-right', 0)
+            
+            // CRITICAL: Viewport and rendering options
+            ->setOption('viewport-size', '794x1123')
+            ->setOption('dpi', 96)
+            ->setOption('zoom', 1.0)
+            ->setOption('disable-smart-shrinking', true)
+            
+            // Image quality
+            ->setOption('image-quality', 100)
+            ->setOption('image-dpi', 96)
+            
+            // Encoding
+            ->setOption('encoding', 'UTF-8');
         
-        // Display inline in browser
         return $pdf->inline('invoice-' . $invoice->invoice_number . '.pdf');
     }
 
