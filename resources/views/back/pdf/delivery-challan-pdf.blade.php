@@ -25,8 +25,8 @@
         }
 
         .page-wrapper {
-            width: 794px;
-            /* height: 1123px; */
+            width: 100%;
+            height: 297mm;
             /* border: 1px solid black; */
             position: relative;
             display: flex;
@@ -287,7 +287,7 @@
 
 
         /* Footer - ABSOLUTE POSITION AT BOTTOM */
-        /* .footer {
+        .footer {
             position: fixed;
             bottom: 0;
             left: 0;
@@ -317,7 +317,7 @@
         .footer .right-cell {
             text-align: right;
             width: 33%;
-        } */
+        }
     </style>
 </head>
 
@@ -468,13 +468,13 @@
 
 
         <!-- Footer - ABSOLUTE POSITION AT BOTTOM -->
-        <!-- <table class="footer">
+        <table class="footer">
             <tr>
                 <td class="left-cell">{{ $settings->website_url ?? 'www.company.com' }}</td>
                 <td class="center-cell">{{ $settings->phone ?? '+91 XXXXXXXXXX' }}</td>
                 <td class="right-cell">{{ $settings->email ?? 'email@company.com' }}</td>
             </tr>
-        </table> -->
+        </table>
     </div>
 </body>
 
