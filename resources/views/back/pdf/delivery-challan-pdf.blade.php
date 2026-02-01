@@ -330,8 +330,19 @@
                     <td class="logo-cell">
                         @php
                             $settings = \App\Models\Setting::first();
+                            $logoPath = public_path('images/box-logo.png'); // Changed from assets/images
+                            
+                            if (file_exists($logoPath)) {
+                                $logoData = base64_encode(file_get_contents($logoPath));
+                                $logoSrc = 'data:image/png;base64,' . $logoData;
+                            } else {
+                                $logoSrc = '';
+                            }
                         @endphp
-                        <img src="{{ public_path('assets/images/box-logo.png') }}" alt="Company Logo">
+                        
+                        @if($logoSrc)
+                            <img src="{{ $logoSrc }}" alt="Company Logo" style="width: 150px; height: 150px; object-fit: contain;">
+                        @endif
                         <p>GST: {{ $settings->gst_no ?? 'N/A' }}</p>
                     </td>
                     <td class="challan-header-cell">
@@ -450,28 +461,28 @@
         </div>
 
         <!-- Signature Section (Attached to Footer) -->
-        <!-- <table width="100%" style="margin-top:60px;">
-            <tr>
-                <td width="50%" style="text-align:left; vertical-align:bottom;">
-                    <div style="border-top:1px solid #000; width:220px;"></div>
-                    <p style="margin-top:5px;">STAMP & SIGN</p>
-                </td>
+        <div style="margin-top:60px; overflow:hidden;">
+            <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
+                <p style="margin:0 0 25px 0; font-size:12px; text-align:right; color: #fff;">Your Sincerely</p>
+                <div style="border-top:1px solid #000; width:140px; margin:0;"></div>
+                <p style="margin:5px 0 0 0; font-size:12px; font-weight: bold;">STAMP & SIGN</p>
+            </div>
 
-                <td width="50%" style="text-align:right; vertical-align:bottom;">
-                    <p style="margin-bottom:30px;">Your Sincerely</p>
-                    <div style="border-top:1px solid #000; width:220px; margin-left:auto;"></div>
-                    <p style="margin-top:5px;">BoxMaker</p>
-                </td>
-            </tr>
-        </table> -->
-
+            <div style="float:right; width:50%; padding-right:30px; box-sizing:border-box;">
+                <p style="margin:0 0 25px 0; font-size:12px; text-align:right;">Your Sincerely</p>
+                <div style="border-top:1px solid #000; width:140px; margin:0 0 0 auto;"></div>
+                <p style="margin:5px 0 0 0; font-size:12px; text-align:right; font-weight: bold;">BOXMAKER</p>
+            </div>
+            
+            <div style="clear:both;"></div>
+        </div>
 
 
         <!-- Footer - ABSOLUTE POSITION AT BOTTOM -->
         <table class="footer">
             <tr>
                 <td class="left-cell">{{ $settings->website_url ?? 'www.company.com' }}</td>
-                <td class="center-cell">{{ $settings->phone ?? '+91 XXXXXXXXXX' }}</td>
+                <td class="center-cell">+{{ $settings->phone ?? '+91 XXXXXXXXXX' }}</td>
                 <td class="right-cell">{{ $settings->email ?? 'email@company.com' }}</td>
             </tr>
         </table>
