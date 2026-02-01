@@ -76,7 +76,7 @@
                                         @foreach ($clients as $client)
                                             <option value="{{ $client->id }}" 
                                                 {{ $invoice->client_id == $client->id ? 'selected' : '' }}
-                                                data-address="{{ $client->address }}"
+                                                data-address="{{ $client->factory_address }}"
                                                 data-gst="{{ $client->gst_no ?? '' }}">
                                                 {{ $client->name }}
                                             </option>

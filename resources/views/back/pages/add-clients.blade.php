@@ -64,8 +64,15 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="formrow-firstname-input">Address</label>
-                                    <textarea name="client_address" id="client_address" class="form-control">Enter Client Address</textarea>
+                                    <textarea name="client_address" id="client_address" class="form-control" placeholder="Enter Client Address"></textarea>
                                     <span class="text-danger error-text client_address_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="formrow-firstname-input">Factory Address</label>
+                                    <textarea name="client_factory_address" id="client_factory_address" class="form-control" placeholder="Enter Client Factory Address"></textarea>
+                                    <span class="text-danger error-text client_factory_address_error"></span>
                                 </div>
                             </div>
                         </div>

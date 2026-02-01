@@ -59,6 +59,7 @@ class ClientController extends Controller
         $client->phone = $request->client_phone;
         $client->email = $request->client_email;
         $client->address = $request->client_address;
+        $client->factory_address = $request->client_factory_address;
         $client->gst_no = $request->client_gst_no;
         $saved = $client->save();
         if($saved) {
@@ -122,6 +123,7 @@ class ClientController extends Controller
         $client->phone = $request->client_phone;
         $client->email = $request->client_email;
         $client->address = $request->client_address;
+        $client->factory_address = $request->client_factory_address;
         $client->gst_no = $request->client_gst_no;
         $updated = $client->save();
 

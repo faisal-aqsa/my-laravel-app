@@ -8,7 +8,7 @@
     <div class="d-flex flex-column h-100">
         <div class="mb-4 mb-md-5 text-center">
             <a href="index.html" class="d-block auth-logo">
-                <img src="/back/assets/images/logo-sm.svg" alt="" height="28"> <span class="logo-txt">BoxMaker</span>
+                <img src="/back/assets/images/logo-sm.svg" alt="" height="28"> <span class="logo-txt">BOXMAKER</span>
             </a>
         </div>
         <div class="auth-content my-auto">
@@ -49,7 +49,7 @@
 
         </div>
         <div class="mt-4 mt-md-5 text-center">
-            <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> BoxMaker.</p>
+            <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> BOXMAKER.</p>
         </div>
     </div>
 </div>

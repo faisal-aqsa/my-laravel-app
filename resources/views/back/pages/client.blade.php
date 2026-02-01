@@ -39,27 +39,30 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 186.2px;"
                                                 aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending">Sr No</th>
+                                                aria-label="Sr No: activate to sort column descending">Sr No</th>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 186.2px;"
                                                 aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending">Client Name</th>
+                                                aria-label="Client Name: activate to sort column descending">Client Name</th>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 186.2px;"
                                                 aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending">Client Phone</th>
+                                                aria-label="Client Phone: activate to sort column descending">Client Phone</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 279.2px;"
-                                                aria-label="Position: activate to sort column ascending">Client Email</th>
+                                                aria-label="Client Email: activate to sort column ascending">Client Email</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 279.2px;"
-                                                aria-label="Position: activate to sort column ascending">Client GST Number</th>
+                                                aria-label="Client GST Number: activate to sort column ascending">Client GST Number</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 136.2px;"
-                                                aria-label="Office: activate to sort column ascending">Client Address</th>
+                                                aria-label="Client Address: activate to sort column ascending">Client Address</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                colspan="1" style="width: 136.2px;"
+                                                aria-label="Factory Address: activate to sort column ascending">Factory Address</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 129.2px;"
-                                                aria-label="Start date: activate to sort column ascending">Action
+                                                aria-label="Action: activate to sort column ascending">Action
                                             </th>
                                         </tr>
                                     </thead>
@@ -74,6 +77,7 @@
                                                 <td>{{ $client->email }}</td>
                                                 <td>{{ $client->gst_no }}</td>
                                                 <td>{{ $client->address }}</td>
+                                                <td>{{ $client->factory_address }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.edit-client', ['id' => $client->id]) }}" class="text-primary">
                                                         <i class="mdi mdi-square-edit-outline" style="font-size: 25px"></i>
