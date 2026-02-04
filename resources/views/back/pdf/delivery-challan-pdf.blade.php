@@ -50,13 +50,14 @@
         .logo-cell {
             width: 35%;
             text-align: center;
-            vertical-align: middle;
             padding: 30px 20px;
+            position: relative;
+            vertical-align: top;
         }
 
         .logo-cell img {
-            max-width: 120px;
-            max-height: 100px;
+            max-width: 170px;
+            max-height: 170px;
             margin-bottom: 15px;
             display: block;
             margin-left: auto;
@@ -64,9 +65,18 @@
         }
 
         .logo-cell p {
+            position: absolute;
+            bottom: 0;
+            padding: 5px;
+            left: 0;
+            right: 0;
+            text-align: center;
             font-size: 15px;
-            font-weight: normal;
-            margin-top: 10px;
+            margin: 0;
+            background-color: #000;
+            color: #ffffff;
+            font-weight: bold;
+            letter-spacing: 8px;
         }
 
         .challan-header-cell {
@@ -92,7 +102,7 @@
         }
 
         .header-info-table td {
-            padding: 10px 30px;
+            padding: 5px 20px;
             font-size: 15px;
         }
 
@@ -141,7 +151,7 @@
         /* Items Section */
         .items-section {
             width: 100%;
-            padding: 30px;
+            padding: 15px;
         }
 
         .items-header {
@@ -152,7 +162,7 @@
         }
 
         .items-header td {
-            padding: 15px 10px;
+            padding: 15px 5px;
             font-size: 15px;
         }
 
@@ -182,7 +192,7 @@
         }
 
         .items-table td {
-            padding: 15px 10px;
+            padding: 15px 5px;
             font-size: 15px;
         }
 
@@ -341,7 +351,7 @@
                         @endphp
                         
                         @if($logoSrc)
-                            <img src="{{ $logoSrc }}" alt="Company Logo" style="width: 150px; height: 150px; object-fit: contain;">
+                            <img src="{{ $logoSrc }}" alt="Company Logo" style="width: 200px; height: 200px; object-fit: contain;">
                         @endif
                         <p>GST: {{ $settings->gst_no ?? 'N/A' }}</p>
                     </td>
@@ -426,7 +436,7 @@
                     <tr>
                         <td class="particular-col">PARTICULAR</td>
                         <td class="qty-col">QTY</td>
-                        <td class="total-col">TOTAL (₹)</td>
+                        <!-- <td class="total-col">TOTAL (₹)</td> -->
                     </tr>
                 </table>
 
@@ -436,7 +446,7 @@
                     <tr>
                         <td class="particular-col">{{ $item->particular }}</td>
                         <td class="qty-col">{{ number_format($item->quantity, 2) }}</td>
-                        <td class="total-col">{{ number_format($item->total_amount, 2) }}</td>
+                        <!-- <td class="total-col">{{ number_format($item->total_amount, 2) }}</td> -->
                     </tr>
                     @endforeach
                 </table>
@@ -447,14 +457,14 @@
                         <td class="company-cell">
                             <!-- <h3>For, {{ $settings->name ?? 'Company Name' }}</h3> -->
                         </td>
-                        <td class="total-cell">
+                        <!-- <td class="total-cell">
                             <table>
                                 <tr class="total-row">
                                     <td>Total Amount</td>
                                     <td style="text-align: right;">₹ {{ number_format($challan->total_amount, 2) }}</td>
                                 </tr>
                             </table>
-                        </td>
+                        </td> -->
                     </tr>
                 </table>
             </div>
@@ -476,6 +486,13 @@
             
             <div style="clear:both;"></div>
         </div>
+
+        <!-- Computer Generated Note -->
+
+        <p style="margin-top:20px;text-align:center;font-size:13px;color:#000;">
+            *This is a computer generated delivery challan and does not require signature.
+        </p>
+
 
 
         <!-- Footer - ABSOLUTE POSITION AT BOTTOM -->

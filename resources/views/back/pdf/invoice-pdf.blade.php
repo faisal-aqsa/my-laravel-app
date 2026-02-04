@@ -39,7 +39,7 @@
             width: 100%;
         }
 
-        .logo-cell {
+        /* .logo-cell {
             width: 35%;
             text-align: center;
             vertical-align: middle;
@@ -47,8 +47,8 @@
         }
 
         .logo-cell img {
-            max-width: 120px;
-            max-height: 100px;
+            max-width: 200px;
+            max-height: 200px;
             margin-bottom: 15px;
             display: block;
             margin-left: auto;
@@ -59,6 +59,38 @@
             font-size: 15px;
             font-weight: normal;
             margin-top: 10px;
+        } */
+
+        .logo-cell {
+            width: 35%;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            vertical-align: top;
+        }
+
+        .logo-cell img {
+            max-width: 170px;
+            max-height: 170px;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logo-cell p {
+            position: absolute;
+            bottom: 0;
+            padding: 5px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 15px;
+            margin: 0;
+            background-color: #000;
+            color: #ffffff;
+            font-weight: bold;
+            letter-spacing: 8px;
         }
 
         .invoice-header-cell {
@@ -84,7 +116,7 @@
         }
 
         .header-info-table td {
-            padding: 10px 30px;
+            padding: 5px 20px;
             font-size: 15px;
         }
 
@@ -381,7 +413,7 @@
                     @endphp
                     
                     @if($logoSrc)
-                        <img src="{{ $logoSrc }}" alt="Company Logo" style="width: 150px; height: 150px; object-fit: contain;">
+                        <img src="{{ $logoSrc }}" alt="Company Logo" style="width: 200px; height: 200px; object-fit: contain;">
                     @endif
                     <p>GST: {{ $settings->gst_no ?? 'N/A' }}</p>
                 </td>
@@ -591,19 +623,22 @@
          <!-- Signature Section (Attached to Footer) -->
         <div style="margin-top:60px; overflow:hidden;">
             <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
-                <p style="margin:0 0 25px 0; font-size:12px; text-align:right; color: #fff;">Your Sincerely</p>
+                <p style="margin:0 0 25px 0; font-size:12px; text-align:left;">Your Sincerely</p>
                 <div style="border-top:1px solid #000; width:140px; margin:0;"></div>
-                <p style="margin:5px 0 0 0; font-size:12px; font-weight: bold;">STAMP & SIGN</p>
+                <p style="margin:5px 0 0 0; font-size:12px; font-weight: bold;">BOXMAKER</p>
             </div>
 
-            <div style="float:right; width:50%; padding-right:30px; box-sizing:border-box;">
+            <!-- <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
                 <p style="margin:0 0 25px 0; font-size:12px; text-align:right;">Your Sincerely</p>
                 <div style="border-top:1px solid #000; width:140px; margin:0 0 0 auto;"></div>
                 <p style="margin:5px 0 0 0; font-size:12px; text-align:right; font-weight: bold;">BOXMAKER</p>
-            </div>
+            </div> -->
             
             <div style="clear:both;"></div>
         </div>
+        <p style="margin-top:10px;text-align:center;font-size:13px;color:#000;">
+            *This is a computer generated invoice and does not require signature.
+        </p>
 
         <!-- Footer - FIXED AT BOTTOM -->
         <table class="footer">
