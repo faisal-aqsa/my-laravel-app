@@ -120,13 +120,13 @@
         }
 
         .header-info-table .label-cell {
-            width: 30%;
-            font-weight: 700;
+            width: 35%;
+            font-weight: 500;
             text-align: left;
         }
 
         .header-info-table .value-cell {
-            width: 70%;
+            width: 65%;
             text-align: right;
             font-weight: normal;
         }
