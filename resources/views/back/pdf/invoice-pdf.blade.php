@@ -433,13 +433,13 @@
                         </tr>
                         @if($invoice->vehicle_no)
                         <tr>
-                            <td class="label-cell">Vehicle No.:</td>
+                            <td class="label-cell">Vehicle No:</td>
                             <td class="value-cell">{{ $invoice->vehicle_no }}</td>
                         </tr>
                         @endif
                         @if($invoice->po_number)
                         <tr>
-                            <td class="label-cell">PO No.:</td>
+                            <td class="label-cell">PO No:</td>
                             <td class="value-cell">{{ $invoice->po_number }}</td>
                         </tr>
                         @endif
