@@ -555,18 +555,18 @@
                                 function amountToWords($amount) {
                                     $rupees = floor($amount);
                                     $paise = round(($amount - $rupees) * 100);
-
+                                    
                                     $words = numberToWords($rupees) . ' Rupees';
-
                                     if ($paise > 0) {
-                                        $words .= "<br>and " . numberToWords($paise) . ' Paise';
+                                        $words .= ' and ' . numberToWords($paise) . ' Paise';
                                     }
-
                                     return $words . ' Only';
                                 }
-
                             @endphp
-                            {{ amountToWords($invoice->grand_total) }}
+                            <p style="max-width:400px; white-space:normal;">
+                                {{ amountToWords($invoice->grand_total) }}
+                            </p>
+
                         </p>
                         <!-- <h3>For, {{ $settings->name ?? 'Company Name' }}</h3> -->
                     </td>
