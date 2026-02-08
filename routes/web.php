@@ -2,14 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PaymentHistoryController;
 use App\Http\Controllers\DeliveryChallanController;
 
@@ -53,7 +49,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
             Route::post('/delete-invoice', 'deleteInvoice')->name('delete-invoice');
             Route::post('/email-invoice', 'emailInvoice')->name('email-invoice');
-            Route::get('/payment-history', 'paymentHistory')->name('payment-history');
         });
 
         Route::controller(PaymentHistoryController::class)->group(function() {

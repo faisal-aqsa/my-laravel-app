@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.payment-history') }}">
+                    <a href="{{ route('admin.all-payment-history') }}">
                         <i class="fas fa-file-invoice-dollar fa-sm"></i>
                         <span data-key="t-cart">Payment History</span>
                     </a>
