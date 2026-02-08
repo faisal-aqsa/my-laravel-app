@@ -6,7 +6,7 @@
     <title>Invoice #{{ $invoice->invoice_number }}</title>
     <link rel="shortcut icon" href="/back/assets/images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -390,7 +390,7 @@
             margin-top:8px; 
             font-weight:bold; 
             font-style:italic; 
-            font-family: 'Kaushan Script', cursive; 
+            font-family: 'Lobster', cursive;
             display:flex; 
             align-items:center; 
             gap:6px;
