@@ -6,6 +6,7 @@
     <title>Invoice #{{ $invoice->invoice_number }}</title>
     <link rel="shortcut icon" href="/back/assets/images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -389,10 +390,11 @@
             margin-top:8px; 
             font-weight:bold; 
             font-style:italic; 
-            font-family:cursive; 
+            font-family: 'Brush Script MT', 'Lucida Handwriting', 'Apple Chancery', cursive;
             display:flex; 
             align-items:center; 
             gap:6px;
+            font-size: 20px;
         }
 
         /* Page break settings for PDF */
