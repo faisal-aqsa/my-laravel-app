@@ -390,11 +390,11 @@
             margin-top:8px; 
             font-weight:bold; 
             font-style:italic; 
-            font-family: 'Brush Script MT', 'Lucida Handwriting', 'Apple Chancery', cursive;
+            font-family: 'Brush Script MT', 'Lucida Handwriting', 'Apple Chancery', cursive; 
             display:flex; 
             align-items:center; 
             gap:6px;
-            font-size: 20px;
+            font-size: 16px; /* Adjust as needed */
         }
 
         /* Page break settings for PDF */
