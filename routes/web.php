@@ -57,6 +57,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
         Route::controller(PaymentHistoryController::class)->group(function() {
             Route::get('/all-payment-history', 'index')->name('all-payment-history');
+            
         });
 
         Route::controller(DeliveryChallanController::class)->group(function() {
