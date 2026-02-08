@@ -53,11 +53,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
             Route::post('/delete-invoice', 'deleteInvoice')->name('delete-invoice');
             Route::post('/email-invoice', 'emailInvoice')->name('email-invoice');
+            Route::get('/payment-history', 'paymentHistory')->name('payment-history');
         });
 
         Route::controller(PaymentHistoryController::class)->group(function() {
             Route::get('/all-payment-history', 'index')->name('all-payment-history');
-            
+
         });
 
         Route::controller(DeliveryChallanController::class)->group(function() {

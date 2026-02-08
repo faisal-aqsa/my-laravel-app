@@ -422,4 +422,16 @@ class InvoiceController extends Controller
             ], 500);
         }
     }
+
+    public function paymentHistory(Request $request)
+    {
+        $data = [
+            'pageTitle' => 'Payment History',
+            'payments' => PaymentHistory::with('invoice')
+                ->latest()
+                ->get()
+        ];
+
+        return view('back.pages.payment-history', $data);
+    }
 }
