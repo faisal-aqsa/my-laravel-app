@@ -90,7 +90,6 @@
             background-color: #000;
             color: #ffffff;
             font-weight: bold;
-            letter-spacing: 8px;
         }
 
         .invoice-header-cell {
