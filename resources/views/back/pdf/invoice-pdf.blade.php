@@ -563,10 +563,7 @@
                                     return $words . ' Only';
                                 }
                             @endphp
-                            <p style="max-width:400px; white-space:normal;">
-                                {{ amountToWords($invoice->grand_total) }}
-                            </p>
-
+                            {{ amountToWords($invoice->grand_total) }}
                         </p>
                         <!-- <h3>For, {{ $settings->name ?? 'Company Name' }}</h3> -->
                     </td>
