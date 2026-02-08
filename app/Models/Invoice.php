@@ -84,4 +84,9 @@ class Invoice extends Model
         
         return $vehicleNo;
     }
+
+    public function paymentHistories()
+    {
+        return $this->hasMany(PaymentHistory::class);
+    }
 }

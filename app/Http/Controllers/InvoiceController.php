@@ -8,6 +8,7 @@ use App\Models\Setting;
 use App\Mail\InvoiceMail;
 use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
+use App\Models\PaymentHistory;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -19,7 +20,7 @@ class InvoiceController extends Controller
     public function index(Request $request) {
         $data = [
             'pageTitle' => 'All Invoice',
-            'invoices' => Invoice::all()
+            'invoices' => Invoice::latest()->get()
         ];
 
         return view('back.pages.invoice', $data);
@@ -324,15 +325,15 @@ class InvoiceController extends Controller
             $invoice->save();
             
             // Create payment record (optional)
-            // PaymentHistory::create([
-            //     'invoice_id' => $invoice->id,
-            //     'amount' => $request->amount_to_pay,
-            //     'payment_date' => $request->payment_date,
-            //     'payment_type' => $request->payment_type,
-            //     'notes' => $request->notes,
-            //     'previous_balance' => $invoice->paid_amount - $request->amount_to_pay,
-            //     'new_balance' => $invoice->grand_total - $newPaidAmount,
-            // ]);
+            PaymentHistory::create([
+                'invoice_id' => $invoice->id,
+                'amount' => $request->amount_to_pay,
+                'payment_date' => $request->payment_date,
+                'payment_type' => $request->payment_type,
+                'notes' => $request->notes,
+                'previous_balance' => $invoice->paid_amount - $request->amount_to_pay,
+                'new_balance' => $invoice->grand_total - $newPaidAmount,
+            ]);
 
             return response()->json([
                 'status' => 1,

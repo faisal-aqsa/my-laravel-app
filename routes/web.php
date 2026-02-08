@@ -10,6 +10,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PaymentHistoryController;
 use App\Http\Controllers\DeliveryChallanController;
 
 // Route::get('/', function () {
@@ -52,6 +53,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
             Route::post('/delete-invoice', 'deleteInvoice')->name('delete-invoice');
             Route::post('/email-invoice', 'emailInvoice')->name('email-invoice');
+        });
+
+        Route::controller(PaymentHistoryController::class)->group(function() {
+            Route::get('/all-payment-history', 'index')->name('all-payment-history');
         });
 
         Route::controller(DeliveryChallanController::class)->group(function() {

@@ -1,13 +1,3 @@
-{{-- 
-==============================================================================
-UPDATED INDEX.BLADE.PHP - WITH EMAIL FUNCTIONALITY
-==============================================================================
-
-This shows your COMPLETE index page with email functionality added.
-Changes are marked with ⭐ NEW comments
-==============================================================================
---}}
-
 @extends('back.layout.pages-layout')
 
 @section('pageTitle', isset($pageTitle) ? $pageTitle : '')

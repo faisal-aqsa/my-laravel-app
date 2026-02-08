@@ -33,6 +33,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.all-payment-history') }}">
+                        <i class="fas fa-file-invoice-dollar fa-sm"></i>
+                        <span data-key="t-cart">Payment History</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.settings') }}">
                         <i class="fas fa-cog fa-sm"></i>
                         <span data-key="t-cart">Settings</span>
