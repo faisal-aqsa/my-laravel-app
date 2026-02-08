@@ -121,7 +121,7 @@
 
         .header-info-table .label-cell {
             width: 30%;
-            font-weight: 500;
+            font-weight: 700;
             text-align: left;
         }
 
@@ -555,13 +555,16 @@
                                 function amountToWords($amount) {
                                     $rupees = floor($amount);
                                     $paise = round(($amount - $rupees) * 100);
-                                    
+
                                     $words = numberToWords($rupees) . ' Rupees';
+
                                     if ($paise > 0) {
-                                        $words .= ' and ' . numberToWords($paise) . ' Paise';
+                                        $words .= "<br>and " . numberToWords($paise) . ' Paise';
                                     }
+
                                     return $words . ' Only';
                                 }
+
                             @endphp
                             {{ amountToWords($invoice->grand_total) }}
                         </p>
