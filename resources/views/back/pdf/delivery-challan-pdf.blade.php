@@ -328,6 +328,16 @@
             text-align: right;
             width: 33%;
         }
+
+        .tag-line {
+            margin-top:8px; 
+            font-weight:bold; 
+            font-style:italic; 
+            font-family:cursive; 
+            display:flex; 
+            align-items:center; 
+            gap:6px;
+        }
     </style>
 </head>
 
@@ -352,7 +362,7 @@
                         
                         @if($logoSrc)
                             <img src="{{ $logoSrc }}" alt="Company Logo" style="width:200px; height:200px; object-fit:contain;">
-                            <p style="margin-top:8px; font-weight:bold; font-style:italic; font-family:cursive; display:flex; align-items:center; gap:6px;">
+                            <p class="tag-line" style="">
                                 We Generally Recycle 
                                 <i class="fas fa-recycle" style="color:black; font-weight:900;"></i>
                             </p>
