@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>Delivery Challan #{{ $challan->challan_number }}</title>
-     <link rel="shortcut icon" href="/back/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/back/assets/images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -333,10 +334,11 @@
             margin-top:8px; 
             font-weight:bold; 
             font-style:italic; 
-            font-family:cursive; 
+            font-family: 'Lobster', cursive;
             display:flex; 
             align-items:center; 
             gap:6px;
+            font-size: 16px; 
         }
     </style>
 </head>
@@ -362,8 +364,8 @@
                         
                         @if($logoSrc)
                             <img src="{{ $logoSrc }}" alt="Company Logo" style="width:200px; height:200px; object-fit:contain;">
-                            <p class="tag-line" style="">
-                                We Generally Recycle 
+                            <p class="tag-line">
+                                We Generally Recycle
                                 <i class="fas fa-recycle" style="color:black; font-weight:900;"></i>
                             </p>
                         @endif
