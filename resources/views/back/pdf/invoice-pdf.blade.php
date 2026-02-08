@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <title>Invoice #{{ $invoice->invoice_number }}</title>
     <link rel="shortcut icon" href="/back/assets/images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -78,7 +79,7 @@
             margin-right: auto;
         }
 
-        .logo-cell p {
+        .logo-cell .gst-p {
             position: absolute;
             bottom: 0;
             padding: 5px;
@@ -106,7 +107,6 @@
             color: #fff;
             padding: 25px 0;
             font-weight: bold;
-            letter-spacing: 10px;
         }
 
         .header-info-table {
@@ -412,9 +412,14 @@
                     @endphp
                     
                     @if($logoSrc)
-                        <img src="{{ $logoSrc }}" alt="Company Logo" style="width: 200px; height: 200px; object-fit: contain;">
+                        <img src="{{ $logoSrc }}" alt="Company Logo" style="width:200px; height:200px; object-fit:contain;">
+                        <p style="margin-top:8px; font-weight:bold; font-style:italic; font-family:cursive; display:flex; align-items:center; gap:6px;">
+                            We Generally Recycle 
+                            <i class="fas fa-recycle" style="color:black; font-weight:900;"></i>
+                        </p>
                     @endif
-                    <p>GST: {{ $settings->gst_no ?? 'N/A' }}</p>
+
+                    <p class="gst-p">GST: {{ $settings->gst_no ?? 'N/A' }}</p>
                 </td>
                 <td class="invoice-header-cell">
                     <div class="head">INVOICE</div>
