@@ -371,7 +371,7 @@
                             </tr>
                             @if($challan->vehicle_no)
                             <tr>
-                                <td class="label-cell">Vehicle No.:</td>
+                                <td class="label-cell">Vehicle No:</td>
                                 <td class="value-cell">{{ $challan->vehicle_no }}</td>
                             </tr>
                             @endif
