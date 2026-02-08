@@ -140,7 +140,7 @@
 
         .buyer-consignee-table td {
             width: 50%;
-            padding: 10px 30px;
+            padding: 15px 30px;
             vertical-align: top;
         }
 
