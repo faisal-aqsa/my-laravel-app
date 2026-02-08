@@ -263,7 +263,7 @@
         }
 
         .words-cell {
-            width: 55%;
+            width: 50%;
             padding-right: 30px;
         }
 
@@ -288,7 +288,7 @@
         }
 
         .amounts-cell {
-            width: 45%;
+            width: 50%;
         }
 
         .amounts-cell > table {
