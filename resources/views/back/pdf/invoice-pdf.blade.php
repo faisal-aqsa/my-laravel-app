@@ -390,7 +390,7 @@
             margin-top:8px; 
             font-weight:bold; 
             font-style:italic; 
-            font-family: 'Brush Script MT', 'Lucida Handwriting', 'Apple Chancery', cursive; 
+            font-family: 'Kaushan Script', cursive; 
             display:flex; 
             align-items:center; 
             gap:6px;
