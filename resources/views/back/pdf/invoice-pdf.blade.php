@@ -428,7 +428,7 @@
                             <td class="value-cell">{{ $invoice->invoice_date->format('d/m/Y') }}</td>
                         </tr>
                         <tr>
-                            <td class="label-cell">Invoice ID:</td>
+                            <td class="label-cell">Invoice No:</td>
                             <td class="value-cell">{{ $invoice->invoice_number }}</td>
                         </tr>
                         @if($invoice->vehicle_no)
