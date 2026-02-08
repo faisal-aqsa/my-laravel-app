@@ -636,7 +636,7 @@
             <div style="clear:both;"></div>
         </div>
         <p style="margin-top:10px;text-align:center;font-size:13px;color:#000;">
-            *This is a computer generated invoice and does not require signature.
+            *This is a computer generated invoice.
         </p>
 
         <!-- Footer - FIXED AT BOTTOM -->

@@ -489,7 +489,7 @@
         <!-- Computer Generated Note -->
 
         <p style="margin-top:20px;text-align:center;font-size:13px;color:#000;">
-            *This is a computer generated delivery challan and does not require signature.
+            *This is a computer generated delivery challan.
         </p>
 
 
