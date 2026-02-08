@@ -643,7 +643,7 @@
         <table class="footer">
             <tr>
                 <td class="left-cell">{{ $settings->website_url ?? 'www.company.com' }}</td>
-                <td class="center-cell">+ {{ $settings->phone ?? '+91 XXXXXXXXXX' }}</td>
+                <td class="center-cell">+{{ $settings->phone ?? '+91 XXXXXXXXXX' }}</td>
                 <td class="right-cell">{{ $settings->email ?? 'email@company.com' }}</td>
             </tr>
         </table>
