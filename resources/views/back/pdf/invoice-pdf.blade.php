@@ -164,7 +164,7 @@
         /* Items Section - FULL WIDTH */
         .items-section {
             width: 100%;
-            padding: 30px;
+            padding: 15px;
             flex: 1; /* This makes it grow to fill available space */
         }
 
@@ -177,7 +177,7 @@
         }
 
         .items-header td {
-            padding: 15px 10px;
+            padding: 10px 10px;
             font-size: 15px;
         }
 
@@ -217,7 +217,7 @@
         }
 
         .items-table td {
-            padding: 15px 10px;
+            padding: 10px 10px;
             font-size: 15px;
         }
 
@@ -301,7 +301,7 @@
         }
 
         .subtotal-row td {
-            padding: 12px 20px;
+            padding: 10px 20px;
             font-size: 16px;
             font-weight: 500;
         }
@@ -315,7 +315,7 @@
         }
 
         .tax-rows-inner tr td {
-            padding: 12px 20px;
+            padding: 10px 20px;
             font-size: 15px;
             border-bottom: 1px solid #ddd;
         }
@@ -327,7 +327,7 @@
         }
 
         .grand-total-row td {
-            padding: 15px 20px;
+            padding: 10px 20px;
             font-size: 17px;
             font-weight: bold;
         }
@@ -643,7 +643,7 @@
         <table class="footer">
             <tr>
                 <td class="left-cell">{{ $settings->website_url ?? 'www.company.com' }}</td>
-                <td class="center-cell">+{{ $settings->phone ?? '+91 XXXXXXXXXX' }}</td>
+                <td class="center-cell">+ {{ $settings->phone ?? '+91 XXXXXXXXXX' }}</td>
                 <td class="right-cell">{{ $settings->email ?? 'email@company.com' }}</td>
             </tr>
         </table>
