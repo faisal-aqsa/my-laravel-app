@@ -263,7 +263,7 @@
         }
 
         .words-cell {
-            width: 50%;
+            width: 45%;
             padding-right: 30px;
         }
 
