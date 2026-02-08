@@ -288,7 +288,7 @@
         }
 
         .amounts-cell {
-            width: 50%;
+            width: 45%;
         }
 
         .amounts-cell > table {
