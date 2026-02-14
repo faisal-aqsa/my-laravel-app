@@ -392,18 +392,6 @@
                                     <td class="value-cell">{{ $challan->vehicle_no }}</td>
                                 </tr>
                             @endif
-                            @if($challan->vehicle_no)
-                                <tr style="display: none;">
-                                    <td class="label-cell">Vehicle No:</td>
-                                    <td class="value-cell">{{ $challan->vehicle_no }}</td>
-                                </tr>
-                            @endif
-                            @if($challan->vehicle_no)
-                                <tr style="display: none;">
-                                    <td class="label-cell">Vehicle No:</td>
-                                    <td class="value-cell">{{ $challan->vehicle_no }}</td>
-                                </tr>
-                            @endif
                         </table>
                     </td>
                 </tr>
