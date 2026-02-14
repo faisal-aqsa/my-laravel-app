@@ -48,6 +48,7 @@
         /* Header Section - Logo LEFT, Details RIGHT */
         .header-table {
             width: 100%;
+            margin-bottom: 25px;
         }
 
         .logo-cell {
