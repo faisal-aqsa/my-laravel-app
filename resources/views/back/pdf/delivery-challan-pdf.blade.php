@@ -25,19 +25,21 @@
             padding: 0;
             margin: 0;
             font-size: 14px;
+            min-height: 100vh;
+            position: relative;
         }
 
         .page-wrapper {
             width: 100%;
-            height: 297mm;
-            /* border: 1px solid black; */
+            min-height: 297mm;
             position: relative;
             display: flex;
             flex-direction: column;
+            padding-bottom: 120px; /* Space for fixed footer */
         }
 
         .content-wrapper {
-            padding-bottom: 160px;
+            flex: 1;
         }
 
         table {
@@ -258,46 +260,28 @@
             font-weight: bold;
         }
 
-        /* Signature */
-        .signature-wrapper {
-            position: absolute;
-            bottom: 90px; /* sits just above footer */
-            left: 30px;
-            right: 30px;
-        }
-
-        .signature-footer {
+        /* Fixed Signature Section - positioned above footer */
+        .fixed-signature-section {
             position: fixed;
-            bottom: 70px; /* JUST ABOVE FOOTER */
-            left: 30px;
-            right: 30px;
+            bottom: 100px; /* Height of footer + spacing */
+            left: 0;
+            right: 0;
+            background: white;
+            z-index: 100;
+            padding: 0 30px;
         }
 
-        .signature-line {
-            width: 220px;
-            border-top: 1px solid #000;
-            text-align: center;
-            padding-top: 6px;
-            font-size: 14px;
-            font-weight: 500;
+        /* Alternative: If fixed positioning causes issues in PDF, use absolute */
+        .signature-container {
+            position: absolute;
+            bottom: 120px; /* Height of footer + spacing */
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0 30px;
         }
 
-
-        .signature-section {
-            border-top: 1px solid #000;
-            text-align: center;
-            width: 220px;
-            display: inline-block;
-        }
-
-        .signature-section p {
-            font-size: 14px;
-            padding-top: 6px;
-            font-weight: 500;
-        }
-
-
-        /* Footer - ABSOLUTE POSITION AT BOTTOM */
+        /* Footer - FIXED AT BOTTOM */
         .footer {
             position: fixed;
             bottom: 0;
@@ -306,6 +290,7 @@
             background: #000;
             color: #fff;
             padding: 20px 30px;
+            z-index: 1000;
         }
 
         .footer td {
@@ -339,6 +324,12 @@
             align-items:center; 
             gap:6px;
             font-size: 16px; 
+        }
+
+        /* Ensure content doesn't overlap with fixed elements */
+        .content-spacer {
+            height: 200px; /* Space for signature and footer */
+            width: 100%;
         }
     </style>
 </head>
@@ -414,19 +405,6 @@
                 <tr>
                     <td>
                         <h2>BUYER:</h2>
-                        <!-- <p>{{ $challan->client->name ?? 'N/A' }}</p>
-                        @php
-                            $clientAddress = $challan->client->address ?? '';
-                            $addressLines = explode("\n", $clientAddress);
-                        @endphp
-                        @foreach($addressLines as $line)
-                            @if(trim($line))
-                                <p>{{ trim($line) }}</p>
-                            @endif
-                        @endforeach
-                        @if($challan->client->gst_no)
-                            <p>GST: {{ $challan->client->gst_no }}</p>
-                        @endif -->
 
                         @php
                             $client = $challan->getClient;
@@ -496,10 +474,13 @@
                     </tr>
                 </table>
             </div>
+            
+            <!-- Spacer to push content above fixed elements -->
+            <div class="content-spacer"></div>
         </div>
 
-        <!-- Signature Section (Attached to Footer) -->
-        <div style="margin-top:60px; overflow:hidden;">
+        <!-- Signature Section (Fixed above footer) -->
+        <div class="signature-container">
             <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
                 <p style="margin:0 0 25px 0; font-size:12px; text-align:right; color: #fff;">Your Sincerely</p>
                 <div style="border-top:1px solid #000; width:140px; margin:0;"></div>
@@ -513,17 +494,14 @@
             </div>
             
             <div style="clear:both;"></div>
+            
+            <!-- Computer Generated Note -->
+            <p style="margin-top:20px; text-align:center; font-size:13px; color:#000;">
+                *This is a computer generated delivery challan.
+            </p>
         </div>
 
-        <!-- Computer Generated Note -->
-
-        <p style="margin-top:20px;text-align:center;font-size:13px;color:#000;">
-            *This is a computer generated delivery challan.
-        </p>
-
-
-
-        <!-- Footer - ABSOLUTE POSITION AT BOTTOM -->
+        <!-- Footer - FIXED AT BOTTOM -->
         <table class="footer">
             <tr>
                 <td class="left-cell">{{ $settings->website_url ?? 'www.company.com' }}</td>
