@@ -274,11 +274,11 @@
         /* Alternative: If fixed positioning causes issues in PDF, use absolute */
         .signature-container {
             position: absolute;
-            bottom: 120px; /* Height of footer + spacing */
+            bottom: 80px; /* Height of footer + spacing */
             left: 0;
             right: 0;
             background: white;
-            padding: 0 30px;
+            padding: 0 5px;
         }
 
         /* Footer - FIXED AT BOTTOM */
