@@ -82,6 +82,7 @@ class InvoiceController extends Controller
             'is_cgst' => 'boolean',
             'is_gst' => 'boolean',
             'is_igst' => 'boolean',
+            'is_performa_invoice' => 'boolean',
         ], [
             'invoice_number.unique' => 'This invoice number already exists',
             'particular.*.required' => 'Each item must have a description',
@@ -107,6 +108,7 @@ class InvoiceController extends Controller
                 'is_cgst' => $request->boolean('is_cgst'),
                 'is_gst' => $request->boolean('is_gst'),
                 'is_igst' => $request->boolean('is_igst'),
+                'is_performa_invoice' => $request->boolean('is_performa_invoice'),
                 'consignee_address' => $request->consignee_address,
                 'e_way_bill_no' => $request->e_way_bill_no,
                 'vehicle_no' => $request->vehicle_no,
@@ -223,6 +225,7 @@ class InvoiceController extends Controller
             'is_cgst' => 'boolean',
             'is_gst' => 'boolean',
             'is_igst' => 'boolean',
+            'is_performa_invoice' => 'boolean',
         ], [
             'invoice_number.unique' => 'This invoice number already exists',
             'particular.*.required' => 'Each item must have a description',
@@ -246,6 +249,7 @@ class InvoiceController extends Controller
                 'is_cgst' => $request->boolean('is_cgst'),
                 'is_gst' => $request->boolean('is_gst'),
                 'is_igst' => $request->boolean('is_igst'),
+                'is_performa_invoice' => $request->boolean('is_performa_invoice'),
                 'consignee_address' => $request->consignee_address,
                 'e_way_bill_no' => $request->e_way_bill_no,
                 'vehicle_no' => $request->vehicle_no,

@@ -24,6 +24,7 @@ class Invoice extends Model
         'vehicle_no',
         'po_number',
         'paid_date',
+        'is_performa_invoice'
     ];
     
     public function getClient() {
@@ -43,6 +44,7 @@ class Invoice extends Model
         'is_cgst' => 'boolean',
         'is_gst' => 'boolean',
         'is_igst' => 'boolean',
+        'is_performa_invoice' => 'boolean',
         'total_amount' => 'decimal:2',
         'grand_total' => 'decimal:2',
         'paid_amount' => 'decimal:2',

@@ -160,28 +160,28 @@
                                                     <div class="d-flex flex-wrap gap-3 mt-2">
                                                         <div class="form-check">
                                                             <input class="form-check-input tax-type" type="checkbox" id="is_sgst" name="is_sgst" value="1"
-                                                                   {{ $invoice->is_sgst ? 'checked' : '' }}>
+                                                                {{ $invoice->is_sgst ? 'checked' : '' }}>
                                                             <label class="form-check-label" for="is_sgst">
                                                                 <span class="badge bg-primary me-1">SGST</span> ({{ $settings->sgst ?? 0 }}%)
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input tax-type" type="checkbox" id="is_cgst" name="is_cgst" value="1"
-                                                                   {{ $invoice->is_cgst ? 'checked' : '' }}>
+                                                                {{ $invoice->is_cgst ? 'checked' : '' }}>
                                                             <label class="form-check-label" for="is_cgst">
                                                                 <span class="badge bg-success me-1">CGST</span> ({{ $settings->cgst ?? 0 }}%)
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input tax-type" type="checkbox" id="is_igst" name="is_igst" value="1"
-                                                                   {{ $invoice->is_igst ? 'checked' : '' }}>
+                                                                {{ $invoice->is_igst ? 'checked' : '' }}>
                                                             <label class="form-check-label" for="is_igst">
                                                                 <span class="badge bg-info me-1">IGST</span> ({{ $settings->igst ?? 0 }}%)
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" id="is_gst" name="is_gst" value="1"
-                                                                   {{ $invoice->is_gst ? 'checked' : '' }}>
+                                                                {{ $invoice->is_gst ? 'checked' : '' }}>
                                                             <label class="form-check-label" for="is_gst">
                                                                 <i class="fas fa-file-invoice-dollar me-1"></i> GST (Auto-Select SGST+CGST)
                                                             </label>
@@ -203,6 +203,25 @@
                                                         <p class="mb-1 fw-medium"><i class="fas fa-check-circle text-success me-1"></i>Selected:</p>
                                                         <ul class="mb-0 ps-3" id="tax_selection_list"></ul>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Add Performa Invoice Checkbox Here -->
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="is_performa_invoice" name="is_performa_invoice" value="1"
+                                                        {{ $invoice->is_performa_invoice ? 'checked' : '' }}>
+                                                    <label class="form-check-label fw-medium" for="is_performa_invoice">
+                                                        <i class="fas fa-file-invoice me-2 text-warning"></i>
+                                                        <span class="badge bg-warning text-dark me-2">Proforma</span>
+                                                        This is a Performa Invoice
+                                                    </label>
+                                                    <small class="text-muted d-block mt-1">
+                                                        <i class="fas fa-info-circle me-1"></i>
+                                                        Proforma invoices are preliminary documents that show estimated costs but are not official invoices
+                                                    </small>
                                                 </div>
                                             </div>
                                         </div>
@@ -422,6 +441,50 @@
         sgstPercent.textContent = sgstRate;
         cgstPercent.textContent = cgstRate;
         igstPercent.textContent = igstRate;
+
+        // Proforma invoice toggle effects for edit page
+        let isProformaCheckbox = document.getElementById('is_performa_invoice');
+
+        if (isProformaCheckbox) {
+            isProformaCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.closest('.card-body').classList.add('bg-light');
+            
+                    // Optional: Add warning badge
+                    let badge = document.createElement('span');
+                    badge.className = 'badge bg-warning text-dark ms-2';
+                    badge.id = 'proforma-badge';
+                    badge.innerHTML = '<i class="fas fa-file-invoice me-1"></i>PROFORMA';
+                    
+                    // Add badge to page title if not exists
+                    if (!document.getElementById('proforma-badge')) {
+                        document.querySelector('.page-title-box h4').appendChild(badge);
+                    }
+
+                    // Disable E-Way Bill field for proforma invoices
+                    document.getElementById('e_way_bill_no').closest('.col-md-6').style.opacity = '0.5';
+                    document.getElementById('e_way_bill_no').readOnly = true;
+                    document.getElementById('e_way_bill_no').placeholder = 'Not applicable for proforma';
+                } else {
+                    this.closest('.card-body').classList.remove('bg-light');
+            
+                    // Remove proforma badge
+                    let badge = document.getElementById('proforma-badge');
+                    if (badge) {
+                        badge.remove();
+                    }
+                    // Re-enable E-Way Bill field
+                    document.getElementById('e_way_bill_no').closest('.col-md-6').style.opacity = '1';
+                    document.getElementById('e_way_bill_no').readOnly = false;
+                    document.getElementById('e_way_bill_no').placeholder = 'Enter E-Way Bill Number';
+                }
+            });
+
+            // Trigger on page load if it's already a proforma invoice
+            if (isProformaCheckbox.checked) {
+                isProformaCheckbox.dispatchEvent(new Event('change'));
+            }
+        }
         
         // Calculate total for a single row
         function calculateRowTotal(row) {

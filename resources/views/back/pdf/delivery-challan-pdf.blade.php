@@ -323,7 +323,7 @@
             display:flex; 
             align-items:center; 
             gap:6px;
-            font-size: 16px; 
+            font-size: 20px; 
         }
 
         /* Ensure content doesn't overlap with fixed elements */

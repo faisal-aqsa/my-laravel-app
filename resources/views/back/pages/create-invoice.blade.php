@@ -186,6 +186,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <!-- Add Performa Invoice Checkbox Here -->
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="is_performa_invoice" name="is_performa_invoice" value="1">
+                                                    <label class="form-check-label fw-medium" for="is_performa_invoice">
+                                                        <i class="fas fa-file-invoice me-2 text-warning"></i>
+                                                        <span class="badge bg-warning text-dark me-2">Proforma</span>
+                                                        This is a Performa Invoice
+                                                    </label>
+                                                    <small class="text-muted d-block mt-1">
+                                                        <i class="fas fa-info-circle me-1"></i>
+                                                        Proforma invoices are preliminary documents that show estimated costs but are not official invoices
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -360,6 +378,25 @@
         sgstPercent.textContent = sgstRate;
         cgstPercent.textContent = cgstRate;
         igstPercent.textContent = igstRate;
+
+        // Proforma invoice toggle effects
+        let isProformaCheckbox = document.getElementById('is_performa_invoice');
+
+        isProformaCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('e_way_bill_no').closest('.col-md-6').style.opacity = '0.5';
+                document.getElementById('e_way_bill_no').readOnly = true;
+                document.getElementById('e_way_bill_no').placeholder = 'Not applicable for proforma';
+                
+                this.closest('.card-body').classList.add('bg-light');
+            } else {
+                document.getElementById('e_way_bill_no').closest('.col-md-6').style.opacity = '1';
+                document.getElementById('e_way_bill_no').readOnly = false;
+                document.getElementById('e_way_bill_no').placeholder = 'Enter E-Way Bill Number';
+                
+                this.closest('.card-body').classList.remove('bg-light');
+            }
+        });
         
         // Calculate total for a single row
         function calculateRowTotal(row) {

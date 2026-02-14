@@ -375,7 +375,7 @@
             display:flex; 
             align-items:center; 
             gap:6px;
-            font-size: 16px;
+            font-size: 20px;
         }
 
         /* Page break settings for PDF */
@@ -421,7 +421,13 @@
                     <p class="gst-p">GST: {{ $settings->gst_no ?? 'N/A' }}</p>
                 </td>
                 <td class="invoice-header-cell">
-                    <div class="head">INVOICE</div>
+                    <div class="head">
+                        @if($invoice->is_performa_invoice)
+                            PROFORMA INVOICE
+                        @else
+                            INVOICE
+                        @endif
+                    </div>
                     <table class="header-info-table">
                         <tr>
                             <td class="label-cell">Off:</td>
