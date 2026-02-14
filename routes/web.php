@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\PaymentHistoryController;
 use App\Http\Controllers\DeliveryChallanController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentHistoryController;
+use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\SettingController;
+use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -66,6 +67,18 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/update-delivery-challan/{id}', 'updateDeliveryChallan')->name('update-delivery-challan');
             Route::post('/delete-delivery-challan/{id}', 'destroy')->name('delete-delivery-challan');
             Route::post('/email-delivery-challan', 'emailDeliveryChallan')->name('email-delivery-challan');
+        });
+
+        Route::controller(QuotationController::class)->group(function() {
+            Route::get('/all-quotations', 'index')->name('all-quotations');
+            Route::get('/add-quotation', 'create')->name('add-quotation');
+            Route::post('/store-quotation', 'store')->name('store-quotation');
+            // Route::get('/delivery-challan/{id}/download', 'downloadPDF')->name('download-delivery-challan');
+            // Route::get('/delivery-challan/{id}/view', 'viewPDF')->name('delivery-challan-view');
+            Route::get('/edit-quotation/{id}', 'edit')->name('edit-quotation');
+            Route::post('/update-quotation/{id}', 'update')->name('update-quotation');
+            // Route::post('/delete-delivery-challan/{id}', 'destroy')->name('delete-delivery-challan');
+            // Route::post('/email-delivery-challan', 'emailDeliveryChallan')->name('email-delivery-challan');
         });
 
         Route::controller(SettingController::class)->group(function() {
