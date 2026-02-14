@@ -48,6 +48,7 @@
         /* Header Section - Logo LEFT, Details RIGHT */
         .header-table {
             width: 100%;
+            height: 200px;
         }
 
         .logo-cell {
@@ -56,7 +57,6 @@
             padding: 30px 20px;
             position: relative;
             vertical-align: top;
-            margin-bottom: 25px;
         }
 
         .logo-cell img {
