@@ -20,15 +20,17 @@
             padding: 0;
             margin: 0;
             font-size: 14px;
+            min-height: 100vh;
+            position: relative;
         }
 
         .container {
             width: 100%;
-            height: 297mm;
-            /* border: 1px solid black; */
+            min-height: 297mm;
             position: relative;
             display: flex;
             flex-direction: column;
+            padding-bottom: 150px; /* Space for fixed footer and signature */
         }
 
         table {
@@ -40,28 +42,6 @@
         .header-table {
             width: 100%;
         }
-
-        /* .logo-cell {
-            width: 35%;
-            text-align: center;
-            vertical-align: middle;
-            padding: 30px 20px;
-        }
-
-        .logo-cell img {
-            max-width: 200px;
-            max-height: 200px;
-            margin-bottom: 15px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .logo-cell p {
-            font-size: 15px;
-            font-weight: normal;
-            margin-top: 10px;
-        } */
 
         .logo-cell {
             width: 35%;
@@ -174,7 +154,6 @@
             color: #fff;
             font-weight: bold;
             text-transform: uppercase;
-            /* border-radius: 10px; */
         }
 
         .items-header td {
@@ -333,24 +312,25 @@
             font-weight: bold;
         }
 
-        /* Signature */
-        .signature-wrapper {
-            margin-top: 50px;
-            width: 100%;
+        /* Fixed Signature Section - positioned above footer */
+        .fixed-signature-section {
+            position: fixed;
+            bottom: 100px; /* Height of footer + spacing */
+            left: 0;
+            right: 0;
+            background: white;
+            z-index: 100;
+            padding: 0 30px;
         }
 
-        .signature-section {
-            padding-top: 15px;
-            border-top: 1px solid black;
-            text-align: center;
-            width: 250px;
-            display: inline-block;
-        }
-
-        .signature-section p {
-            font-size: 15px;
-            padding: 8px;
-            font-weight: 500;
+        /* Alternative: Use absolute positioning for better PDF compatibility */
+        .signature-container {
+            position: absolute;
+            bottom: 80px; /* Height of footer + extra spacing */
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0 5px;
         }
 
         /* Footer - FIXED AT BOTTOM */
@@ -362,6 +342,7 @@
             background: #000;
             color: #fff;
             padding: 20px 30px;
+            z-index: 1000;
         }
 
         .footer td {
@@ -394,13 +375,19 @@
             display:flex; 
             align-items:center; 
             gap:6px;
-            font-size: 16px; /* Adjust as needed */
+            font-size: 16px;
         }
 
         /* Page break settings for PDF */
         @page {
             margin: 0;
             size: A4 portrait;
+        }
+
+        /* Spacer to push content above fixed elements */
+        .content-spacer {
+            height: 180px; /* Space for signature and footer */
+            width: 100%;
         }
     </style>
 </head>
@@ -582,7 +569,6 @@
                             @endphp
                             {{ amountToWords($invoice->grand_total) }}
                         </p>
-                        <!-- <h3>For, {{ $settings->name ?? 'Company Name' }}</h3> -->
                     </td>
                     <td class="amounts-cell">
                         <table>
@@ -628,33 +614,25 @@
                     </td>
                 </tr>
             </table>
-
-            <!-- Signature -->
-            <!-- <div class="signature-wrapper">
-                <div class="signature-section">
-                    <p>Partner Sign</p>
-                </div>
-            </div> -->
         </div>
-         <!-- Signature Section (Attached to Footer) -->
-        <div style="margin-top:60px; overflow:hidden;">
+        
+        <!-- Spacer to push content above fixed elements -->
+        <div class="content-spacer"></div>
+
+        <!-- Signature Section (Fixed above footer) -->
+        <div class="signature-container">
             <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
                 <p style="margin:0 0 25px 0; font-size:12px; text-align:left;">Your Sincerely</p>
                 <div style="border-top:1px solid #000; width:140px; margin:0;"></div>
                 <p style="margin:5px 0 0 0; font-size:12px; font-weight: bold;">BOXMAKER</p>
             </div>
-
-            <!-- <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
-                <p style="margin:0 0 25px 0; font-size:12px; text-align:right;">Your Sincerely</p>
-                <div style="border-top:1px solid #000; width:140px; margin:0 0 0 auto;"></div>
-                <p style="margin:5px 0 0 0; font-size:12px; text-align:right; font-weight: bold;">BOXMAKER</p>
-            </div> -->
             
             <div style="clear:both;"></div>
+            
+            <p style="margin-top:10px; text-align:center; font-size:13px; color:#000;">
+                *This is a computer generated invoice.
+            </p>
         </div>
-        <p style="margin-top:10px;text-align:center;font-size:13px;color:#000;">
-            *This is a computer generated invoice.
-        </p>
 
         <!-- Footer - FIXED AT BOTTOM -->
         <table class="footer">
