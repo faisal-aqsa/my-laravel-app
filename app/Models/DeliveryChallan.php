@@ -17,6 +17,7 @@ class DeliveryChallan extends Model
         'vehicle_no',
         'challan_date',
         'total_amount',
+        'delivery_partner_phone'
     ];
 
     protected $casts = [

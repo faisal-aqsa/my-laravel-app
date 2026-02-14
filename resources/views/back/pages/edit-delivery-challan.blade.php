@@ -84,6 +84,18 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <!-- Delivery partner Phone No -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label" for="delivery_partner_phone">Delivery partner Phone No</label>
+                                    <input type="text" class="form-control" name="delivery_partner_phone" id="delivery_partner_phone" 
+                                           value="{{ $challan->delivery_partner_phone }}" placeholder="Enter Vehicle Number">
+                                    @error('delivery_partner_phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             
                             <!-- Consignee Address -->
                             <div class="col-md-12">

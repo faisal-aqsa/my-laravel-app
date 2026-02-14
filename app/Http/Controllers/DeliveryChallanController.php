@@ -49,6 +49,7 @@ class DeliveryChallanController extends Controller
             'challan_number' => 'required|unique:delivery_challans',
             'challan_date' => 'required|date',
             'vehicle_no' => 'nullable|string|max:50',
+            'delivery_partner_phone' => 'nullable|string|max:20',
             'consignee_address' => 'nullable|string',
             'particular' => 'required|array',
             'particular.*' => 'required|string',
@@ -78,6 +79,7 @@ class DeliveryChallanController extends Controller
                 'client_id' => $request->client_id,
                 'challan_date' => $request->challan_date,
                 'vehicle_no' => $request->vehicle_no,
+                'delivery_partner_phone' => $request->delivery_partner_phone,
                 'consignee_address' => $request->consignee_address,
                 'total_amount' => $totalAmount,
             ]);
@@ -133,6 +135,7 @@ class DeliveryChallanController extends Controller
             'challan_number' => 'required|unique:delivery_challans,challan_number,' . $id,
             'challan_date' => 'required|date',
             'vehicle_no' => 'nullable|string|max:50',
+            'delivery_partner_phone' => 'nullable|string|max:20',
             'consignee_address' => 'nullable|string',
             'particular' => 'required|array',
             'particular.*' => 'required|string',
@@ -154,6 +157,7 @@ class DeliveryChallanController extends Controller
                 'challan_number' => $request->challan_number,
                 'challan_date' => $request->challan_date,
                 'vehicle_no' => $request->vehicle_no,
+                'delivery_partner_phone' => $request->delivery_partner_phone,
                 'consignee_address' => $request->consignee_address,
                 'total_amount' => $totalAmount,
             ]);

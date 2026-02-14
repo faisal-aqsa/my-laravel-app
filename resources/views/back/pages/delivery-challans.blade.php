@@ -68,6 +68,9 @@
                                                 colspan="1" style="width: 100px;"
                                                 aria-label="Vehicle No: activate to sort column ascending">Vehicle No</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                colspan="1" style="width: 100px;"
+                                                aria-label="Partner No: activate to sort column ascending">Partner No</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 120px;"
                                                 aria-label="Challan Date: activate to sort column ascending">Challan Date</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
@@ -88,6 +91,7 @@
                                                 </td>
                                                 <td>{{ $challan->challan_number }}</td>
                                                 <td>{{ $challan->vehicle_no ?? 'N/A' }}</td>
+                                                <td>{{ $challan->delivery_partner_phone ?? 'N/A' }}</td>
                                                 <td>{{ $challan->challan_date->format('d-m-Y') }}</td>
                                                 <td>₹{{ number_format($challan->total_amount, 2) }}</td>
                                                 <td>
