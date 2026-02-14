@@ -394,14 +394,14 @@
                             @endif
                             @if($challan->vehicle_no)
                                 <tr>
-                                    <td class="label-cell">Vehicle No:</td>
-                                    <td class="value-cell">{{ $challan->vehicle_no }}</td>
+                                    <td class="label-cell" style="color:#fff !important;">Vehicle No:</td>
+                                    <td class="value-cell" style="color:#fff !important;">{{ $challan->vehicle_no }}</td>
                                 </tr>
                             @endif
                             @if($challan->vehicle_no)
                                 <tr>
-                                    <td class="label-cell">Vehicle No:</td>
-                                    <td class="value-cell">{{ $challan->vehicle_no }}</td>
+                                    <td class="label-cell" style="color:#fff !important;">Vehicle No:</td>
+                                    <td class="value-cell" style="color:#fff !important;">{{ $challan->vehicle_no }}</td>
                                 </tr>
                             @endif
                         </table>
