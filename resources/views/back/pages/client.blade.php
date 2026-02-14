@@ -106,11 +106,11 @@
 @push('custom-scripts')
 
 <script>
-    $(document).on('click', '#deleteProductBtn', function(e) {
+    $(document).on('click', '#deleteclientBtn', function(e) {
         e.preventDefault();
         var url = "{{ route('admin.delete-client') }}";
         var token = "{{ csrf_token() }}";
-        var product_id = $(this).data("id");
+        var client_id = $(this).data("id");
 
         Swal.fire({
             title: "Are you sure?",
@@ -123,7 +123,7 @@
             allowOutsideClick: false,
         }).then(function (result) {
             if(result.value) {
-                $.post(url, { _token:token, product_id:product_id }, function(response){
+                $.post(url, { _token:token, client_id:client_id }, function(response){
                     if(response.status == 1) {
                         $('#success .toast-body').text(response.msg);
                         var successToast = new bootstrap.Toast(document.getElementById('success'));

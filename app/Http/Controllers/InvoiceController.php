@@ -438,4 +438,78 @@ class InvoiceController extends Controller
 
         return view('back.pages.payment-history', $data);
     }
+
+    public function deleteInvoice($id)
+    {
+        try {
+            $challan = Invoice::findOrFail($id);
+            $challan->delete();
+
+            return response()->json([
+                'status' => 1,
+                'message' => 'Invoice deleted successfully!'
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Invoice deletion failed: ' . $e->getMessage());
+
+            return response()->json([
+                'status' => 0,
+                'message' => 'Failed to delete invoice: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+    public function updateInvoiceStatus(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'invoice_id' => 'required|exists:invoices,id',
+            'status' => 'required|in:pending,paid,partial_paid,overdue',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Validation error',
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        try {
+            $invoice = Invoice::findOrFail($request->invoice_id);
+            
+            // Update status
+            $invoice->status = $request->status;
+            $invoice->save();
+            
+            // Log the status change
+            Log::info('Invoice status updated', [
+                'invoice_id' => $invoice->id,
+                'invoice_number' => $invoice->invoice_number,
+                'old_status' => $invoice->getOriginal('status'),
+                'new_status' => $invoice->status,
+            ]);
+
+            return response()->json([
+                'status' => 1,
+                'message' => 'Invoice status updated successfully!',
+                'data' => [
+                    'id' => $invoice->id,
+                    'invoice_number' => $invoice->invoice_number,
+                    'status' => $invoice->status,
+                    'paid_amount' => $invoice->paid_amount,
+                    'grand_total' => $invoice->grand_total,
+                    'remaining' => $invoice->grand_total - $invoice->paid_amount,
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Invoice status update failed: ' . $e->getMessage());
+            
+            return response()->json([
+                'status' => 0,
+                'message' => 'Failed to update invoice status: ' . $e->getMessage()
+            ]);
+        }
+    }
 }

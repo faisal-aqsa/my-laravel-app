@@ -47,7 +47,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/update-invoice', 'updateInvoice')->name('update-invoice');
             Route::post('/invoices/update-payment', 'updateInvoicePayment')->name('update-invoice-payment');
             Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
-            Route::post('/delete-invoice', 'deleteInvoice')->name('delete-invoice');
+            Route::post('/delete-invoice/{id}', 'deleteInvoice')->name('delete-invoice');
             Route::post('/email-invoice', 'emailInvoice')->name('email-invoice');
         });
 
@@ -74,7 +74,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/store-setting', 'storeSetting')->name('store-setting');
             Route::get('/edit-setting', 'editSetting')->name('edit-setting');
             Route::post('/update-setting', 'updateSetting')->name('update-setting');
-            Route::post('/delete-client', 'deleteClient')->name('delete-client');
         });
     });
 });

@@ -291,7 +291,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         url: url,
-                        method: 'DELETE',
+                        method: 'POST',
                         data: {
                             _token: token
                         },

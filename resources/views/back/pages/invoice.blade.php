@@ -542,7 +542,7 @@
         $(document).on('click', '.delete-invoice-btn', function(e) {
             e.preventDefault();
             var invoiceId = $(this).data('invoice-id');
-            var url = "{{ route('admin.delete-invoice') }}";
+             var url = "{{ route('admin.delete-invoice', ':id') }}".replace(':id', invoiceId);
             var token = "{{ csrf_token() }}";
 
             Swal.fire({
