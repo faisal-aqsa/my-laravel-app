@@ -28,7 +28,7 @@ class InvoiceController extends Controller
 
     public function create(Request $request) {
         $lastInvoice = Invoice::latest('id')->first();
-        $nextInvoiceNumber = $lastInvoice ? ($lastInvoice->invoice_number + 1) : 0001;
+        $nextInvoiceNumber = $lastInvoice ? ($lastInvoice->invoice_number + 1) : 1001;
         $settings = Setting::first();
     
         // If no settings exist, create default
