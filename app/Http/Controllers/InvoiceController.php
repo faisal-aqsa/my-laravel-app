@@ -177,7 +177,6 @@ class InvoiceController extends Controller
         return $pdf->inline('invoice-' . $invoice->invoice_number . '.pdf');
     }
 
-
     public function editInvoice(Request $request) {
         $invoice_id = $request->id;
         $invoice = Invoice::with('invoiceItems')->findOrFail($invoice_id);
@@ -274,6 +273,20 @@ class InvoiceController extends Controller
            
             return redirect()->back()->with('error', 'Failed to update invoice: ' . $e->getMessage())->withInput();
         }   
+    }
+
+    public function viewInvoice($id)
+    {
+        $invoice = Invoice::with(['getClient', 'invoiceItems'])->findOrFail($id);
+        $invoiceItems = $invoice->invoiceItems;
+        
+        $data = [
+            'pageTitle' => 'Invoice Details - ' . $invoice->invoice_number,
+            'invoice' => $invoice,
+            'invoiceItems' => $invoiceItems,
+        ];
+        
+        return view('back.pages.invoice-details', $data);
     }
 
     public function updateInvoicePayment(Request $request)

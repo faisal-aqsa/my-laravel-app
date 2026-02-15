@@ -84,12 +84,12 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 100px;"
                                                 aria-label="Status: activate to sort column ascending">Status</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            <!-- <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 100px;"
                                                 aria-label="Invoice Date: activate to sort column ascending">Invoice Date</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 100px;"
-                                                aria-label="Due Date: activate to sort column ascending">Due Date</th>
+                                                aria-label="Due Date: activate to sort column ascending">Due Date</th> -->
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 150px;"
                                                 aria-label="Action: activate to sort column ascending">Action
@@ -145,45 +145,53 @@
                                                     </span>
                                                 </td>
                                                 
-                                                <td>{{ $invoice->invoice_date->format('d-m-Y') }}</td>
-                                                <td>{{ $invoice->due_date->format('d-m-Y') }}</td>
+                                                <!-- <td>{{ $invoice->invoice_date->format('d-m-Y') }}</td>
+                                                <td>{{ $invoice->due_date->format('d-m-Y') }}</td> -->
                                                 
                                                 {{-- ⭐ NEW: Updated Action Buttons with Email Button --}}
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="{{ route('admin.edit-invoice', ['id' => $invoice->id]) }}" 
-                                                           class="btn btn-sm btn-outline-primary" 
-                                                           data-bs-toggle="tooltip" title="Edit Invoice">
-                                                            <i class="mdi mdi-square-edit-outline"></i>
-                                                        </a>
-                                                        
-                                                        {{-- ⭐ NEW: Email Invoice Button --}}
-                                                        <button type="button"
-                                                                class="btn btn-sm btn-outline-info email-invoice-btn"
-                                                                data-invoice-id="{{ $invoice->id }}"
-                                                                data-client-name="{{ $invoice->getClient->name ?? 'N/A' }}"
-                                                                data-client-email="{{ $invoice->getClient->email ?? '' }}"
-                                                                data-invoice-number="{{ $invoice->invoice_number }}"
-                                                                data-grand-total="{{ $invoice->grand_total }}"
-                                                                data-status="{{ ucfirst(str_replace('_', ' ', $invoice->status)) }}"
-                                                                data-bs-toggle="tooltip" title="Email Invoice">
-                                                            <i class="mdi mdi-email-outline"></i>
-                                                        </button>
-                                                        
-                                                        <a href="{{ route('admin.invoice-download', $invoice->id) }}" 
-                                                           class="btn btn-sm btn-outline-success"
-                                                           data-bs-toggle="tooltip" title="Download Invoice">
-                                                            <i class="mdi mdi-download"></i>
-                                                        </a>
-                                                        <a href="{{ route('admin.invoice-view', $invoice->id) }}" 
-                                                           class="btn btn-sm btn-outline-warning"
-                                                           data-bs-toggle="tooltip" title="View Invoice">
+
+                                                        <a href="{{ route('admin.invoice-view-details', $invoice->id) }}" 
+                                                            class="btn btn-sm btn-outline-info"
+                                                            data-bs-toggle="tooltip" title="View Details">
                                                             <i class="mdi mdi-eye"></i>
                                                         </a>
+
+                                                        <a href="{{ route('admin.edit-invoice', ['id' => $invoice->id]) }}" 
+                                                            class="btn btn-sm btn-outline-primary" 
+                                                            data-bs-toggle="tooltip" title="Edit Invoice">
+                                                            <i class="mdi mdi-square-edit-outline"></i>
+                                                        </a>
+
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-outline-secondary email-invoice-btn"
+                                                            data-invoice-id="{{ $invoice->id }}"
+                                                            data-client-name="{{ $invoice->getClient->name ?? 'N/A' }}"
+                                                            data-client-email="{{ $invoice->getClient->email ?? '' }}"
+                                                            data-invoice-number="{{ $invoice->invoice_number }}"
+                                                            data-grand-total="{{ $invoice->grand_total }}"
+                                                            data-status="{{ ucfirst(str_replace('_', ' ', $invoice->status)) }}"
+                                                            data-bs-toggle="tooltip" title="Email Invoice">
+                                                            <i class="mdi mdi-email-outline"></i>
+                                                        </button>
+
+                                                        <a href="{{ route('admin.invoice-download', $invoice->id) }}" 
+                                                            class="btn btn-sm btn-outline-success"
+                                                            data-bs-toggle="tooltip" title="Download Invoice">
+                                                            <i class="mdi mdi-download"></i>
+                                                        </a>
+
+                                                        <a href="{{ route('admin.invoice-view', $invoice->id) }}" 
+                                                            class="btn btn-sm btn-outline-dark"
+                                                            data-bs-toggle="tooltip" title="View PDF">
+                                                            <i class="mdi mdi-file-pdf-box"></i>
+                                                        </a>
+
                                                         <button type="button" 
-                                                                class="btn btn-sm btn-outline-danger delete-invoice-btn"
-                                                                data-invoice-id="{{ $invoice->id }}"
-                                                                data-bs-toggle="tooltip" title="Delete Invoice">
+                                                            class="btn btn-sm btn-outline-danger delete-invoice-btn"
+                                                            data-invoice-id="{{ $invoice->id }}"
+                                                            data-bs-toggle="tooltip" title="Delete Invoice">
                                                             <i class="mdi mdi-delete"></i>
                                                         </button>
                                                     </div>

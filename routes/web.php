@@ -46,6 +46,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::get('/invoice/{id}/view', 'viewPDF')->name('invoice-view');
             Route::get('/edit-invoice', 'editInvoice')->name('edit-invoice');
             Route::post('/update-invoice', 'updateInvoice')->name('update-invoice');
+            Route::get('/invoice-view/{id}/view-details', 'viewInvoice')->name('invoice-view-details');
             Route::post('/invoices/update-payment', 'updateInvoicePayment')->name('update-invoice-payment');
             Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
             Route::post('/delete-invoice/{id}', 'deleteInvoice')->name('delete-invoice');
@@ -65,6 +66,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::get('/delivery-challan/{id}/view', 'viewPDF')->name('delivery-challan-view');
             Route::get('/edit-delivery-challan/{id}', 'editDelievryChallan')->name('edit-delivery-challan');
             Route::post('/update-delivery-challan/{id}', 'updateDeliveryChallan')->name('update-delivery-challan');
+            Route::get('/delivery-challan-view/{id}/view-details', 'viewDeliveryChallan')->name('delivery-challan-details');
             Route::post('/delete-delivery-challan/{id}', 'destroy')->name('delete-delivery-challan');
             Route::post('/email-delivery-challan', 'emailDeliveryChallan')->name('email-delivery-challan');
         });

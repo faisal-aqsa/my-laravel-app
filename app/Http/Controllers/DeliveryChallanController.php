@@ -189,6 +189,20 @@ class DeliveryChallanController extends Controller
         }
     }
 
+    public function viewDeliveryChallan($id)
+    {
+        $challan = DeliveryChallan::with(['client', 'items'])->findOrFail($id);
+        $challanItems = $challan->items;
+        
+        $data = [
+            'pageTitle' => 'Delivery Challan Details - ' . $challan->challan_number,
+            'challan' => $challan,
+            'challanItems' => $challanItems,
+        ];
+        
+        return view('back.pages.delivery-challan-details', $data);
+    }
+
     // Delete delivery challan
     public function destroy($id)
     {

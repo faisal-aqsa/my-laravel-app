@@ -96,6 +96,12 @@
                                                 <td>₹{{ number_format($challan->total_amount, 2) }}</td>
                                                 <td>
                                                     <div class="btn-group" role="group">
+                                                        <a href="{{ route('admin.delivery-challan-details', $challan->id) }}" 
+                                                            class="btn btn-sm btn-outline-info"
+                                                            data-bs-toggle="tooltip" title="View Details">
+                                                            <i class="mdi mdi-eye"></i>
+                                                        </a>
+
                                                         <a href="{{ route('admin.edit-delivery-challan', $challan->id) }}"
                                                            class="btn btn-sm btn-outline-primary"
                                                            data-bs-toggle="tooltip"
@@ -126,10 +132,10 @@
                                                         </a>
 
                                                         <a href="{{ route('admin.delivery-challan-view', $challan->id) }}" 
-                                                           class="btn btn-sm btn-outline-warning"
+                                                           class="btn btn-sm btn-outline-dark"
                                                            data-bs-toggle="tooltip" 
                                                            title="View Challan">
-                                                            <i class="mdi mdi-eye"></i>
+                                                            <i class="mdi mdi-file-pdf-box"></i>
                                                         </a>
 
                                                         <button type="button"
