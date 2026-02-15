@@ -319,7 +319,7 @@
             margin-top:8px; 
             font-weight:bold; 
             font-style:italic; 
-            font-family: 'Lobster', cursive;
+            font-family: 'Lobster';
             display:flex; 
             align-items:center; 
             gap:6px;
