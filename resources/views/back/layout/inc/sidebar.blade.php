@@ -32,12 +32,12 @@
                         <span data-key="t-cart">Delivery Challans</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('admin.all-quotations') }}">
                         <i class="fas fa-file-signature fa-sm"></i>
                         <span data-key="t-cart">Quotations</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{ route('admin.all-payment-history') }}">
                         <i class="fas fa-file-invoice-dollar fa-sm"></i>
