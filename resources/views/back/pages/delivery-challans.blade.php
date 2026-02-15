@@ -24,7 +24,7 @@
         @media (max-width: 576px) {
             .client-name-cell {
                 max-width: 300px;
-                -webkit-line-clamp: 2;
+                -webkit-line-clamp: 1;
             }
         }
     </style>
