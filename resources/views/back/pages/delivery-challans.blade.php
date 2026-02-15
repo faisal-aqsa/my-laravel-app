@@ -10,15 +10,25 @@
 
         /* Limit client name to max 3 lines */
         .client-name-cell {
-            max-width: 100%;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            white-space: normal;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            word-break: break-word;
+            white-space: normal !important;
         }
+
+
+        /* Make Sr No column small */
+        #datatable th:nth-child(2),
+        #datatable td:nth-child(2) {
+            width: 60px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Allow Client Name to take remaining width */
+        #datatable th:nth-child(1),
+        #datatable td:nth-child(1) {
+            width: auto;
+        }
+
 
         /* Extra mobile optimization */
         @media (max-width: 576px) {
