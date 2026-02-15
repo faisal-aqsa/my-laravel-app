@@ -10,12 +10,12 @@
 
         /* Limit client name to max 3 lines */
         .client-name-cell {
-            max-width: 150px;
+            max-width: 100%;
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: normal;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -23,7 +23,7 @@
         /* Extra mobile optimization */
         @media (max-width: 576px) {
             .client-name-cell {
-                max-width: 120px;
+                max-width: 200px;
                 -webkit-line-clamp: 2;
             }
         }
