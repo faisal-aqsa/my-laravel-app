@@ -18,8 +18,8 @@
         /* Make Sr No column small */
         #datatable th:nth-child(2),
         #datatable td:nth-child(2) {
-            width: 60px;
-            min-width: 60px;
+            width: 100%;
+            min-width: 100%;
             text-align: center;
         }
 
