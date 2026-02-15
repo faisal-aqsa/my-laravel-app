@@ -2,6 +2,46 @@
 
 @section('pageTitle', isset($pageTitle) ? $pageTitle : '')
 
+@push('custom-styles')
+    <style>
+        #datatable td {
+            white-space: normal !important;
+        }
+
+        /* Limit client name to max 3 lines */
+        .client-name-cell {
+            word-break: break-word;
+            white-space: normal !important;
+        }
+
+
+        /* Make Sr No column small */
+        #datatable th:nth-child(2),
+        #datatable td:nth-child(2) {
+            width: 60px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Allow Client Name to take remaining width */
+        #datatable th:nth-child(1),
+        #datatable td:nth-child(1) {
+            width: auto;
+        }
+
+
+        /* Extra mobile optimization */
+        @media (max-width: 576px) {
+            #datatable th:nth-child(2),
+            #datatable td:nth-child(2) {
+                width: 50px;
+                min-width: 50px;
+            }
+        }
+
+    </style>
+@endpush
+
 @section('content')
 
     <div class="row">
@@ -111,7 +151,7 @@
                                                 }
                                             @endphp
                                             <tr class="odd" data-invoice-id="{{ $invoice->id }}">
-                                                <td class="dtr-control sorting_1" tabindex="0">{{ $invoice->getClient->name ?? 'N/A' }}</td>
+                                                <td class="dtr-control sorting_1 client-name-cell" tabindex="0">{{ $invoice->getClient->name ?? 'N/A' }}</td>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $invoice->invoice_number }}</td>
                                                 <td>₹{{ number_format($invoice->total_amount, 2) }}</td>

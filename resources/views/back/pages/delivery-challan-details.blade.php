@@ -65,7 +65,6 @@
                     <a href="{{ route('admin.download-delivery-challan', $challan->id) }}" class="btn btn-success waves-effect waves-light">
                         <i class="fas fa-download me-2"></i>Download PDF
                     </a>
-                    
                     <button type="button" 
                             class="btn btn-warning waves-effect waves-light print-challan-btn">
                         <i class="fas fa-print me-2"></i>Print
