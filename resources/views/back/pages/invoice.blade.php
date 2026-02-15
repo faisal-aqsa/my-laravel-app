@@ -4,40 +4,34 @@
 
 @push('custom-styles')
     <style>
-        #datatable td {
-            white-space: normal !important;
-        }
 
-        /* Limit client name to max 3 lines */
+    .client-name-cell {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #datatable th:nth-child(2),
+    #datatable td:nth-child(2) {
+        width: 60px;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    @media (max-width: 576px) {
+
         .client-name-cell {
-            word-break: break-word;
             white-space: normal !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
-
-        /* Make Sr No column small */
         #datatable th:nth-child(2),
         #datatable td:nth-child(2) {
-            width: 60px;
-            min-width: 60px;
-            text-align: center;
+            width: 50px;
+            min-width: 50px;
         }
-
-        /* Allow Client Name to take remaining width */
-        #datatable th:nth-child(1),
-        #datatable td:nth-child(1) {
-            width: auto;
-        }
-
-
-        /* Extra mobile optimization */
-        @media (max-width: 576px) {
-            #datatable th:nth-child(2),
-            #datatable td:nth-child(2) {
-                width: 50px;
-                min-width: 50px;
-            }
-        }
+    }
 
     </style>
 @endpush

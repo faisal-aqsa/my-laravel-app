@@ -3,37 +3,37 @@
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Delivery Challans')
 
 @push('custom-styles')
-<style>
-
-.client-name-cell {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-#datatable th:nth-child(2),
-#datatable td:nth-child(2) {
-    width: 60px;
-    min-width: 60px;
-    text-align: center;
-}
-
-@media (max-width: 576px) {
+    <style>
 
     .client-name-cell {
-        white-space: normal !important;
-        word-break: break-word;
-        overflow-wrap: break-word;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     #datatable th:nth-child(2),
     #datatable td:nth-child(2) {
-        width: 50px;
-        min-width: 50px;
+        width: 60px;
+        min-width: 60px;
+        text-align: center;
     }
-}
 
-</style>
+    @media (max-width: 576px) {
+
+        .client-name-cell {
+            white-space: normal !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        #datatable th:nth-child(2),
+        #datatable td:nth-child(2) {
+            width: 50px;
+            min-width: 50px;
+        }
+    }
+
+    </style>
 @endpush
 
 
