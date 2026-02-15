@@ -22,11 +22,13 @@
 
         /* Extra mobile optimization */
         @media (max-width: 576px) {
-            .client-name-cell {
-                max-width: 300px;
-                -webkit-line-clamp: 1;
+            #datatable th:nth-child(2),
+            #datatable td:nth-child(2) {
+                width: 50px;
+                min-width: 50px;
             }
         }
+
     </style>
 @endpush
 
