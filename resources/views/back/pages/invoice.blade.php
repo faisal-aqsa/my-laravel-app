@@ -59,7 +59,7 @@
                                     <thead>
                                         <tr>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
-                                                rowspan="1" colspan="1" style="width: 150px;"
+                                                rowspan="1" colspan="1" style="width: 50px;"
                                                 aria-sort="ascending"
                                                 aria-label="Client Name: activate to sort column descending">Client Name</th>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
