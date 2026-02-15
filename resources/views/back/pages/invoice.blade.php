@@ -59,13 +59,13 @@
                                     <thead>
                                         <tr>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
-                                                rowspan="1" colspan="1" style="width: 50px;"
-                                                aria-sort="ascending"
-                                                aria-label="SR No: activate to sort column descending">Sr No</th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 150px;"
                                                 aria-sort="ascending"
                                                 aria-label="Client Name: activate to sort column descending">Client Name</th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
+                                                rowspan="1" colspan="1" style="width: 50px;"
+                                                aria-sort="ascending"
+                                                aria-label="SR No: activate to sort column descending">Sr No</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 120px;"
                                                 aria-label="Invoice No: activate to sort column ascending">Invoice Number</th>
@@ -111,8 +111,8 @@
                                                 }
                                             @endphp
                                             <tr class="odd" data-invoice-id="{{ $invoice->id }}">
-                                                <td>{{ $loop->iteration }}</td>
                                                 <td class="dtr-control sorting_1" tabindex="0">{{ $invoice->getClient->name ?? 'N/A' }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $invoice->invoice_number }}</td>
                                                 <td>₹{{ number_format($invoice->total_amount, 2) }}</td>
                                                 

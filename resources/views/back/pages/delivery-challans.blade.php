@@ -54,13 +54,13 @@
                                     <thead>
                                         <tr>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
-                                                rowspan="1" colspan="1" style="width: 50px;"
-                                                aria-sort="ascending"
-                                                aria-label="SR No: activate to sort column descending">Sr No</th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 150px;"
                                                 aria-sort="ascending"
                                                 aria-label="Client Name: activate to sort column descending">Client Name</th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
+                                                rowspan="1" colspan="1" style="width: 50px;"
+                                                aria-sort="ascending"
+                                                aria-label="SR No: activate to sort column descending">Sr No</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 120px;"
                                                 aria-label="Challan No: activate to sort column ascending">Challan No</th>
@@ -85,10 +85,10 @@
                                     <tbody>
                                         @forelse ($challans as $challan)
                                             <tr class="odd" data-challan-id="{{ $challan->id }}">
-                                                <td>{{ $loop->iteration }}</td>
                                                 <td class="dtr-control">
                                                     {{ $challan->client->name ?? $challan->getClient->name ?? 'N/A' }}
                                                 </td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $challan->challan_number }}</td>
                                                 <td>{{ $challan->vehicle_no ?? 'N/A' }}</td>
                                                 <td>{{ $challan->delivery_partner_phone ?? 'N/A' }}</td>
