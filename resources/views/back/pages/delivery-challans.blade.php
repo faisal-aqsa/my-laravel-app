@@ -23,7 +23,7 @@
         /* Extra mobile optimization */
         @media (max-width: 576px) {
             .client-name-cell {
-                max-width: 200px;
+                max-width: 300px;
                 -webkit-line-clamp: 2;
             }
         }
