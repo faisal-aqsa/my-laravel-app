@@ -2,6 +2,35 @@
 
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Delivery Challans')
 
+@push('custom-styles')
+    <style>
+        #datatable td {
+            white-space: normal !important;
+        }
+
+        /* Limit client name to max 3 lines */
+        .client-name-cell {
+            max-width: 150px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Extra mobile optimization */
+        @media (max-width: 576px) {
+            .client-name-cell {
+                max-width: 120px;
+                -webkit-line-clamp: 2;
+            }
+        }
+    </style>
+@endpush
+
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -85,7 +114,7 @@
                                     <tbody>
                                         @forelse ($challans as $challan)
                                             <tr class="odd" data-challan-id="{{ $challan->id }}">
-                                                <td class="dtr-control">
+                                                <td class="dtr-control client-name-cell">
                                                     {{ $challan->client->name ?? $challan->getClient->name ?? 'N/A' }}
                                                 </td>
                                                 <td>{{ $loop->iteration }}</td>
