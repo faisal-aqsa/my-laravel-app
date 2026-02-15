@@ -375,7 +375,7 @@
             display:flex; 
             align-items:center; 
             gap:6px;
-            font-size: 20px;
+            font-size: 15px;
         }
 
         /* Page break settings for PDF */
