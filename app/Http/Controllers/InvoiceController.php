@@ -28,7 +28,7 @@ class InvoiceController extends Controller
 
     public function create(Request $request) {
         $lastInvoice = Invoice::latest('id')->first();
-        $nextInvoiceNumber = $lastInvoice ? ($lastInvoice->invoice_number + 1) : 1001;
+        $nextInvoiceNumber = $lastInvoice ? ($lastInvoice->invoice_number + 1) : 0001;
         $settings = Setting::first();
     
         // If no settings exist, create default
@@ -133,15 +133,6 @@ class InvoiceController extends Controller
                 ->withInput();
         }
     }
-
-    // public function downloadPDF($id)
-    // {
-    //     $invoice = Invoice::with(['invoiceItems', 'getClient'])->findOrFail($id);
-
-    //     $pdf = Pdf::loadView('back.pdf.invoice-pdf', compact('invoice'));
-
-    //     return $pdf->download('invoice-' . $invoice->invoice_number . '.pdf');
-    // }
 
     public function downloadPDF($id)
     {
