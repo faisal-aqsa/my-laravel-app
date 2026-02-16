@@ -424,7 +424,7 @@
                         </p>
                     </td>
                     <td class="consignee-cell">
-                        <h2>CONSIGNEE:</h2>
+                        <h2>CONSIGNEE SHIP TO:</h2>
 
                         @php
                             $consigneeAddress = $challan->consignee_address
@@ -446,7 +446,7 @@
                 <!-- Items Header -->
                 <table class="items-header">
                     <tr>
-                        <td class="particular-col">PARTICULAR</td>
+                        <td class="particular-col">DESCRIPTION</td>
                         <td class="qty-col">QTY</td>
                         <!-- <td class="total-col">TOTAL (₹)</td> -->
                     </tr>

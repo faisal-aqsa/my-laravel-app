@@ -51,7 +51,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="challan_number">Challan Number</label>
                                     <input type="text" class="form-control" name="challan_number" 
-                                           id="challan_number" value="{{ $challanNumber }}" readonly>
+                                           id="challan_number" value="{{ $challanNumber }}">
                                     @error('challan_number')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

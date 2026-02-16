@@ -83,7 +83,7 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label" for="invoice_number">Invoice Number</label>
-                                    <input type="text" class="form-control" name="invoice_number" id="invoice_number" value="{{ $invoiceNumber }}" readonly>
+                                    <input type="text" class="form-control" name="invoice_number" id="invoice_number" value="{{ $invoiceNumber }}">
                                     @error('invoice_number')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

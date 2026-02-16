@@ -28,7 +28,7 @@ class DeliveryChallanController extends Controller
     public function create()
     {
         $lastChallan = DeliveryChallan::latest('id')->first();
-        $nextChallanNumber = $lastChallan ? ((int)$lastChallan->challan_number + 1) : 1001;
+        $nextChallanNumber = $lastChallan ? ((int)$lastChallan->challan_number + 1) : 0001;
         $clients = Client::all();
         
         $data = [

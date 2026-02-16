@@ -425,7 +425,7 @@
                         @if($invoice->is_performa_invoice)
                             PROFORMA INVOICE
                         @else
-                            INVOICE
+                            TAX INVOICE
                         @endif
                     </div>
                     <table class="header-info-table">
@@ -483,7 +483,7 @@
                 </td>
 
                 <td class="consignee-cell">
-                    <h2>CONSIGNEE:</h2>
+                    <h2>CONSIGNEE SHIP TO:</h2>
 
                     @php
                         $consigneeAddress = $invoice->consignee_address
@@ -506,7 +506,7 @@
             <!-- Items Header -->
             <table class="items-header">
                 <tr>
-                    <td class="particular-col">PARTICULAR</td>
+                    <td class="particular-col">DESCRIPTION</td>
                     <td class="hsn-col">HSN</td>
                     <td class="qty-col">QTY</td>
                     <td class="rate-col">RATE (₹)</td>
@@ -628,9 +628,9 @@
         <!-- Signature Section (Fixed above footer) -->
         <div class="signature-container">
             <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
-                <p style="margin:0 0 25px 0; font-size:12px; text-align:left;">Your Sincerely</p>
+                <p style="margin:0 0 25px 0; font-size:12px; text-align:left;">For, BOXMAKER</p>
                 <div style="border-top:1px solid #000; width:140px; margin:0;"></div>
-                <p style="margin:5px 0 0 0; font-size:12px; font-weight: bold;">BOXMAKER</p>
+                <p style="margin:5px 0 0 0; font-size:12px; font-weight: bold;">PARTNERS</p>
             </div>
             
             <div style="clear:both;"></div>
