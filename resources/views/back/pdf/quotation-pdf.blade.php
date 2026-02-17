@@ -173,7 +173,6 @@
     .quotation-badge span {
         font-size: 30px;
         font-weight: 700;
-        letter-spacing: 4px;
         color: #000000;
     }
 
@@ -186,7 +185,7 @@
     }
 
     .address-text {
-        font-size: 15px;
+        font-size: 13px;
         color: #ffffff;
         line-height: 1.7;
         font-weight: bold;
