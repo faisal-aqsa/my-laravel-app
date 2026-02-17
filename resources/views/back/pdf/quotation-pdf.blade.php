@@ -101,7 +101,6 @@
     .quotation-badge span {
         font-size: 26px;
         font-weight: 700;
-        letter-spacing: 5px;
         color: #1f2933;
     }
 
