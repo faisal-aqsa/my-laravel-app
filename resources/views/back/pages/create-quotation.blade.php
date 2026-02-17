@@ -72,6 +72,20 @@
                                     <span class="text-danger error-text date_error"></span>
                                 </div>
                             </div>
+
+                            <!-- Notes -->
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="notes">Notes (Optional)</label>
+                                    <textarea class="form-control" name="notes" id="notes" rows="3" 
+                                            placeholder="Enter any additional notes or remarks...">{{ old('notes') }}</textarea>
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Add any special instructions, terms, or remarks for this quotation
+                                    </small>
+                                    <span class="text-danger error-text notes_error"></span>
+                                </div>
+                            </div>
                             
                             <!-- Inclusions Section -->
                             <div class="col-md-12">

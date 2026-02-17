@@ -419,6 +419,12 @@
             <div style="clear:both;"></div>
         </div>
 
+        @if($quotation->notes)
+            <p style="margin-top:100px; text-align:center; font-size:13px; color:#000;">
+                *{{ $quotation->notes ?? "" }}
+            </p>
+        @endif
+
         {{-- ===================== PAGE FOOTER ===================== --}}
         <div class="page-footer">
             <table class="footer-contact-table">

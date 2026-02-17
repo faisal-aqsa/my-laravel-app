@@ -211,6 +211,22 @@
                 </div>
                 @endif
 
+                <!-- Notes Section (if exists) -->
+                @if($quotation->notes)
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card border shadow-none mb-3">
+                                <div class="card-header bg-light">
+                                    <h6 class="mb-0"><i class="fas fa-sticky-note me-2"></i>Notes / Remarks</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-0">{{ $quotation->notes }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <!-- Quotation Items Table -->
                 <div class="row mt-3">
                     <div class="col-12">

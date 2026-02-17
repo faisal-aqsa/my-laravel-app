@@ -15,6 +15,7 @@ class Quotation extends Model
         'attention',
         'quotation_for',
         'date',
+        'notes',
         'is_tax_included',
         'is_delivery_charges_included',
         'is_printing_included',
