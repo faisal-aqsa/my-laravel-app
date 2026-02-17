@@ -9,7 +9,6 @@ use App\Mail\InvoiceMail;
 use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
 use App\Models\PaymentHistory;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\Snappy\Facades\SnappyPdf;
