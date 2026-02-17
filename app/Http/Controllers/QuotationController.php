@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\QuotationMail;
 use App\Models\Client;
 use App\Models\Quotation;
 use App\Models\QuotationItem;
+use App\Models\Setting;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class QuotationController extends Controller
 {
     public function index(Request $request) {
         $data = [
-            'pageTitle' => 'All Quotationa',
+            'pageTitle' => 'All Quotations',
             'quotations' => Quotation::latest()->get()
         ];
 
@@ -207,6 +211,41 @@ class QuotationController extends Controller
         }
     }
 
+    public function viewQuotationDetails($id)
+    {
+        $quotation = Quotation::with(['client', 'items'])->findOrFail($id);
+        $quotationItems = $quotation->items;
+        
+        $subtotal = $quotationItems->sum('base_price');
+        $quotation->subtotal = $subtotal;
+        
+        $tax_rate = 18;
+        $quotation->tax_rate = $tax_rate;
+        $quotation->tax = $quotation->is_tax_included ? ($subtotal * $tax_rate / 100) : 0;
+        
+        $quotation->delivery_charges = $quotation->is_delivery_charges_included ? 500 : 0; // Set your logic
+        $quotation->printing_charges = $quotation->is_printing_included ? 300 : 0; // Set your logic
+        
+        $quotation->discount = 0;
+        $quotation->grand_total = $subtotal - $quotation->discount + $quotation->tax + 
+                                $quotation->delivery_charges + $quotation->printing_charges;
+        
+        $quotation->grand_total_in_words = $this->numberToWords($quotation->grand_total);
+        
+        $data = [
+            'pageTitle' => 'Quotation Details - #' . $quotation->id,
+            'quotation' => $quotation,
+            'quotationItems' => $quotationItems,
+        ];
+        
+        return view('back.pages.quotation-details', $data);
+    }
+
+    private function numberToWords($number)
+    {
+        return 'Rupees ' . number_format($number, 2) . ' only';
+    }
+
     // Delete quotation
     public function destroy($id)
     {
@@ -226,6 +265,112 @@ class QuotationController extends Controller
                 'status' => 0,
                 'message' => 'Failed to delete quotation: ' . $e->getMessage()
             ]);
+        }
+    }
+
+    public function viewPDF($id)
+    {
+        $quotation = Quotation::with(['items', 'client'])->findOrFail($id);
+        $settings = Setting::first();
+        
+        $pdf = SnappyPdf::loadView('back.pdf.quotation-pdf', compact('quotation', 'settings'))
+                ->setOption('enable-local-file-access', true)
+                ->setOption('margin-top', 0)
+                ->setOption('margin-bottom', 0)
+                ->setOption('margin-left', 0)
+                ->setOption('margin-right', 0)
+                ->setOption('page-size', 'A4')
+                ->setOption('orientation', 'Portrait')
+                ->setOption('disable-smart-shrinking', true);
+        
+        // Display inline in browser
+        return $pdf->inline('quotation-' . $quotation->id . '.pdf');
+    }
+
+    public function downloadPDF($id)
+    {
+        $quotation = Quotation::with(['items', 'client'])->findOrFail($id);
+        $settings = Setting::first();
+        
+        $pdf = SnappyPdf::loadView('back.pdf.quotation-pdf', compact('quotation', 'settings'))
+                ->setOption('enable-local-file-access', true)
+                ->setOption('margin-top', 0)
+                ->setOption('margin-bottom', 0)
+                ->setOption('margin-left', 0)
+                ->setOption('margin-right', 0)
+                ->setOption('page-size', 'A4')
+                ->setOption('orientation', 'Portrait')
+                ->setOption('disable-smart-shrinking', true);
+        
+        return $pdf->download('quotation-' . $quotation->id . '.pdf');
+    }
+
+    public function emailQuotation(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'quotation_id'    => 'required|exists:quotations,id',
+                'recipient_email' => 'required|email',
+                'cc_email'        => 'nullable|email',
+                'email_message'   => 'nullable|string|max:1000',
+            ]);
+
+            $quotation = Quotation::with(['items', 'client'])->findOrFail($validated['quotation_id']);
+            $settings  = Setting::first();
+
+            // Generate PDF (mirrors your downloadPDF method exactly)
+            $pdf = SnappyPdf::loadView('back.pdf.quotation-pdf', compact('quotation', 'settings'))
+                        ->setOption('enable-local-file-access', true)
+                        ->setOption('margin-top', 0)
+                        ->setOption('margin-bottom', 0)
+                        ->setOption('margin-left', 0)
+                        ->setOption('margin-right', 0)
+                        ->setOption('page-size', 'A4')
+                        ->setOption('orientation', 'Portrait')
+                        ->setOption('disable-smart-shrinking', true);
+
+            // Create temp directory if needed
+            $tempDir = storage_path('app/temp');
+            if (!file_exists($tempDir)) {
+                mkdir($tempDir, 0755, true);
+            }
+
+            $tempPath = $tempDir . '/quotation-' . $quotation->id . '-' . time() . '.pdf';
+            $pdf->save($tempPath);
+
+            // Build mail and send
+            $mail = Mail::to($validated['recipient_email']);
+
+            if (!empty($validated['cc_email'])) {
+                $mail->cc($validated['cc_email']);
+            }
+
+            $mail->send(new QuotationMail($quotation, $tempPath, $validated['email_message'] ?? null));
+
+            // Clean up temp file
+            if (file_exists($tempPath)) {
+                unlink($tempPath);
+            }
+
+            return response()->json([
+                'status'  => 1,
+                'message' => 'Quotation emailed successfully to ' . $validated['recipient_email']
+            ]);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status'  => 0,
+                'message' => 'Validation failed',
+                'errors'  => $e->errors()
+            ], 422);
+
+        } catch (\Exception $e) {
+            Log::error('Quotation Email Error: ' . $e->getMessage());
+
+            return response()->json([
+                'status'  => 0,
+                'message' => 'Failed to send email. Please try again later.'
+            ], 500);
         }
     }
 }

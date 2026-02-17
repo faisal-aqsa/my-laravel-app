@@ -13,7 +13,7 @@ class ClientController extends Controller
     public function index()
     {
         $data = [
-            'pageTitle' => 'All CLients',
+            'pageTitle' => 'All Clients',
             'clients' => Client::all()
         ];
         return view('back.pages.client', $data);

@@ -75,12 +75,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::get('/all-quotations', 'index')->name('all-quotations');
             Route::get('/add-quotation', 'create')->name('add-quotation');
             Route::post('/store-quotation', 'store')->name('store-quotation');
-            // Route::get('/delivery-challan/{id}/download', 'downloadPDF')->name('download-delivery-challan');
-            // Route::get('/delivery-challan/{id}/view', 'viewPDF')->name('delivery-challan-view');
+            Route::get('/quotation/{id}/download', 'downloadPDF')->name('download-quotation');
+            Route::get('/quotation/{id}/view', 'viewPDF')->name('quotation-view');
             Route::get('/edit-quotation/{id}', 'edit')->name('edit-quotation');
             Route::post('/update-quotation/{id}', 'update')->name('update-quotation');
-            // Route::post('/delete-delivery-challan/{id}', 'destroy')->name('delete-delivery-challan');
-            // Route::post('/email-delivery-challan', 'emailDeliveryChallan')->name('email-delivery-challan');
+            Route::get('/quotation/{id}/view-details', 'viewQuotationDetails')->name('quotation-view-details');
+            Route::post('/delete-quotation/{id}', 'destroy')->name('delete-quotation');
+            Route::post('/email-quotation', 'emailQuotation')->name('email-quotation');
         });
 
         Route::controller(SettingController::class)->group(function() {

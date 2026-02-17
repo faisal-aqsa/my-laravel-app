@@ -25,7 +25,7 @@
         </div>
         <div class="toast-body"></div>
     </div>
-    
+
     <!-- Error Toast -->
     <div id="danger" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
         <div class="toast-header bg-danger text-white">
@@ -53,42 +53,30 @@
                                     aria-describedby="datatable_info">
                                     <thead>
                                         <tr>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
-                                                rowspan="1" colspan="1" style="width: 50px;"
-                                                aria-sort="ascending"
-                                                aria-label="SR No: activate to sort column descending">Sr No</th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
-                                                rowspan="1" colspan="1" style="width: 150px;"
-                                                aria-sort="ascending"
-                                                aria-label="Client Name: activate to sort column descending">Client Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" style="width: 120px;"
-                                                aria-label="Attention: activate to sort column ascending">Attention</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" style="width: 100px;"
-                                                aria-label="Quotation For: activate to sort column ascending">Quotation For</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" style="width: 120px;"
-                                                aria-label="Challan Date: activate to sort column ascending">Quotation Date</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" style="width: 150px;"
-                                                aria-label="Action: activate to sort column ascending">Action
-                                            </th>
+                                            <th style="width: 50px;">Sr No</th>
+                                            <th style="width: 150px;">Client Name</th>
+                                            <th style="width: 120px;">Attention</th>
+                                            <th style="width: 100px;">Quotation For</th>
+                                            <th style="width: 120px;">Quotation Date</th>
+                                            <th style="width: 150px;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($quotations as $quotation)
-                                            <tr class="odd" data-challan-id="{{ $quotation->id }}">
+                                            <tr class="odd" data-quotation-id="{{ $quotation->id }}">
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td class="dtr-control">
-                                                    {{ $quotation->client->name ?? 'N/A' }}
-                                                </td>
+                                                <td class="dtr-control">{{ $quotation->client->name ?? 'N/A' }}</td>
                                                 <td>{{ $quotation->attention }}</td>
                                                 <td>{{ $quotation->quotation_for ?? 'N/A' }}</td>
                                                 <td>{{ $quotation->date->format('d-m-Y') }}</td>
-                                                
                                                 <td>
                                                     <div class="btn-group" role="group">
+                                                        <a href="{{ route('admin.quotation-view-details', $quotation->id) }}" 
+                                                            class="btn btn-sm btn-outline-info"
+                                                            data-bs-toggle="tooltip" title="View Details">
+                                                            <i class="mdi mdi-eye"></i>
+                                                        </a>
+                                                        {{-- Edit --}}
                                                         <a href="{{ route('admin.edit-quotation', $quotation->id) }}"
                                                            class="btn btn-sm btn-outline-primary"
                                                            data-bs-toggle="tooltip"
@@ -96,47 +84,51 @@
                                                             <i class="mdi mdi-square-edit-outline"></i>
                                                         </a>
 
-                                                        {{-- ⭐ NEW: Email Delivery Challan Button --}}
+                                                        {{-- Email --}}
                                                         <button type="button"
-                                                                class="btn btn-sm btn-outline-info email-quotation-btn"
+                                                                class="btn btn-sm btn-outline-secondary email-quotation-btn"
                                                                 data-quotation-id="{{ $quotation->id }}"
                                                                 data-client-name="{{ $quotation->client->name ?? 'N/A' }}"
                                                                 data-client-email="{{ $quotation->client->email ?? '' }}"
                                                                 data-quotation-date="{{ $quotation->date->format('d-m-Y') }}"
-                                                                data-bs-toggle="tooltip" 
+                                                                data-attention="{{ $quotation->attention ?? '' }}"
+                                                                data-quotation-for="{{ $quotation->quotation_for ?? '' }}"
+                                                                data-bs-toggle="tooltip"
                                                                 title="Email Quotation">
                                                             <i class="mdi mdi-email-outline"></i>
                                                         </button>
 
-                                                        <a href="{{ route('admin.download-delivery-challan', $quotation->id) }}"
+                                                        {{-- Download --}}
+                                                        <a href="{{ route('admin.download-quotation', $quotation->id) }}"
                                                            class="btn btn-sm btn-outline-success"
                                                            data-bs-toggle="tooltip"
                                                            title="Download PDF">
                                                             <i class="mdi mdi-download"></i>
                                                         </a>
 
-                                                        <a href="{{ route('admin.delivery-challan-view', $quotation->id) }}" 
-                                                           class="btn btn-sm btn-outline-warning"
-                                                           data-bs-toggle="tooltip" 
+                                                        {{-- View --}}
+                                                        <a href="{{ route('admin.quotation-view', $quotation->id) }}"
+                                                           class="btn btn-sm btn-outline-dark"
+                                                           data-bs-toggle="tooltip"
                                                            title="View Quotation">
-                                                            <i class="mdi mdi-eye"></i>
+                                                            <i class="mdi mdi-file-pdf-box"></i>
                                                         </a>
 
+                                                        {{-- Delete --}}
                                                         <button type="button"
-                                                                class="btn btn-sm btn-outline-danger delete-challan-btn"
-                                                                data-challan-id="{{ $quotation->id }}"
+                                                                class="btn btn-sm btn-outline-danger delete-quotation-btn"
+                                                                data-quotation-id="{{ $quotation->id }}"
                                                                 data-bs-toggle="tooltip"
                                                                 title="Delete Quotation">
                                                             <i class="mdi mdi-delete"></i>
                                                         </button>
+
                                                     </div>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="7" class="text-center">
-                                                    No quotations found
-                                                </td>
+                                                <td colspan="6" class="text-center">No quotations found</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -149,92 +141,82 @@
         </div>
     </div>
 
-    {{-- ⭐ NEW: Email Delivery Challan Modal --}}
-    <div class="modal fade" id="emailChallanModal" tabindex="-1" aria-labelledby="emailChallanModalLabel" aria-hidden="true">
+    {{-- Email Quotation Modal --}}
+    <div class="modal fade" id="emailQuotationModal" tabindex="-1" aria-labelledby="emailQuotationModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="emailChallanModalLabel">
-                        <i class="fas fa-envelope me-2"></i>Send Delivery Challan via Email
+                    <h5 class="modal-title" id="emailQuotationModalLabel">
+                        <i class="fas fa-envelope me-2"></i>Send Quotation via Email
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="emailChallanForm">
+                <form id="emailQuotationForm">
                     @csrf
                     <div class="modal-body">
-                        <input type="hidden" id="email_challan_id" name="challan_id">
-                        
-                        <!-- Challan Information Display -->
+                        <input type="hidden" id="email_quotation_id" name="quotation_id">
+
+                        {{-- Quotation Info Summary --}}
                         <div class="alert alert-info">
                             <h6 class="alert-heading mb-2">
-                                <i class="fas fa-truck me-1"></i>Delivery Challan Details
+                                <i class="fas fa-file-alt me-1"></i>Quotation Details
                             </h6>
                             <div class="row">
                                 <div class="col-6">
-                                    <small class="text-muted">Challan Number:</small>
-                                    <p class="mb-1"><strong id="email_challan_number"></strong></p>
-                                </div>
-                                <div class="col-6">
                                     <small class="text-muted">Client:</small>
-                                    <p class="mb-1"><strong id="email_client_name"></strong></p>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <small class="text-muted">Amount:</small>
-                                    <p class="mb-0"><strong id="email_total_amount"></strong></p>
+                                    <p class="mb-1"><strong id="eq_client_name"></strong></p>
                                 </div>
                                 <div class="col-6">
                                     <small class="text-muted">Date:</small>
-                                    <p class="mb-0"><strong id="email_challan_date"></strong></p>
+                                    <p class="mb-1"><strong id="eq_quotation_date"></strong></p>
                                 </div>
                             </div>
-                            <div class="row mt-2" id="vehicle_number_row" style="display: none;">
-                                <div class="col-12">
-                                    <small class="text-muted">Vehicle Number:</small>
-                                    <p class="mb-0"><strong id="email_vehicle_number"></strong></p>
+                            <div class="row mt-1" id="eq_attention_row">
+                                <div class="col-6">
+                                    <small class="text-muted">Attention:</small>
+                                    <p class="mb-1"><strong id="eq_attention"></strong></p>
+                                </div>
+                                <div class="col-6" id="eq_quotation_for_col">
+                                    <small class="text-muted">Quotation For:</small>
+                                    <p class="mb-1"><strong id="eq_quotation_for"></strong></p>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Email Address Field -->
+
+                        {{-- Recipient Email --}}
                         <div class="mb-3">
-                            <label for="recipient_email_challan" class="form-label">
+                            <label for="eq_recipient_email" class="form-label">
                                 <i class="fas fa-at me-1"></i>Recipient Email Address <span class="text-danger">*</span>
                             </label>
-                            <input type="email" class="form-control" id="recipient_email_challan" name="recipient_email" 
-                                   placeholder="Enter email address" required>
-                            <small class="text-muted">
-                                The delivery challan will be sent to this email address. You can change the default client email if needed.
-                            </small>
+                            <input type="email" class="form-control" id="eq_recipient_email"
+                                   name="recipient_email" placeholder="Enter email address" required>
+                            <small class="text-muted">Pre-filled with client email. Change if needed.</small>
                         </div>
-                        
-                        <!-- CC Email (Optional) -->
+
+                        {{-- CC Email --}}
                         <div class="mb-3">
-                            <label for="cc_email_challan" class="form-label">
+                            <label for="eq_cc_email" class="form-label">
                                 <i class="fas fa-copy me-1"></i>CC Email (Optional)
                             </label>
-                            <input type="email" class="form-control" id="cc_email_challan" name="cc_email" 
-                                   placeholder="Enter CC email address (optional)">
-                            <small class="text-muted">Send a copy to another email address.</small>
+                            <input type="email" class="form-control" id="eq_cc_email"
+                                   name="cc_email" placeholder="Enter CC email address (optional)">
                         </div>
-                        
-                        <!-- Custom Message -->
+
+                        {{-- Custom Message --}}
                         <div class="mb-3">
-                            <label for="email_message_challan" class="form-label">
+                            <label for="eq_email_message" class="form-label">
                                 <i class="fas fa-comment-dots me-1"></i>Custom Message (Optional)
                             </label>
-                            <textarea class="form-control" id="email_message_challan" name="email_message" rows="3" 
-                                      placeholder="Add a personal message to include in the email..."></textarea>
-                            <small class="text-muted">This message will be displayed in the email body.</small>
+                            <textarea class="form-control" id="eq_email_message" name="email_message"
+                                      rows="3" placeholder="Add a personal message..."></textarea>
                         </div>
-                        
-                        <!-- Email Preview Info -->
+
+                        {{-- What will be sent --}}
                         <div class="alert alert-secondary mb-0">
                             <h6 class="mb-2"><i class="fas fa-info-circle me-1"></i>What will be sent:</h6>
                             <ul class="mb-0 ps-3">
-                                <li>Professional email template with challan details</li>
-                                <li>Delivery Challan PDF as attachment</li>
+                                <li>Professional email template with quotation details</li>
+                                <li>Quotation PDF as attachment</li>
                                 <li>Your custom message (if provided)</li>
                             </ul>
                         </div>
@@ -256,175 +238,142 @@
 
 @push('custom-scripts')
 <script>
-    $(document).ready(function() {
-        // Initialize tooltips
-        $('[data-bs-toggle="tooltip"]').tooltip();
-        
-        // Handle delete delivery challan
-        $(document).on('click', '.delete-challan-btn', function(e) {
-            e.preventDefault();
-            var challanId = $(this).data('challan-id');
-            var url = "{{ route('admin.delete-delivery-challan', ':id') }}".replace(':id', challanId);
-            var token = "{{ csrf_token() }}";
+$(document).ready(function () {
 
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You want to delete this delivery challan!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#2ab57d",
-                cancelButtonColor: "#fd625e",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "Cancel",
-                allowOutsideClick: false,
-            }).then(function (result) {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: url,
-                        method: 'POST',
-                        data: {
-                            _token: token
-                        },
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.status == 1) {
-                                $('#success .toast-body').text(response.message);
-                                var successToast = new bootstrap.Toast(document.getElementById('success'));
-                                successToast.show();
-                                
-                                // Remove row from table
-                                $(`[data-challan-id="${challanId}"]`).closest('tr').fadeOut(300, function() {
-                                    $(this).remove();
-                                });
-                            } else {
-                                $('#danger .toast-body').text(response.message);
-                                var dangerToast = new bootstrap.Toast(document.getElementById('danger'));
-                                dangerToast.show();
-                            }
-                        },
-                        error: function() {
-                            $('#danger .toast-body').text('An error occurred. Please try again.');
-                            var dangerToast = new bootstrap.Toast(document.getElementById('danger'));
-                            dangerToast.show();
+    // Initialize tooltips
+    $('[data-bs-toggle="tooltip"]').tooltip();
+
+    // -------------------------------------------------------
+    // DELETE QUOTATION
+    // -------------------------------------------------------
+    $(document).on('click', '.delete-quotation-btn', function (e) {
+        e.preventDefault();
+        var quotationId = $(this).data('quotation-id');
+        var url   = "{{ route('admin.delete-quotation', ':id') }}".replace(':id', quotationId);
+        var token = "{{ csrf_token() }}";
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to delete this quotation!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#2ab57d",
+            cancelButtonColor: "#fd625e",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel",
+            allowOutsideClick: false,
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: { _token: token },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status == 1) {
+                            $('#success .toast-body').text(response.message);
+                            new bootstrap.Toast(document.getElementById('success')).show();
+                            $('[data-quotation-id="' + quotationId + '"]').closest('tr').fadeOut(300, function () {
+                                $(this).remove();
+                            });
+                        } else {
+                            $('#danger .toast-body').text(response.message);
+                            new bootstrap.Toast(document.getElementById('danger')).show();
                         }
-                    });
-                }
-            });
-        });
-
-        // ⭐ NEW: Email Delivery Challan Functionality
-        
-        // Handle email delivery challan button click
-        $(document).on('click', '.email-challan-btn', function() {
-            var challanId = $(this).data('challan-id');
-            var clientName = $(this).data('client-name');
-            var clientEmail = $(this).data('client-email');
-            var challanNumber = $(this).data('challan-number');
-            var totalAmount = $(this).data('total-amount');
-            var challanDate = $(this).data('challan-date');
-            var vehicleNumber = $(this).data('vehicle-number');
-            
-            // Set modal values
-            $('#email_challan_id').val(challanId);
-            $('#email_challan_number').text(challanNumber);
-            $('#email_client_name').text(clientName);
-            $('#email_total_amount').text('₹' + parseFloat(totalAmount).toFixed(2));
-            $('#email_challan_date').text(challanDate);
-            
-            // Show vehicle number if exists
-            if (vehicleNumber && vehicleNumber !== 'N/A') {
-                $('#email_vehicle_number').text(vehicleNumber);
-                $('#vehicle_number_row').show();
-            } else {
-                $('#vehicle_number_row').hide();
+                    },
+                    error: function () {
+                        $('#danger .toast-body').text('An error occurred. Please try again.');
+                        new bootstrap.Toast(document.getElementById('danger')).show();
+                    }
+                });
             }
-            
-            // Pre-fill recipient email with client's email
-            $('#recipient_email_challan').val(clientEmail);
-            
-            // Clear CC and message fields
-            $('#cc_email_challan').val('');
-            $('#email_message_challan').val('');
-            
-            // Show modal
-            var emailChallanModal = new bootstrap.Modal(document.getElementById('emailChallanModal'));
-            emailChallanModal.show();
-        });
-
-        // Handle email form submission
-        $('#emailChallanForm').on('submit', function(e) {
-            e.preventDefault();
-            
-            var formData = $(this).serialize();
-            var url = "{{ route('admin.email-delivery-challan') }}";
-            
-            // Show loading state
-            var submitBtn = $(this).find('button[type="submit"]');
-            var originalText = submitBtn.html();
-            submitBtn.html('<i class="fas fa-spinner fa-spin me-1"></i>Sending Email...');
-            submitBtn.prop('disabled', true);
-            
-            // Disable cancel button
-            var cancelBtn = $(this).find('button[data-bs-dismiss="modal"]');
-            cancelBtn.prop('disabled', true);
-            
-            $.ajax({
-                url: url,
-                method: 'POST',
-                data: formData,
-                dataType: 'json',
-                success: function(response) {
-                    submitBtn.html(originalText);
-                    submitBtn.prop('disabled', false);
-                    cancelBtn.prop('disabled', false);
-                    
-                    if (response.status == 1) {
-                        // Close modal
-                        var emailChallanModal = bootstrap.Modal.getInstance(document.getElementById('emailChallanModal'));
-                        emailChallanModal.hide();
-                        
-                        // Show success toast
-                        $('#success .toast-body').text(response.message);
-                        var successToast = new bootstrap.Toast(document.getElementById('success'));
-                        successToast.show();
-                        
-                        // Reset form
-                        $('#emailChallanForm')[0].reset();
-                    } else {
-                        $('#danger .toast-body').text(response.message);
-                        var dangerToast = new bootstrap.Toast(document.getElementById('danger'));
-                        dangerToast.show();
-                    }
-                },
-                error: function(xhr) {
-                    submitBtn.html(originalText);
-                    submitBtn.prop('disabled', false);
-                    cancelBtn.prop('disabled', false);
-                    
-                    var errorMessage = 'An error occurred. Please try again.';
-                    
-                    if (xhr.status === 422) {
-                        var errors = xhr.responseJSON.errors;
-                        var errorMessages = [];
-                        $.each(errors, function(field, messages) {
-                            errorMessages.push(messages.join(', '));
-                        });
-                        errorMessage = errorMessages.join('\n');
-                    } else if (xhr.responseJSON && xhr.responseJSON.message) {
-                        errorMessage = xhr.responseJSON.message;
-                    }
-                    
-                    $('#danger .toast-body').text(errorMessage);
-                    var dangerToast = new bootstrap.Toast(document.getElementById('danger'));
-                    dangerToast.show();
-                }
-            });
-        });
-
-        // Reset form when modal is hidden
-        $('#emailChallanModal').on('hidden.bs.modal', function () {
-            $('#emailChallanForm')[0].reset();
         });
     });
+
+    // -------------------------------------------------------
+    // OPEN EMAIL MODAL
+    // -------------------------------------------------------
+    $(document).on('click', '.email-quotation-btn', function () {
+        var quotationId   = $(this).data('quotation-id');
+        var clientName    = $(this).data('client-name');
+        var clientEmail   = $(this).data('client-email');
+        var quotationDate = $(this).data('quotation-date');
+        var attention     = $(this).data('attention');
+        var quotationFor  = $(this).data('quotation-for');
+
+        // Populate summary
+        $('#email_quotation_id').val(quotationId);
+        $('#eq_client_name').text(clientName);
+        $('#eq_quotation_date').text(quotationDate);
+        $('#eq_attention').text(attention || '—');
+        $('#eq_quotation_for').text(quotationFor || '—');
+
+        // Pre-fill recipient email
+        $('#eq_recipient_email').val(clientEmail);
+
+        // Clear optional fields
+        $('#eq_cc_email').val('');
+        $('#eq_email_message').val('');
+
+        new bootstrap.Modal(document.getElementById('emailQuotationModal')).show();
+    });
+
+    // -------------------------------------------------------
+    // SUBMIT EMAIL FORM
+    // -------------------------------------------------------
+    $('#emailQuotationForm').on('submit', function (e) {
+        e.preventDefault();
+
+        var submitBtn   = $(this).find('button[type="submit"]');
+        var cancelBtn   = $(this).find('button[data-bs-dismiss="modal"]');
+        var originalHtml = submitBtn.html();
+
+        submitBtn.html('<i class="fas fa-spinner fa-spin me-1"></i>Sending...').prop('disabled', true);
+        cancelBtn.prop('disabled', true);
+
+        $.ajax({
+            url: "{{ route('admin.email-quotation') }}",
+            method: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (response) {
+                submitBtn.html(originalHtml).prop('disabled', false);
+                cancelBtn.prop('disabled', false);
+
+                if (response.status == 1) {
+                    bootstrap.Modal.getInstance(document.getElementById('emailQuotationModal')).hide();
+                    $('#success .toast-body').text(response.message);
+                    new bootstrap.Toast(document.getElementById('success')).show();
+                    $('#emailQuotationForm')[0].reset();
+                } else {
+                    $('#danger .toast-body').text(response.message);
+                    new bootstrap.Toast(document.getElementById('danger')).show();
+                }
+            },
+            error: function (xhr) {
+                submitBtn.html(originalHtml).prop('disabled', false);
+                cancelBtn.prop('disabled', false);
+
+                var errorMessage = 'An error occurred. Please try again.';
+                if (xhr.status === 422) {
+                    var msgs = [];
+                    $.each(xhr.responseJSON.errors, function (f, m) { msgs.push(m.join(', ')); });
+                    errorMessage = msgs.join('\n');
+                } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
+                }
+
+                $('#danger .toast-body').text(errorMessage);
+                new bootstrap.Toast(document.getElementById('danger')).show();
+            }
+        });
+    });
+
+    // Reset form on modal close
+    $('#emailQuotationModal').on('hidden.bs.modal', function () {
+        $('#emailQuotationForm')[0].reset();
+    });
+
+});
 </script>
 @endpush
