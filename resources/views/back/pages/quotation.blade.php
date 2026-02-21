@@ -87,8 +87,8 @@
                                     aria-describedby="datatable_info">
                                     <thead>
                                         <tr>
-                                            <th style="width: 50px;">Sr No</th>
                                             <th style="width: 150px;">Client Name</th>
+                                            <th style="width: 50px;">Sr No</th>
                                             <th style="width: 120px;">Attention</th>
                                             <th style="width: 100px;">Quotation For</th>
                                             <th style="width: 120px;">Quotation Date</th>
