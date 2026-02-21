@@ -2,6 +2,40 @@
 
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Quotations')
 
+@push('custom-styles')
+    <style>
+
+    .client-name-cell {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #datatable th:nth-child(2),
+    #datatable td:nth-child(2) {
+        width: 60px;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    @media (max-width: 576px) {
+
+        .client-name-cell {
+            white-space: normal !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        #datatable th:nth-child(2),
+        #datatable td:nth-child(2) {
+            width: 50px;
+            min-width: 50px;
+        }
+    }
+
+    </style>
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -64,8 +98,8 @@
                                     <tbody>
                                         @forelse ($quotations as $quotation)
                                             <tr class="odd" data-quotation-id="{{ $quotation->id }}">
+                                                <td class="dtr-control sorting_1 client-name-cell">{{ $quotation->client->name ?? 'N/A' }}</td>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td class="dtr-control">{{ $quotation->client->name ?? 'N/A' }}</td>
                                                 <td>{{ $quotation->attention }}</td>
                                                 <td>{{ $quotation->quotation_for ?? 'N/A' }}</td>
                                                 <td>{{ $quotation->date->format('d-m-Y') }}</td>
