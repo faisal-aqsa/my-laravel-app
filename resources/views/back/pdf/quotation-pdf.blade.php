@@ -338,6 +338,10 @@
                                 <td class="value-cell">{{ $quotation->date->format('d/m/Y') }}</td>
                             </tr>
                             <tr>
+                                <td class="label-cell">Quotation No:</td>
+                                <td class="value-cell">{{ $quotation->quotation_number }}</td>
+                            </tr>
+                            <tr>
                                 <td class="label-cell">Company:</td>
                                 <td class="value-cell">{{ $quotation->client->name ?? 'N/A' }}</td>
                             </tr>
