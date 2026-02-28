@@ -87,12 +87,27 @@
                                     aria-describedby="datatable_info">
                                     <thead>
                                         <tr>
-                                            <th style="width: 150px;">Client Name</th>
-                                            <th style="width: 50px;">Quotation Number</th>
-                                            <th style="width: 120px;">Attention</th>
-                                            <th style="width: 100px;">Quotation For</th>
-                                            <th style="width: 120px;">Quotation Date</th>
-                                            <th style="width: 150px;">Action</th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
+                                                rowspan="1" colspan="1" style="width: 50px;"
+                                                aria-sort="ascending"
+                                                aria-label="Client Name: activate to sort column descending">Client Name</th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
+                                                rowspan="1" colspan="1" style="width: 50px;"
+                                                aria-sort="ascending"
+                                                aria-label="Quotation Number: activate to sort column descending">Quotation Number</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                colspan="1" style="width: 120px;"
+                                                aria-label="Attention: activate to sort column ascending">Attention</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                colspan="1" style="width: 100px;"
+                                                aria-label="Quotation For: activate to sort column ascending">Quotation For</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                colspan="1" style="width: 120px;"
+                                                aria-label="Quotation Date: activate to sort column ascending">Quotation Date</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                                colspan="1" style="width: 150px;"
+                                                aria-label="Action: activate to sort column ascending">Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
