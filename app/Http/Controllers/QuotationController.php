@@ -28,10 +28,13 @@ class QuotationController extends Controller
     public function create()
     {
         $clients = Client::all();
+        $lastQuotation = Quotation::latest('id')->first();
+        $nextQuotationNumber = $lastQuotation ? ($lastQuotation->quotation_number + 1) : 1001;
         
         $data = [
             'pageTitle' => 'Create Quotation',
             'clients' => $clients,
+            'quotationNumber' => $nextQuotationNumber,
         ];
 
         return view('back.pages.create-quotation', $data);
@@ -42,6 +45,7 @@ class QuotationController extends Controller
         // Validation
         $validator = Validator::make($request->all(), [
             'client_id' => 'required|exists:clients,id',
+            'quotation_number' => 'required|unique:quotations',
             'attention' => 'nullable|string|max:255',
             'quotation_for' => 'nullable|string|max:255',
             'date' => 'required|date',
@@ -77,6 +81,7 @@ class QuotationController extends Controller
         try {
             // Create quotation
             $quotation = Quotation::create([
+                'quotation_number' => $request->quotation_number,
                 'client_id' => $request->client_id,
                 'attention' => $request->attention,
                 'quotation_for' => $request->quotation_for,
@@ -141,6 +146,7 @@ class QuotationController extends Controller
 
         // Validation
         $validator = Validator::make($request->all(), [
+            'quotation_number' => 'required|unique:quotations,quotation_number,' . $id,
             'client_id' => 'required|exists:clients,id',
             'attention' => 'nullable|string|max:255',
             'quotation_for' => 'nullable|string|max:255',
@@ -171,6 +177,7 @@ class QuotationController extends Controller
         try {
             // Update quotation
             $quotation->update([
+                'quotation_number' => $request->quotation_number,
                 'client_id' => $request->client_id,
                 'attention' => $request->attention,
                 'quotation_for' => $request->quotation_for,

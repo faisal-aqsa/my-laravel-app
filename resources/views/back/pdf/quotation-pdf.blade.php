@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <title>Quotation #{{ $quotation->id }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courgette&family=Lobster&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Pacifico&family=Playwrite+NZ+Basic:wght@100..400&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
 </head>
 
 <style>
@@ -75,9 +78,8 @@
 
     .tag-line {
         margin-top:8px; 
-        font-weight:bold; 
-        font-style:italic; 
-        font-family: 'DejaVu Sans', Arial, sans-serif;
+        font-weight:900; 
+        font-family: "Roboto Serif", serif;
         display:flex; 
         align-items:center; 
         gap:6px;

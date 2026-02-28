@@ -29,6 +29,17 @@
                         <x-form-alerts></x-form-alerts>
                         
                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label" for="quotation_number">Quotation Number</label>
+                                    <input type="text" class="form-control" name="quotation_number" 
+                                        id="quotation_number" value="{{ $quotation->quotation_number }}" readOnly>
+                                    @error('quotation_number')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div> 
+
                             <!-- Client Selection -->
                             <div class="col-md-4">
                                 <div class="mb-3">

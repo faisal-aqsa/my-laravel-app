@@ -14,7 +14,7 @@ class ClientController extends Controller
     {
         $data = [
             'pageTitle' => 'All Clients',
-            'clients' => Client::all()
+            'clients' => Client::latest()->get()
         ];
         return view('back.pages.client', $data);
     }
@@ -25,7 +25,7 @@ class ClientController extends Controller
     public function create()
     {
         $data = [
-            'pageTitle' => 'Add CLients',
+            'pageTitle' => 'Add Client',
             'clients' => Client::all()
         ];
         return view('back.pages.add-clients', $data);
@@ -38,19 +38,15 @@ class ClientController extends Controller
     {
         $request->validate([
             'client_name' => 'required|unique:clients,name',
-            'client_phone' => 'required|unique:clients,phone',
-            'client_email' => 'required|unique:clients,email',
-            'client_address' => 'required',
-            'client_gst_no' => 'required|unique:clients,gst_no'
+            'client_phone' => 'nullable|unique:clients,phone',
+            'client_email' => 'nullable|unique:clients,email',
+            'client_address' => 'nullable',
+            'client_gst_no' => 'nullable|unique:clients,gst_no'
         ], [
             'client_name.required' => 'Enter client name', 
             'client_name.unique' => 'This client name is already taken',
-            'client_phone.required' => 'Enter client phone', 
             'client_phone.unique' => 'This client phone is already taken',
-            'client_email.required' => 'Enter client email', 
             'client_email.unique' => 'This client email is already taken',
-            'client_address.required' => 'Enter Client Address',
-            'client_gst_no.required' => 'Enter GST Number',
             'client_gst_no.unique' => 'This GST number is already taken',
         ]);
 
@@ -103,19 +99,15 @@ class ClientController extends Controller
 
         $request->validate([
             'client_name' => 'required|unique:clients,name,'.$client->id,
-            'client_phone' => 'required|unique:clients,phone,'.$client->id,
-            'client_email' => 'required|unique:clients,email,'.$client->id,
-            'client_address' => 'required',
-            'client_gst_no' => 'required|unique:clients,gst_no,'.$client->id
+            'client_phone' => 'nullable|unique:clients,phone,'.$client->id,
+            'client_email' => 'nullable|unique:clients,email,'.$client->id,
+            'client_address' => 'nullable',
+            'client_gst_no' => 'nullable|unique:clients,gst_no,'.$client->id
         ], [
             'client_name.required' => 'Enter client name', 
             'client_name.unique' => 'This client name is already taken',
-            'client_phone.required' => 'Enter client phone', 
             'client_phone.unique' => 'This client phone is already taken',
-            'client_email.required' => 'Enter client email', 
             'client_email.unique' => 'This client email is already taken',
-            'client_address.required' => 'Enter Client Address',
-            'client_gst_no.required' => 'Enter GST Number',
             'client_gst_no.unique' => 'This GST number is already taken',
         ]);
 

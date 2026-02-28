@@ -11,6 +11,7 @@ class Quotation extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'quotation_number',
         'client_id',
         'attention',
         'quotation_for',

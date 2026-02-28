@@ -88,7 +88,7 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 150px;">Client Name</th>
-                                            <th style="width: 50px;">Sr No</th>
+                                            <th style="width: 50px;">Quotation Number</th>
                                             <th style="width: 120px;">Attention</th>
                                             <th style="width: 100px;">Quotation For</th>
                                             <th style="width: 120px;">Quotation Date</th>
@@ -99,7 +99,7 @@
                                         @forelse ($quotations as $quotation)
                                             <tr class="odd" data-quotation-id="{{ $quotation->id }}">
                                                 <td class="dtr-control sorting_1 client-name-cell">{{ $quotation->client->name ?? 'N/A' }}</td>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $quotation->quotation_number }}</td>
                                                 <td>{{ $quotation->attention }}</td>
                                                 <td>{{ $quotation->quotation_for ?? 'N/A' }}</td>
                                                 <td>{{ $quotation->date->format('d-m-Y') }}</td>

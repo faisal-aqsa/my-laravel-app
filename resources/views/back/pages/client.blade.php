@@ -2,17 +2,51 @@
 
 @section('pageTitle', isset($pageTitle) ? $pageTitle : '')
 
+@push('custom-styles')
+    <style>
+
+        .client-name-cell {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #datatable th:nth-child(2),
+        #datatable td:nth-child(2) {
+            width: 60px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        @media (max-width: 576px) {
+
+            .client-name-cell {
+                white-space: normal !important;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+
+            #datatable th:nth-child(2),
+            #datatable td:nth-child(2) {
+                width: 50px;
+                min-width: 50px;
+            }
+        }
+
+    </style>
+@endpush
+
 @section('content')
 
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 font-size-18">Product Page</h4>
+                <h4 class="mb-sm-0 font-size-18">Client Page</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Product Page</li>
+                        <li class="breadcrumb-item active">Client Page</li>
                     </ol>
                 </div>
 
@@ -39,11 +73,11 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 186.2px;"
                                                 aria-sort="ascending"
-                                                aria-label="Sr No: activate to sort column descending">Sr No</th>
+                                                aria-label="Client Name: activate to sort column descending">Client Name</th>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 186.2px;"
                                                 aria-sort="ascending"
-                                                aria-label="Client Name: activate to sort column descending">Client Name</th>
+                                                aria-label="Sr No: activate to sort column descending">Sr No</th>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 186.2px;"
                                                 aria-sort="ascending"
@@ -71,8 +105,8 @@
                                     <tbody>
                                         @forelse ($clients as $key => $client)
                                             <tr class="odd">
+                                                <td class="dtr-control sorting_1 client-name-cell" tabindex="0">{{ $client->name }}</td>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td class="dtr-control sorting_1" tabindex="0">{{ $client->name }}</td>
                                                 <td>{{ $client->phone }}</td>
                                                 <td>{{ $client->email }}</td>
                                                 <td>{{ $client->gst_no }}</td>
