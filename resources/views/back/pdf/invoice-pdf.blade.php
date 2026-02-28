@@ -413,7 +413,7 @@
                         <img src="{{ $logoSrc }}" alt="Company Logo" style="width:200px; height:200px; object-fit:contain;">
                         <p class="tag-line">
                             We Generally Recycle
-                            <i class="fas fa-recycle" style="color:black; font-weight:900;"></i>
+                            <!-- <i class="fas fa-recycle" style="color:black; font-weight:900;"></i> -->
                         </p>
                     @endif
 
