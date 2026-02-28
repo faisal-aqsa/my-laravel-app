@@ -369,9 +369,8 @@
 
         .tag-line {
             margin-top:8px; 
-            font-weight:bold; 
-            font-style:italic; 
-            font-family: 'DejaVu Sans', Arial, sans-serif;
+            font-weight:500;  
+            font-family: "Lobster", cursive;
             display:flex; 
             align-items:center; 
             gap:6px;

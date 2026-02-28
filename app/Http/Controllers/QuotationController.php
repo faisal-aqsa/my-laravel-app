@@ -19,7 +19,7 @@ class QuotationController extends Controller
     public function index(Request $request) {
         $data = [
             'pageTitle' => 'All Quotations',
-            'quotations' => Quotation::latest()->get()
+            'quotations' => Quotation::orderBy('created_at', 'desc')->get()
         ];
 
         return view('back.pages.quotation', $data);
