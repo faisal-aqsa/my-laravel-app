@@ -304,7 +304,7 @@
                     <td class="logo-cell">
                         @php
                             $settings = \App\Models\Setting::first();
-                            $logoPath = public_path('images/box-logo.png'); // Changed from assets/images
+                            $logoPath = public_path('images/black-logo.png'); // Changed from assets/images
                             
                             if (file_exists($logoPath)) {
                                 $logoData = base64_encode(file_get_contents($logoPath));
