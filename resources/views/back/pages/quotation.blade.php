@@ -281,6 +281,10 @@
 <script>
 $(document).ready(function () {
 
+    if ($.fn.DataTable.isDataTable('#datatable')) {
+        $('#datatable').DataTable().destroy();
+    }
+
     $('#datatable').DataTable({
         order: [],
         responsive: true,
