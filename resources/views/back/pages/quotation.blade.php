@@ -281,6 +281,11 @@
 <script>
 $(document).ready(function () {
 
+    $('#datatable').DataTable({
+        order: [],
+        responsive: true,
+    });
+
     // Initialize tooltips
     $('[data-bs-toggle="tooltip"]').tooltip();
 
