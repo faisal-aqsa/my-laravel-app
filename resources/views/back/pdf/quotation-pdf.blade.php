@@ -68,8 +68,8 @@
     }
 
     .logo-cell img {
-        width: 110px;
-        height: 110px;
+        width: 150px;
+        height: 150px;
         object-fit: contain;
         filter: invert(1);
         display: block;
@@ -315,7 +315,7 @@
                         @endphp
                         
                         @if($logoSrc)
-                            <img src="{{ $logoSrc }}" alt="Company Logo" style="width:150px; height:150px; object-fit:contain;">
+                            <img src="{{ $logoSrc }}" alt="Company Logo" style="width:200px; height:200px; object-fit:contain;">
                             {{-- <p class="tag-line">
                                 We Generally Recycle
                                 <!-- <i class="fas fa-recycle" style="color:black; font-weight:900;"></i> -->
