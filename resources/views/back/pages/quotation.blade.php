@@ -95,16 +95,16 @@
                                                 rowspan="1" colspan="1" style="width: 50px;"
                                                 aria-sort="ascending"
                                                 aria-label="Quotation Number: activate to sort column descending">Quotation Number</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 120px;"
                                                 aria-label="Attention: activate to sort column ascending">Attention</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 100px;"
                                                 aria-label="Quotation For: activate to sort column ascending">Quotation For</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 120px;"
                                                 aria-label="Quotation Date: activate to sort column ascending">Quotation Date</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 150px;"
                                                 aria-label="Action: activate to sort column ascending">Action
                                             </th>
@@ -113,7 +113,7 @@
                                     <tbody>
                                         @forelse ($quotations as $quotation)
                                             <tr class="odd" data-quotation-id="{{ $quotation->id }}">
-                                                <td class="dtr-control sorting_1 client-name-cell">{{ $quotation->client->name ?? 'N/A' }}</td>
+                                                <td class="dtr-control client-name-cell">{{ $quotation->client->name ?? 'N/A' }}</td>
                                                 <td>{{ $quotation->quotation_number }}</td>
                                                 <td>{{ $quotation->attention }}</td>
                                                 <td>{{ $quotation->quotation_for ?? 'N/A' }}</td>
