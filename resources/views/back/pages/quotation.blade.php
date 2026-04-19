@@ -89,11 +89,9 @@
                                         <tr>
                                             <th tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 50px;"
-                                                aria-sort="ascending"
                                                 aria-label="Client Name: activate to sort column descending">Client Name</th>
                                             <th tabindex="0" aria-controls="datatable"
                                                 rowspan="1" colspan="1" style="width: 50px;"
-                                                aria-sort="ascending"
                                                 aria-label="Quotation Number: activate to sort column descending">Quotation Number</th>
                                             <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                 colspan="1" style="width: 120px;"
