@@ -515,4 +515,51 @@ class InvoiceController extends Controller
             ]);
         }
     }
+
+    public function export()
+    {
+        $invoices = Invoice::latest()->get();
+
+        $filename = 'invoices_' . date('Y-m-d_H-i-s') . '.csv';
+
+        $headers = [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+            'Pragma'              => 'no-cache',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires'             => '0',
+        ];
+
+        $callback = function () use ($invoices) {
+            $handle = fopen('php://output', 'w');
+
+            // Header row
+            fputcsv($handle, [
+                'Client Name',
+                'Invoice Number',
+                'Sub Total',
+                'Paid Amount',
+                'Remaining',
+                'Grand Total',
+                'Status',
+            ]);
+
+            foreach ($invoices as $invoice) {
+                $remaining = $invoice->grand_total - $invoice->paid_amount;
+                fputcsv($handle, [
+                    $invoice->getClient->name ?? 'N/A',
+                    $invoice->invoice_number,
+                    number_format($invoice->total_amount, 2),
+                    number_format($invoice->paid_amount, 2),
+                    number_format($remaining, 2),
+                    number_format($invoice->grand_total, 2),
+                    ucfirst(str_replace('_', ' ', $invoice->status)),
+                ]);
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

@@ -51,6 +51,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::post('/invoices/update-status', 'updateInvoiceStatus')->name('update-invoice-status');
             Route::post('/delete-invoice/{id}', 'deleteInvoice')->name('delete-invoice');
             Route::post('/email-invoice', 'emailInvoice')->name('email-invoice');
+            Route::get('/invoices/export', 'export')->name('export-invoices');
         });
 
         Route::controller(PaymentHistoryController::class)->group(function() {
@@ -69,6 +70,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::get('/delivery-challan-view/{id}/view-details', 'viewDeliveryChallan')->name('delivery-challan-details');
             Route::post('/delete-delivery-challan/{id}', 'destroy')->name('delete-delivery-challan');
             Route::post('/email-delivery-challan', 'emailDeliveryChallan')->name('email-delivery-challan');
+            Route::get('/delivery-challans/export', 'export')->name('export-delivery-challans');
         });
 
         Route::controller(QuotationController::class)->group(function() {

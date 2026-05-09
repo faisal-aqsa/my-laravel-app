@@ -79,6 +79,9 @@
                     <a href="{{ route('admin.add-delivery-challan') }}" class="btn btn-primary waves-effect waves-light">
                         <i class="fas fa-plus me-2"></i>Create Delivery Challan
                     </a>
+                    <a href="{{ route('admin.export-delivery-challans') }}" class="btn btn-success waves-effect waves-light">
+                        <i class="fas fa-file-excel me-2"></i>Export to Excel
+                    </a>
                 </div>
                 <div class="card-body">
                     <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">

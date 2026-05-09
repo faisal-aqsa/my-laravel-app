@@ -80,6 +80,9 @@
                     <a href="{{ route('admin.add-invoice') }}" class="btn btn-primary waves-effect waves-light">
                         <i class="fas fa-plus me-2"></i>Create Invoice
                     </a>
+                    <a href="{{ route('admin.export-invoices') }}" class="btn btn-success waves-effect waves-light">
+                        <i class="fas fa-file-excel me-2"></i>Export to Excel
+                    </a>
                 </div>
                 <div class="card-body">
 

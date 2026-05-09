@@ -339,4 +339,46 @@ class DeliveryChallanController extends Controller
             ], 500);
         }
     }
+
+    public function export()
+    {
+        $challans = DeliveryChallan::with('client')->latest()->get();
+
+        $filename = 'delivery_challans_' . date('Y-m-d_H-i-s') . '.csv';
+
+        $headers = [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+            'Pragma'              => 'no-cache',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires'             => '0',
+        ];
+
+        $callback = function () use ($challans) {
+            $handle = fopen('php://output', 'w');
+
+            // Header row
+            fputcsv($handle, [
+                'Client Name',
+                'Challan No',
+                'Vehicle No',
+                'Partner No',
+                'Challan Date',
+            ]);
+
+            foreach ($challans as $challan) {
+                fputcsv($handle, [
+                    $challan->client->name ?? $challan->getClient->name ?? 'N/A',
+                    $challan->challan_number,
+                    $challan->vehicle_no ?? 'N/A',
+                    $challan->delivery_partner_phone ?? 'N/A',
+                    $challan->challan_date->format('d-m-Y'),
+                ]);
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }
