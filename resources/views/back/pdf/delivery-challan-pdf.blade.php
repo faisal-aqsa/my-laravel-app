@@ -492,12 +492,37 @@
                 <p style="margin:5px 0 0 0; font-size:12px; font-weight: bold;">STAMP & SIGN</p>
             </div>
 
-            <div style="float:right; width:50%; padding-right:30px; box-sizing:border-box;">
+            {{-- <div style="float:right; width:50%; padding-right:30px; box-sizing:border-box;">
                 <p style="margin:0 0 25px 0; font-size:12px; text-align:right;">Your Sincerely</p>
                 <div style="border-top:1px solid #000; width:140px; margin:0 0 0 auto;"></div>
                 <p style="margin:5px 0 0 0; font-size:12px; text-align:right; font-weight: bold;">BOXMAKER</p>
+            </div> --}}
+
+            <div style="float:right; width:50%; padding-right:30px; box-sizing:border-box;">
+                <p style="margin:0 0 5px 0; font-size:12px; text-align:right;">Your Sincerely</p>
+                
+                @php
+                    $sigPath = public_path('storage/' . $settings->signature);
+                    $sigSrc = '';
+                    if ($settings->signature && file_exists($sigPath)) {
+                        $ext = pathinfo($sigPath, PATHINFO_EXTENSION);
+                        $mime = in_array($ext, ['jpg','jpeg']) ? 'image/jpeg' : 'image/png';
+                        $sigSrc = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($sigPath));
+                    }
+                @endphp
+
+                @if($sigSrc)
+                    <div style="text-align:right;">
+                        <img src="{{ $sigSrc }}" style="max-width:120px; max-height:60px; object-fit:contain;">
+                    </div>
+                @else
+                    <div style="height:60px;"></div>
+                @endif
+
+                <div style="border-top:1px solid #000; width:140px; margin:0 0 0 auto;"></div>
+                <p style="margin:5px 0 0 0; font-size:12px; text-align:right; font-weight: bold;">BOXMAKER</p>
             </div>
-            
+
             <div style="clear:both;"></div>
             
             <!-- Computer Generated Note -->

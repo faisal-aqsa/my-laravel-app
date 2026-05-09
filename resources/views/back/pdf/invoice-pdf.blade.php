@@ -625,7 +625,7 @@
         <div class="content-spacer"></div>
 
         <!-- Signature Section (Fixed above footer) -->
-        <div class="signature-container">
+        {{-- <div class="signature-container">
             <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
                 <p style="margin:0 0 25px 0; font-size:12px; text-align:left;">For, BOXMAKER</p>
                 <div style="border-top:1px solid #000; width:140px; margin:0;"></div>
@@ -634,6 +634,38 @@
             
             <div style="clear:both;"></div>
             
+            <p style="margin-top:10px; text-align:center; font-size:13px; color:#000;">
+                *This is a computer generated invoice.
+            </p>
+        </div> --}}
+
+        <div class="signature-container">
+            <div style="float:left; width:50%; padding-left:30px; box-sizing:border-box;">
+                <p style="margin:0 0 5px 0; font-size:12px; text-align:left;">For, BOXMAKER</p>
+
+                @php
+                    $settings = $settings ?? \App\Models\Setting::first();
+                    $sigPath = public_path('storage/' . $settings->signature);
+                    $sigSrc = '';
+                    if ($settings->signature && file_exists($sigPath)) {
+                        $ext = pathinfo($sigPath, PATHINFO_EXTENSION);
+                        $mime = in_array($ext, ['jpg','jpeg']) ? 'image/jpeg' : 'image/png';
+                        $sigSrc = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($sigPath));
+                    }
+                @endphp
+
+                @if($sigSrc)
+                    <img src="{{ $sigSrc }}" style="max-width:120px; max-height:60px; object-fit:contain; display:block;">
+                @else
+                    <div style="height:60px;"></div>
+                @endif
+
+                <div style="border-top:1px solid #000; width:140px; margin:0;"></div>
+                <p style="margin:5px 0 0 0; font-size:12px; font-weight: bold;">PARTNERS</p>
+            </div>
+
+            <div style="clear:both;"></div>
+
             <p style="margin-top:10px; text-align:center; font-size:13px; color:#000;">
                 *This is a computer generated invoice.
             </p>
