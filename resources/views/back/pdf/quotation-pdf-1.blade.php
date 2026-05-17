@@ -74,28 +74,25 @@
        FROM / FOR BOXES
     ============================================= */
     .boxes-wrap {
-        display: table;
-        width: 100%;
         padding: 22px 40px;
         border-bottom: 1px solid #e8ecf0;
-        border-collapse: collapse;
+    }
+
+    .boxes-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 12px 0;
         table-layout: fixed;
     }
 
+    /* Real <td> — wkhtmltopdf natively equalises height */
     .box-cell {
-        display: table-cell;
         width: 50%;
         vertical-align: top;
-    }
-    .box-cell:first-child { padding-right: 12px; }
-    .box-cell:last-child  { padding-left: 12px; }
-
-    .info-box {
         background: #f7f9fb;
         border: 1px solid #e4e9ee;
         border-top: 3px solid #ffbd59;
         padding: 15px 18px;
-        height: 100%;
     }
 
     .box-title { font-size: 9.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #ffbd59; margin-bottom: 9px; }
@@ -335,33 +332,33 @@
 
     {{-- FROM / FOR BOXES --}}
     <div class="boxes-wrap">
-        <div class="box-cell">
-            <div class="info-box">
-                <div class="box-title">Quotation From</div>
-                <div class="box-name">BOXMAKER</div>
-                <div class="box-detail">
-                    {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
-                    @if($settings->gst_no ?? false)<strong>GSTIN:</strong> {{ $settings->gst_no }}<br>@endif
-                    @if($settings->phone ?? false)<strong>Phone:</strong> {{ $settings->phone }}<br>@endif
-                    @if($settings->email ?? false)<strong>Email:</strong> {{ $settings->email }}@endif
-                </div>
-            </div>
-        </div>
-        <div class="box-cell">
-            <div class="info-box">
-                <div class="box-title">Quotation For</div>
-                <div class="box-name">{{ $quotation->client->name ?? 'N/A' }}</div>
-                <div class="box-detail">
-                    @if($quotation->client->factory_address ?? $quotation->client->address ?? false)
-                        {{ $quotation->client->factory_address ?? $quotation->client->address }}<br>
-                    @endif
-                    @if($quotation->client->gst_no ?? false)<strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>@endif
-                    @if($quotation->client->phone ?? false)<strong>Phone:</strong> {{ $quotation->client->phone }}<br>@endif
-                    @if($quotation->client->email ?? false)<strong>Email:</strong> {{ $quotation->client->email }}@endif
-                    @if($quotation->quotation_for ?? false)<br><strong>For:</strong> {{ $quotation->quotation_for }}@endif
-                </div>
-            </div>
-        </div>
+        <table class="boxes-table">
+            <tr>
+                <td class="box-cell">
+                    <div class="box-title">Quotation From</div>
+                    <div class="box-name">BOXMAKER</div>
+                    <div class="box-detail">
+                        {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
+                        @if($settings->gst_no ?? false)<strong>GSTIN:</strong> {{ $settings->gst_no }}<br>@endif
+                        @if($settings->phone ?? false)<strong>Phone:</strong> {{ $settings->phone }}<br>@endif
+                        @if($settings->email ?? false)<strong>Email:</strong> {{ $settings->email }}@endif
+                    </div>
+                </td>
+                <td class="box-cell">
+                    <div class="box-title">Quotation For</div>
+                    <div class="box-name">{{ $quotation->client->name ?? 'N/A' }}</div>
+                    <div class="box-detail">
+                        @if($quotation->client->factory_address ?? $quotation->client->address ?? false)
+                            {{ $quotation->client->factory_address ?? $quotation->client->address }}<br>
+                        @endif
+                        @if($quotation->client->gst_no ?? false)<strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>@endif
+                        @if($quotation->client->phone ?? false)<strong>Phone:</strong> {{ $quotation->client->phone }}<br>@endif
+                        @if($quotation->client->email ?? false)<strong>Email:</strong> {{ $quotation->client->email }}@endif
+                        @if($quotation->quotation_for ?? false)<br><strong>For:</strong> {{ $quotation->quotation_for }}@endif
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 
     {{-- ITEMS TABLE --}}
