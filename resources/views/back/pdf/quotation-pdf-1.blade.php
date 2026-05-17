@@ -80,9 +80,16 @@
 
     .boxes-table {
         width: 100%;
-        border-collapse: separate;
-        border-spacing: 12px 0;
+        border-collapse: collapse;
         table-layout: fixed;
+    }
+
+    .box-cell + .box-cell {
+        padding-left: 0;
+    }
+
+    .box-spacer {
+        width: 14px;
     }
 
     /* Real <td> — wkhtmltopdf natively equalises height */
@@ -344,6 +351,7 @@
                         @if($settings->email ?? false)<strong>Email:</strong> {{ $settings->email }}@endif
                     </div>
                 </td>
+                <td class="box-spacer"></td>
                 <td class="box-cell">
                     <div class="box-title">Quotation For</div>
                     <div class="box-name">{{ $quotation->client->name ?? 'N/A' }}</div>
