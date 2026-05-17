@@ -15,13 +15,14 @@
         font-size: 13px;
     }
 
+    /* wkhtmltopdf: footer fixed at page bottom via @page margin + running element */
     .page {
         width: 100%;
-        padding-bottom: 60px;
+        padding-bottom: 80px; /* reserve space so content doesn't go under footer */
     }
 
     /* =============================================
-       TOP ACCENT LINE
+       TOP ACCENT
     ============================================= */
     .top-accent {
         height: 5px;
@@ -58,7 +59,6 @@
         color: #2d3743;
         letter-spacing: 1px;
         display: inline-block;
-        margin-bottom: 4px;
     }
 
     .status-badge {
@@ -244,12 +244,25 @@
     }
 
     /* =============================================
-       BOTTOM: NOTES LEFT + SUMMARY RIGHT
+       BOTTOM SECTION — notes + summary
+       Separated from items table by top margin
     ============================================= */
     .bottom-section {
         display: table;
         width: 100%;
-        padding: 22px 40px 0 40px;
+        /* Clear gap from the items table above */
+        margin-top: 30px;
+        padding: 0 40px;
+        border-collapse: collapse;
+        /* Top border as visual separator */
+        border-top: 1px solid #e8ecf0;
+    }
+
+    /* Invisible spacer row to add padding after border */
+    .bottom-inner {
+        display: table;
+        width: 100%;
+        padding-top: 22px;
         border-collapse: collapse;
     }
 
@@ -258,6 +271,7 @@
         width: 50%;
         vertical-align: top;
         padding-right: 24px;
+        padding-top: 22px;
     }
 
     .bottom-right {
@@ -265,6 +279,8 @@
         width: 50%;
         vertical-align: top;
         padding-left: 24px;
+        padding-top: 22px;
+        border-left: 1px solid #e8ecf0;
     }
 
     /* Notes */
@@ -282,7 +298,7 @@
         font-style: italic;
     }
 
-    /* Summary table — matches reference style */
+    /* Summary table */
     .summary-table {
         width: 100%;
         border-collapse: collapse;
@@ -310,14 +326,14 @@
         font-size: 15px !important;
         font-weight: 900 !important;
         color: #2d3743 !important;
-        padding-top: 12px !important;
+        padding-top: 13px !important;
+        padding-bottom: 13px !important;
         border-top: 2px solid #2d3743 !important;
         border-bottom: 2px solid #2d3743 !important;
-        padding-bottom: 12px !important;
     }
 
     /* =============================================
-       SIGNATURE — only For Boxmaker, right side
+       SIGNATURE — For Boxmaker only, right-aligned
     ============================================= */
     .sig-wrap {
         padding: 36px 40px 0 40px;
@@ -350,12 +366,19 @@
     }
 
     /* =============================================
-       FOOTER — not fixed, stays in flow
+       FOOTER
+       Use position:fixed for wkhtmltopdf so it
+       appears at the bottom of every page without
+       creating an extra blank page.
+       The padding-bottom on .page reserves space.
     ============================================= */
     .page-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
         background: #2d3743;
         border-top: 4px solid #ffbd59;
-        margin-top: 36px;
     }
 
     .footer-table {
@@ -507,17 +530,15 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" style="text-align:center; color:#aaa; padding:28px; font-style:italic;">No items found</td>
+                    <td colspan="4" style="text-align:center;color:#aaa;padding:28px;font-style:italic;">No items found</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
-    {{-- ===================== BOTTOM: NOTES + SUMMARY ===================== --}}
+    {{-- ===================== NOTES + SUMMARY (separated from table) ===================== --}}
     <div class="bottom-section">
-
-        {{-- Left: Notes --}}
         <div class="bottom-left">
             @if($quotation->notes)
                 <div class="notes-title">Additional Notes</div>
@@ -525,7 +546,6 @@
             @endif
         </div>
 
-        {{-- Right: Summary — inclusions listed like subtotal rows --}}
         <div class="bottom-right">
             <table class="summary-table">
                 <tr>
@@ -558,10 +578,9 @@
                 </tr>
             </table>
         </div>
-
     </div>
 
-    {{-- ===================== SIGNATURE — For Boxmaker only ===================== --}}
+    {{-- ===================== SIGNATURE ===================== --}}
     <div class="sig-wrap">
         <div class="sig-block">
             <div class="sig-spacer"></div>
@@ -572,7 +591,7 @@
         </div>
     </div>
 
-    {{-- ===================== FOOTER — in flow, no fixed ===================== --}}
+    {{-- ===================== FOOTER (fixed, wkhtmltopdf) ===================== --}}
     <div class="page-footer">
         <table class="footer-table">
             <tr>
