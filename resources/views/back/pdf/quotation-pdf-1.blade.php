@@ -12,149 +12,243 @@
         background: #ffffff;
         font-family: Arial, sans-serif;
         color: #2d3743;
+        font-size: 13px;
     }
 
     .page {
         width: 100%;
         min-height: 100vh;
-        position: relative;
-        padding-bottom: 80px;
+        padding: 0 0 90px 0;
     }
 
     /* =============================================
-       HEADER — full-width dark background
+       TOP ACCENT LINE
+    ============================================= */
+    .top-accent {
+        height: 5px;
+        background: #ffbd59;
+        width: 100%;
+    }
+
+    /* =============================================
+       HEADER SECTION
+       Logo top-right, title + meta top-left
     ============================================= */
     .header {
-        background: #2d3743;
-        padding: 30px 40px;
-    }
-
-    /* Logo centered at top */
-    .header-logo-wrap {
-        text-align: center;
-        margin-bottom: 22px;
-        padding-bottom: 22px;
-        border-bottom: 1px solid rgba(255,189,89,0.25);
-    }
-
-    .header-logo-wrap img {
-        height: 90px;
-        width: auto;
-        object-fit: contain;
-        display: inline-block;
-        /* invert black logo to white for dark background */
-        filter: brightness(0) invert(1);
-    }
-
-    .header-logo-wrap .company-name {
-        font-size: 13px;
-        font-weight: 900;
-        letter-spacing: 6px;
-        color: #ffffff;
-        text-transform: uppercase;
-        margin-top: 8px;
-    }
-
-    .header-logo-wrap .company-sub {
-        font-size: 8px;
-        letter-spacing: 3px;
-        color: #ffbd59;
-        text-transform: uppercase;
-        font-weight: 700;
-        margin-top: 3px;
-    }
-
-    /* Three-column info row */
-    .header-meta {
         display: table;
         width: 100%;
+        padding: 30px 40px 24px 40px;
+        border-bottom: 1px solid #e8ecf0;
+    }
+
+    .header-left {
+        display: table-cell;
+        vertical-align: top;
+        width: 60%;
+    }
+
+    .header-right {
+        display: table-cell;
+        vertical-align: top;
+        width: 40%;
+        text-align: right;
+    }
+
+    /* Title row */
+    .quotation-heading {
+        font-size: 30px;
+        font-weight: 900;
+        color: #2d3743;
+        letter-spacing: 1px;
+        display: inline-block;
+        margin-bottom: 4px;
+    }
+
+    .status-badge {
+        display: inline-block;
+        background: #ffbd59;
+        color: #2d3743;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 4px 12px;
+        vertical-align: middle;
+        margin-left: 10px;
+        position: relative;
+        top: -3px;
+    }
+
+    /* Meta rows */
+    .meta-table {
+        margin-top: 14px;
         border-collapse: collapse;
     }
 
-    .header-meta-col {
-        display: table-cell;
+    .meta-table td {
+        padding: 4px 0;
+        font-size: 13px;
         vertical-align: top;
-        width: 33.33%;
-        padding: 0 15px;
-        border-right: 1px solid rgba(255,189,89,0.15);
     }
 
-    .header-meta-col:first-child { padding-left: 0; }
-    .header-meta-col:last-child  { padding-right: 0; border-right: none; text-align: right; }
-    .header-meta-col.center      { text-align: center; }
+    .meta-key {
+        color: #9aa5b0;
+        width: 130px;
+        font-weight: 500;
+    }
 
-    .meta-label {
-        font-size: 7.5px;
+    .meta-val {
+        color: #2d3743;
         font-weight: 700;
-        letter-spacing: 2.5px;
+    }
+
+    /* Logo */
+    .logo-img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        display: inline-block;
+    }
+
+    .logo-company {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 3px;
+        color: #2d3743;
         text-transform: uppercase;
-        color: rgba(255,189,89,0.65);
+        margin-top: 6px;
+        text-align: right;
+    }
+
+    .logo-tagline {
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: #ffbd59;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-top: 2px;
+        text-align: right;
+    }
+
+    .logo-recycle {
+        font-size: 9px;
+        color: #b0bac5;
+        margin-top: 2px;
+        text-align: right;
+    }
+
+    /* =============================================
+       FROM / FOR BOXES
+    ============================================= */
+    .boxes-wrap {
+        display: table;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        padding: 24px 40px;
+        border-bottom: 1px solid #e8ecf0;
+    }
+
+    .box-cell {
+        display: table-cell;
+        width: 50%;
+        vertical-align: top;
+    }
+
+    .box-cell:first-child {
+        padding-right: 12px;
+    }
+
+    .box-cell:last-child {
+        padding-left: 12px;
+    }
+
+    .info-box {
+        background: #f7f9fb;
+        border: 1px solid #e4e9ee;
+        border-top: 3px solid #ffbd59;
+        padding: 16px 18px;
+        height: 100%;
+    }
+
+    .box-title {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #ffbd59;
+        margin-bottom: 10px;
+    }
+
+    .box-name {
+        font-size: 14px;
+        font-weight: 800;
+        color: #2d3743;
         margin-bottom: 5px;
     }
 
-    .meta-value {
-        font-size: 13px;
-        font-weight: 700;
-        color: #ffffff;
-        line-height: 1.45;
+    .box-detail {
+        font-size: 12.5px;
+        color: #666;
+        line-height: 1.65;
     }
 
-    .meta-value.gold {
-        color: #ffbd59;
-        font-size: 14px;
-    }
-
-    .meta-value.big {
-        font-size: 28px;
-        font-weight: 900;
-        color: #ffbd59;
-        letter-spacing: 2px;
-        line-height: 1;
-    }
-
-    .meta-value.date-val {
-        font-size: 13px;
-        color: #ffffff;
-    }
-
-    /* =============================================
-       GOLD RIBBON
-    ============================================= */
-    .gold-ribbon {
-        background: #ffbd59;
-        padding: 9px 40px;
-        text-align: center;
-    }
-
-    .gold-ribbon p {
-        font-size: 11px;
-        font-weight: 600;
+    .box-detail strong {
         color: #2d3743;
-        letter-spacing: 0.4px;
     }
 
     /* =============================================
-       BODY
+       SUPPLY INFO ROW
     ============================================= */
-    .body {
-        padding: 30px 40px 20px;
+    .supply-row {
+        display: table;
+        width: 100%;
+        padding: 10px 40px;
+        background: #fafbfc;
+        border-bottom: 1px solid #e8ecf0;
     }
 
-    /* Section title */
+    .supply-left {
+        display: table-cell;
+        width: 50%;
+        font-size: 12.5px;
+        color: #555;
+        vertical-align: middle;
+    }
+
+    .supply-right {
+        display: table-cell;
+        width: 50%;
+        text-align: right;
+        font-size: 12.5px;
+        color: #555;
+        vertical-align: middle;
+    }
+
+    .supply-left strong,
+    .supply-right strong {
+        color: #2d3743;
+    }
+
+    /* =============================================
+       ITEMS TABLE
+    ============================================= */
+    .table-wrap {
+        padding: 0 40px;
+        margin-top: 24px;
+    }
+
     .sec-title {
         font-size: 8px;
         font-weight: 700;
         letter-spacing: 2.5px;
         text-transform: uppercase;
         color: #2d3743;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
         padding-left: 10px;
         border-left: 3px solid #ffbd59;
     }
 
-    /* =============================================
-       ITEMS TABLE
-    ============================================= */
     .items-table {
         width: 100%;
         border-collapse: collapse;
@@ -167,36 +261,37 @@
         font-weight: 700;
         letter-spacing: 2px;
         text-transform: uppercase;
-        padding: 12px 16px;
+        padding: 12px 14px;
+        text-align: left;
     }
 
-    .items-table thead tr th.th-num   { text-align: center; width: 44px; }
-    .items-table thead tr th.th-prod  { text-align: left; }
-    .items-table thead tr th.th-gsm   { text-align: center; width: 105px; }
-    .items-table thead tr th.th-price { text-align: right; width: 150px; padding-right: 18px; }
+    .items-table thead tr th.center { text-align: center; }
+    .items-table thead tr th.right  { text-align: right; padding-right: 16px; }
 
     .items-table tbody tr {
         border-bottom: 1px solid #edf0f4;
     }
 
-    .items-table tbody tr:last-child {
-        border-bottom: 2px solid #2d3743;
-    }
-
-    .items-table tbody tr:nth-child(even) { background: #f9fafb; }
+    .items-table tbody tr:nth-child(even) { background: #f7f9fb; }
     .items-table tbody tr:nth-child(odd)  { background: #ffffff; }
 
     .items-table tbody td {
-        padding: 14px 16px;
+        padding: 13px 14px;
         font-size: 13px;
         color: #2d3743;
         vertical-align: middle;
     }
 
-    .td-num   { text-align: center; font-size: 10px; font-weight: 700; color: #c0c8d0; }
-    .td-prod  { font-weight: 600; color: #1a252f; line-height: 1.5; }
-    .td-gsm   { text-align: center; }
-    .td-price { text-align: right; font-weight: 800; font-size: 15px; padding-right: 18px; }
+    .items-table tbody td.center { text-align: center; }
+    .items-table tbody td.right  { text-align: right; padding-right: 16px; font-weight: 700; }
+    .items-table tbody td.num    { color: #aab0b8; font-weight: 700; font-size: 11px; width: 36px; }
+
+    .hsn-small {
+        font-size: 10.5px;
+        color: #9aa5b0;
+        display: block;
+        margin-top: 2px;
+    }
 
     .gsm-pill {
         display: inline-block;
@@ -205,46 +300,45 @@
         color: #2d3743;
         font-size: 10.5px;
         font-weight: 700;
-        padding: 3px 11px;
+        padding: 3px 10px;
         border-radius: 20px;
     }
 
     /* =============================================
-       BOTTOM SPLIT
+       BOTTOM: INCLUSIONS LEFT + SUMMARY RIGHT
     ============================================= */
-    .bottom-wrap {
+    .bottom-section {
         display: table;
         width: 100%;
-        margin-top: 26px;
+        padding: 24px 40px 0 40px;
         border-collapse: collapse;
     }
 
-    .bot-left {
+    .bottom-left {
         display: table-cell;
-        width: 42%;
+        width: 50%;
         vertical-align: top;
         padding-right: 20px;
     }
 
-    .bot-right {
+    .bottom-right {
         display: table-cell;
-        width: 58%;
+        width: 50%;
         vertical-align: top;
         padding-left: 20px;
-        border-left: 1px solid #e8ecf0;
     }
 
     /* Inclusions */
     .inc-card {
         border: 1px solid #e0e5ea;
-        border-top: 4px solid #ffbd59;
+        border-top: 3px solid #ffbd59;
     }
 
     .inc-head {
         background: #f7f9fb;
         border-bottom: 1px solid #e8ecf0;
-        padding: 9px 15px;
-        font-size: 7.5px;
+        padding: 9px 14px;
+        font-size: 8px;
         font-weight: 700;
         letter-spacing: 2px;
         text-transform: uppercase;
@@ -254,7 +348,7 @@
     .inc-row {
         display: table;
         width: 100%;
-        padding: 9px 15px;
+        padding: 9px 14px;
         border-bottom: 1px solid #f0f3f7;
     }
 
@@ -284,63 +378,80 @@
         padding: 4px 10px;
     }
 
-    .tag-no { font-size: 14px; color: #d5dbe0; font-weight: 700; }
-
-    /* Notes */
-    .notes-card {
-        border: 1px solid #f0e6c0;
-        border-left: 4px solid #ffbd59;
-        background: #fffdf6;
-        padding: 15px 18px;
-    }
-
-    .notes-head {
-        font-size: 7.5px;
+    .tag-no {
+        font-size: 14px;
+        color: #d5dbe0;
         font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #2d3743;
-        margin-bottom: 9px;
     }
 
-    .notes-body {
+    /* Summary table */
+    .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .summary-table tr td {
+        padding: 9px 0;
         font-size: 13px;
-        color: #666;
-        line-height: 1.75;
-        font-style: italic;
+        color: #555;
+        border-bottom: 1px solid #f0f3f7;
+        vertical-align: middle;
+    }
+
+    .summary-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .summary-table tr td:last-child {
+        text-align: right;
+        font-weight: 700;
+        color: #2d3743;
+    }
+
+    .summary-total-row td {
+        font-size: 15px !important;
+        font-weight: 900 !important;
+        color: #2d3743 !important;
+        padding-top: 13px !important;
+        border-top: 2px solid #2d3743 !important;
+        border-bottom: 2px solid #2d3743 !important;
     }
 
     /* =============================================
-       TERMS BAR
+       NOTES & TERMS
     ============================================= */
-    .terms-bar {
-        margin-top: 22px;
-        background: #f7f9fb;
-        border: 1px solid #e0e5ea;
-        border-left: 4px solid #2d3743;
-        padding: 11px 16px;
+    .notes-section {
+        padding: 20px 40px 0 40px;
         display: table;
         width: 100%;
     }
 
-    .terms-l {
+    .notes-left {
         display: table-cell;
-        vertical-align: middle;
-        font-size: 11.5px;
-        color: #555;
-        width: 72%;
+        width: 50%;
+        vertical-align: top;
+        padding-right: 20px;
     }
 
-    .terms-l strong { color: #2d3743; }
-
-    .terms-r {
+    .notes-right {
         display: table-cell;
-        vertical-align: middle;
-        text-align: right;
-        font-size: 10px;
-        color: #c0c8d0;
-        font-style: italic;
-        width: 28%;
+        width: 50%;
+        vertical-align: top;
+        padding-left: 20px;
+    }
+
+    .notes-title {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #ffbd59;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .notes-body {
+        font-size: 12.5px;
+        color: #666;
+        line-height: 1.7;
     }
 
     /* =============================================
@@ -349,7 +460,8 @@
     .sig-wrap {
         display: table;
         width: 100%;
-        margin-top: 50px;
+        margin-top: 40px;
+        padding: 0 40px;
     }
 
     .sig-l {
@@ -367,8 +479,10 @@
         text-align: right;
     }
 
+    .sig-spacer { height: 45px; }
+
     .sig-line {
-        border-top: 2px solid #2d3743;
+        border-top: 1.5px solid #2d3743;
         padding-top: 8px;
         font-size: 9px;
         font-weight: 700;
@@ -382,13 +496,12 @@
     .sig-sub {
         font-size: 8.5px;
         color: #c0c8d0;
-        margin-top: 3px;
+        margin-top: 2px;
         font-weight: 400;
-        letter-spacing: 0.5px;
     }
 
     /* =============================================
-       PAGE FOOTER
+       FOOTER
     ============================================= */
     .page-footer {
         position: fixed;
@@ -422,7 +535,9 @@
 <body>
 <div class="page">
 
-    {{-- ===================== HEADER (dark) ===================== --}}
+    <div class="top-accent"></div>
+
+    {{-- ===================== HEADER ===================== --}}
     @php
         $settings = \App\Models\Setting::first();
         $logoPath = public_path('images/black-logo.png');
@@ -433,170 +548,228 @@
     @endphp
 
     <div class="header">
+        <div class="header-left">
+            <div>
+                <span class="quotation-heading">Quotation</span>
+                <span class="status-badge">Created</span>
+            </div>
 
-        {{-- Logo + Company name, centered --}}
-        <div class="header-logo-wrap">
-            @if($logoSrc)
-                <img src="{{ $logoSrc }}" alt="Boxmaker Logo"><br>
-            @endif
-            <div class="company-name">BOXMAKER</div>
-            <div class="company-sub">Packaging &amp; Printing &nbsp;·&nbsp; We Generally Recycle ♻</div>
+            <table class="meta-table">
+                <tr>
+                    <td class="meta-key">Quotation No</td>
+                    <td class="meta-val">{{ $quotation->quotation_number }}</td>
+                </tr>
+                <tr>
+                    <td class="meta-key">Quotation Date</td>
+                    <td class="meta-val">{{ $quotation->date->format('M d, Y') }}</td>
+                </tr>
+                <tr>
+                    <td class="meta-key">Valid Till Date</td>
+                    <td class="meta-val">
+                        {{ isset($quotation->valid_until) ? $quotation->valid_until->format('M d, Y') : 'On Request' }}
+                    </td>
+                </tr>
+                @if($quotation->attention)
+                <tr>
+                    <td class="meta-key">Attention</td>
+                    <td class="meta-val">{{ $quotation->attention }}</td>
+                </tr>
+                @endif
+            </table>
         </div>
 
-        {{-- Three-column meta: Client | Quotation | Date --}}
-        <div class="header-meta">
+        <div class="header-right">
+            @if($logoSrc)
+                <img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img">
+            @endif
+            <div class="logo-company">BOXMAKER</div>
+            <div class="logo-tagline">Packaging &amp; Printing</div>
+            <div class="logo-recycle">♻ We Generally Recycle</div>
+        </div>
+    </div>
 
-            {{-- Left: Client details --}}
-            <div class="header-meta-col">
-                <div class="meta-label">Company</div>
-                <div class="meta-value gold">{{ $quotation->client->name ?? 'N/A' }}</div>
-
-                @if($quotation->attention)
-                    <div class="meta-label" style="margin-top:12px;">Attention</div>
-                    <div class="meta-value">{{ $quotation->attention }}</div>
-                @endif
-
-                @if($quotation->quotation_for)
-                    <div class="meta-label" style="margin-top:12px;">Quotation For</div>
-                    <div class="meta-value">{{ $quotation->quotation_for }}</div>
-                @endif
-            </div>
-
-            {{-- Center: Quotation number --}}
-            <div class="header-meta-col center">
-                <div class="meta-label">Quotation No.</div>
-                <div class="meta-value big">{{ $quotation->quotation_number }}</div>
-            </div>
-
-            {{-- Right: Dates --}}
-            <div class="header-meta-col">
-                <div class="meta-label">Date</div>
-                <div class="meta-value date-val">{{ $quotation->date->format('d M Y') }}</div>
-
-                <div class="meta-label" style="margin-top:12px;">Valid Until</div>
-                <div class="meta-value date-val">
-                    {{ isset($quotation->valid_until) ? $quotation->valid_until->format('d M Y') : 'On Request' }}
+    {{-- ===================== FROM / FOR BOXES ===================== --}}
+    <div class="boxes-wrap">
+        <div class="box-cell">
+            <div class="info-box">
+                <div class="box-title">Quotation From</div>
+                <div class="box-name">BOXMAKER</div>
+                <div class="box-detail">
+                    {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
+                    @if($settings->gst_no)
+                        <strong>GSTIN:</strong> {{ $settings->gst_no }}<br>
+                    @endif
+                    @if($settings->phone)
+                        <strong>Phone:</strong> {{ $settings->phone }}<br>
+                    @endif
+                    @if($settings->email)
+                        <strong>Email:</strong> {{ $settings->email }}
+                    @endif
                 </div>
             </div>
+        </div>
 
+        <div class="box-cell">
+            <div class="info-box">
+                <div class="box-title">Quotation For</div>
+                <div class="box-name">{{ $quotation->client->name ?? 'N/A' }}</div>
+                <div class="box-detail">
+                    @if($quotation->client->factory_address ?? $quotation->client->address ?? false)
+                        {{ $quotation->client->factory_address ?? $quotation->client->address }}<br>
+                    @endif
+                    @if($quotation->client->gst_no ?? false)
+                        <strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>
+                    @endif
+                    @if($quotation->client->phone ?? false)
+                        <strong>Phone:</strong> {{ $quotation->client->phone }}<br>
+                    @endif
+                    @if($quotation->client->email ?? false)
+                        <strong>Email:</strong> {{ $quotation->client->email }}
+                    @endif
+                    @if($quotation->quotation_for)
+                        <br><strong>For:</strong> {{ $quotation->quotation_for }}
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 
-    {{-- ===================== GOLD RIBBON ===================== --}}
-    <div class="gold-ribbon">
-        <p>{{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai – 400092' }}</p>
-    </div>
-
-    {{-- ===================== BODY ===================== --}}
-    <div class="body">
-
+    {{-- ===================== ITEMS TABLE ===================== --}}
+    <div class="table-wrap">
         <div class="sec-title">Items &amp; Pricing</div>
 
         <table class="items-table">
             <thead>
                 <tr>
-                    <th class="th-num">#</th>
-                    <th class="th-prod">Product, Material &amp; Size</th>
-                    <th class="th-gsm">GSM</th>
-                    <th class="th-price">Basic Price (₹)</th>
+                    <th style="width:36px;">&nbsp;</th>
+                    <th>Product, Material &amp; Size</th>
+                    <th class="center" style="width:100px;">GSM</th>
+                    <th class="center" style="width:90px;">Quantity</th>
+                    <th class="right" style="width:130px;">Basic Price (₹)</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($quotation->items as $index => $item)
                 <tr>
-                    <td class="td-num">{{ $index + 1 }}</td>
-                    <td class="td-prod">{{ $item->particular }}</td>
-                    <td class="td-gsm">
+                    <td class="num">{{ $index + 1 }}.</td>
+                    <td>
+                        <span style="font-weight:600;">{{ $item->particular }}</span>
+                    </td>
+                    <td class="center">
                         @if($item->gsm)
                             <span class="gsm-pill">{{ $item->gsm }}</span>
                         @else
                             <span style="color:#d0d5db;">—</span>
                         @endif
                     </td>
-                    <td class="td-price">₹{{ number_format($item->base_price, 2) }}</td>
+                    <td class="center">—</td>
+                    <td class="right">₹{{ number_format($item->base_price, 2) }}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" style="text-align:center; color:#aaa; padding:28px; font-style:italic;">
+                    <td colspan="5" style="text-align:center; color:#aaa; padding:28px; font-style:italic;">
                         No items found
                     </td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
+    </div>
 
-        {{-- Bottom split --}}
-        <div class="bottom-wrap">
+    {{-- ===================== BOTTOM: INCLUSIONS + SUMMARY ===================== --}}
+    <div class="bottom-section">
 
-            <div class="bot-left">
-                <div class="inc-card">
-                    <div class="inc-head">What's Included</div>
-                    @php
-                        $inclusions = [
-                            ['Taxes',            $quotation->is_tax_included],
-                            ['Delivery Charges', $quotation->is_delivery_charges_included],
-                            ['Printing',         $quotation->is_printing_included],
-                            ['Plate & Punch',    $quotation->is_plate_and_punch],
-                            ['Lamination',       $quotation->is_lamination],
-                        ];
-                    @endphp
-                    @foreach($inclusions as [$label, $val])
-                    <div class="inc-row">
-                        <div class="inc-lbl">{{ $label }}</div>
-                        <div class="inc-val">
-                            @if($val)
-                                <span class="tag-yes">✓ Included</span>
-                            @else
-                                <span class="tag-no">—</span>
-                            @endif
-                        </div>
+        {{-- Inclusions --}}
+        <div class="bottom-left">
+            <div class="inc-card">
+                <div class="inc-head">What's Included</div>
+                @php
+                    $inclusions = [
+                        ['Taxes',            $quotation->is_tax_included],
+                        ['Delivery Charges', $quotation->is_delivery_charges_included],
+                        ['Printing',         $quotation->is_printing_included],
+                        ['Plate & Punch',    $quotation->is_plate_and_punch],
+                        ['Lamination',       $quotation->is_lamination],
+                    ];
+                @endphp
+                @foreach($inclusions as [$label, $val])
+                <div class="inc-row">
+                    <div class="inc-lbl">{{ $label }}</div>
+                    <div class="inc-val">
+                        @if($val)
+                            <span class="tag-yes">✓ Included</span>
+                        @else
+                            <span class="tag-no">—</span>
+                        @endif
                     </div>
-                    @endforeach
                 </div>
-            </div>
-
-            <div class="bot-right">
-                <div class="notes-card">
-                    <div class="notes-head">Notes &amp; Remarks</div>
-                    @if($quotation->notes)
-                        <p class="notes-body">{{ $quotation->notes }}</p>
-                    @else
-                        <p class="notes-body" style="color:#ccc;">No additional notes.</p>
-                    @endif
-                </div>
+                @endforeach
             </div>
         </div>
 
-        {{-- Terms --}}
-        <div class="terms-bar">
-            <div class="terms-l">
-                <strong>Payment Terms:</strong> &nbsp;Prices subject to change without prior notice. &nbsp;|&nbsp;
-                <strong>Delivery:</strong> &nbsp;As per mutual agreement.
-            </div>
-            <div class="terms-r">Computer-generated document.</div>
-        </div>
-
-        {{-- Signatures --}}
-        <div class="sig-wrap">
-            <div class="sig-l">
-                <div style="height:48px;"></div>
-                <div class="sig-line">
-                    Client Acknowledgement
-                    <div class="sig-sub">Signature &amp; Company Stamp</div>
-                </div>
-            </div>
-            <div class="sig-r">
-                <div style="height:48px;"></div>
-                <div class="sig-line gold-top">
-                    For BOXMAKER
-                    <div class="sig-sub">Authorised Signatory</div>
-                </div>
-            </div>
+        {{-- Summary --}}
+        <div class="bottom-right">
+            <table class="summary-table">
+                <tr>
+                    <td>Subtotal</td>
+                    <td>
+                        ₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Taxes</td>
+                    <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
+                </tr>
+                <tr>
+                    <td>Delivery</td>
+                    <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
+                </tr>
+                <tr class="summary-total-row">
+                    <td>Total (INR)</td>
+                    <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
+                </tr>
+            </table>
         </div>
 
     </div>
 
-    {{-- FOOTER --}}
+    {{-- ===================== NOTES & TERMS ===================== --}}
+    <div class="notes-section" style="margin-top:20px;">
+        @if($quotation->notes)
+        <div class="notes-left">
+            <div class="notes-title">Additional Notes</div>
+            <div class="notes-body">{{ $quotation->notes }}</div>
+        </div>
+        @endif
+        <div class="{{ $quotation->notes ? 'notes-right' : 'notes-left' }}">
+            <div class="notes-title">Terms &amp; Conditions</div>
+            <div class="notes-body">
+                1. Prices are subject to change without prior notice.<br>
+                2. Delivery as per mutual agreement.<br>
+                3. This quotation is valid for the period mentioned above.
+            </div>
+        </div>
+    </div>
+
+    {{-- ===================== SIGNATURES ===================== --}}
+    <div class="sig-wrap">
+        <div class="sig-l">
+            <div class="sig-spacer"></div>
+            <div class="sig-line">
+                Client Acknowledgement
+                <div class="sig-sub">Signature &amp; Company Stamp</div>
+            </div>
+        </div>
+        <div class="sig-r">
+            <div class="sig-spacer"></div>
+            <div class="sig-line gold-top">
+                For BOXMAKER
+                <div class="sig-sub">Authorised Signatory</div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ===================== FOOTER ===================== --}}
     <div class="page-footer">
         <table class="footer-table">
             <tr>
