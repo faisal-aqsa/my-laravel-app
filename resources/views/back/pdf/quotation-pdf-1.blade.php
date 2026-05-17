@@ -9,16 +9,18 @@
 
     html, body {
         width: 100%;
+        height: 100%;
         background: #ffffff;
         font-family: Arial, sans-serif;
         color: #2d3743;
         font-size: 13px;
     }
 
-    /* wkhtmltopdf: footer fixed at page bottom via @page margin + running element */
     .page {
         width: 100%;
-        padding-bottom: 80px; /* reserve space so content doesn't go under footer */
+        min-height: 100%;
+        position: relative;
+        padding-bottom: 70px;
     }
 
     /* =============================================
@@ -76,10 +78,7 @@
         top: -3px;
     }
 
-    .meta-table {
-        margin-top: 14px;
-        border-collapse: collapse;
-    }
+    .meta-table { margin-top: 14px; border-collapse: collapse; }
 
     .meta-table td {
         padding: 4px 0;
@@ -87,16 +86,8 @@
         vertical-align: top;
     }
 
-    .meta-key {
-        color: #9aa5b0;
-        width: 130px;
-        font-weight: 500;
-    }
-
-    .meta-val {
-        color: #2d3743;
-        font-weight: 700;
-    }
+    .meta-key { color: #9aa5b0; width: 130px; font-weight: 500; }
+    .meta-val  { color: #2d3743; font-weight: 700; }
 
     .logo-img {
         width: 110px;
@@ -123,11 +114,7 @@
         margin-top: 2px;
     }
 
-    .logo-recycle {
-        font-size: 9px;
-        color: #b0bac5;
-        margin-top: 2px;
-    }
+    .logo-recycle { font-size: 9px; color: #b0bac5; margin-top: 2px; }
 
     /* =============================================
        FROM / FOR BOXES
@@ -140,12 +127,7 @@
         border-collapse: collapse;
     }
 
-    .box-cell {
-        display: table-cell;
-        width: 50%;
-        vertical-align: top;
-    }
-
+    .box-cell { display: table-cell; width: 50%; vertical-align: top; }
     .box-cell:first-child { padding-right: 12px; }
     .box-cell:last-child  { padding-left: 12px; }
 
@@ -165,27 +147,14 @@
         margin-bottom: 9px;
     }
 
-    .box-name {
-        font-size: 14px;
-        font-weight: 800;
-        color: #2d3743;
-        margin-bottom: 5px;
-    }
-
-    .box-detail {
-        font-size: 12.5px;
-        color: #666;
-        line-height: 1.65;
-    }
-
+    .box-name  { font-size: 14px; font-weight: 800; color: #2d3743; margin-bottom: 5px; }
+    .box-detail { font-size: 12.5px; color: #666; line-height: 1.65; }
     .box-detail strong { color: #2d3743; }
 
     /* =============================================
        ITEMS TABLE
     ============================================= */
-    .table-wrap {
-        padding: 22px 40px 0 40px;
-    }
+    .table-wrap { padding: 26px 40px 0 40px; }
 
     .sec-title {
         font-size: 8px;
@@ -198,10 +167,7 @@
         border-left: 3px solid #ffbd59;
     }
 
-    .items-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+    .items-table { width: 100%; border-collapse: collapse; }
 
     .items-table thead tr th {
         background: #2d3743;
@@ -244,65 +210,57 @@
     }
 
     /* =============================================
-       BOTTOM SECTION — notes + summary
-       Separated from items table by top margin
+       DIVIDER between table and bottom section
+    ============================================= */
+    .section-divider {
+        height: 1px;
+        background: #e8ecf0;
+        margin: 30px 40px 0 40px;
+    }
+
+    /* =============================================
+       BOTTOM — notes left, summary right
+       Both get generous top padding so they sit
+       well below the divider line
     ============================================= */
     .bottom-section {
         display: table;
         width: 100%;
-        /* Clear gap from the items table above */
-        margin-top: 30px;
-        padding: 0 40px;
         border-collapse: collapse;
-        /* Top border as visual separator */
-        border-top: 1px solid #e8ecf0;
-    }
-
-    /* Invisible spacer row to add padding after border */
-    .bottom-inner {
-        display: table;
-        width: 100%;
-        padding-top: 22px;
-        border-collapse: collapse;
+        padding: 28px 40px 0 40px;
     }
 
     .bottom-left {
         display: table-cell;
         width: 50%;
         vertical-align: top;
-        padding-right: 24px;
-        padding-top: 22px;
+        padding-right: 30px;
     }
 
     .bottom-right {
         display: table-cell;
         width: 50%;
         vertical-align: top;
-        padding-left: 24px;
-        padding-top: 22px;
+        padding-left: 30px;
         border-left: 1px solid #e8ecf0;
     }
 
-    /* Notes */
     .notes-title {
-        font-size: 12.5px;
+        font-size: 13px;
         font-weight: 700;
         color: #ffbd59;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
     }
 
     .notes-body {
         font-size: 12.5px;
         color: #666;
-        line-height: 1.7;
+        line-height: 1.75;
         font-style: italic;
     }
 
-    /* Summary table */
-    .summary-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+    /* Summary */
+    .summary-table { width: 100%; border-collapse: collapse; }
 
     .summary-table tr td {
         padding: 10px 0;
@@ -310,10 +268,6 @@
         color: #555;
         border-bottom: 1px solid #f0f3f7;
         vertical-align: middle;
-    }
-
-    .summary-table tr:last-child td {
-        border-bottom: none;
     }
 
     .summary-table tr td:last-child {
@@ -333,10 +287,10 @@
     }
 
     /* =============================================
-       SIGNATURE — For Boxmaker only, right-aligned
+       SIGNATURE
     ============================================= */
     .sig-wrap {
-        padding: 36px 40px 0 40px;
+        padding: 40px 40px 0 40px;
         text-align: right;
     }
 
@@ -367,10 +321,9 @@
 
     /* =============================================
        FOOTER
-       Use position:fixed for wkhtmltopdf so it
-       appears at the bottom of every page without
-       creating an extra blank page.
-       The padding-bottom on .page reserves space.
+       position:fixed bottom:0 for wkhtmltopdf.
+       padding-bottom on .page stops content
+       overlapping it.
     ============================================= */
     .page-footer {
         position: fixed;
@@ -381,16 +334,13 @@
         border-top: 4px solid #ffbd59;
     }
 
-    .footer-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+    .footer-table { width: 100%; border-collapse: collapse; }
 
     .footer-td {
         display: table-cell;
         text-align: center;
         vertical-align: middle;
-        padding: 12px 10px;
+        padding: 13px 10px;
         font-size: 12px;
         color: rgba(255,255,255,0.7);
         border-right: 1px solid rgba(255,189,89,0.15);
@@ -406,7 +356,7 @@
 
     <div class="top-accent"></div>
 
-    {{-- ===================== HEADER ===================== --}}
+    {{-- HEADER --}}
     @php
         $settings = \App\Models\Setting::first();
         $logoPath = public_path('images/black-logo.png');
@@ -456,7 +406,7 @@
         </div>
     </div>
 
-    {{-- ===================== FROM / FOR BOXES ===================== --}}
+    {{-- FROM / FOR BOXES --}}
     <div class="boxes-wrap">
         <div class="box-cell">
             <div class="info-box">
@@ -464,19 +414,12 @@
                 <div class="box-name">BOXMAKER</div>
                 <div class="box-detail">
                     {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
-                    @if($settings->gst_no ?? false)
-                        <strong>GSTIN:</strong> {{ $settings->gst_no }}<br>
-                    @endif
-                    @if($settings->phone ?? false)
-                        <strong>Phone:</strong> {{ $settings->phone }}<br>
-                    @endif
-                    @if($settings->email ?? false)
-                        <strong>Email:</strong> {{ $settings->email }}
-                    @endif
+                    @if($settings->gst_no ?? false)<strong>GSTIN:</strong> {{ $settings->gst_no }}<br>@endif
+                    @if($settings->phone ?? false)<strong>Phone:</strong> {{ $settings->phone }}<br>@endif
+                    @if($settings->email ?? false)<strong>Email:</strong> {{ $settings->email }}@endif
                 </div>
             </div>
         </div>
-
         <div class="box-cell">
             <div class="info-box">
                 <div class="box-title">Quotation For</div>
@@ -485,24 +428,16 @@
                     @if($quotation->client->factory_address ?? $quotation->client->address ?? false)
                         {{ $quotation->client->factory_address ?? $quotation->client->address }}<br>
                     @endif
-                    @if($quotation->client->gst_no ?? false)
-                        <strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>
-                    @endif
-                    @if($quotation->client->phone ?? false)
-                        <strong>Phone:</strong> {{ $quotation->client->phone }}<br>
-                    @endif
-                    @if($quotation->client->email ?? false)
-                        <strong>Email:</strong> {{ $quotation->client->email }}
-                    @endif
-                    @if($quotation->quotation_for ?? false)
-                        <br><strong>For:</strong> {{ $quotation->quotation_for }}
-                    @endif
+                    @if($quotation->client->gst_no ?? false)<strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>@endif
+                    @if($quotation->client->phone ?? false)<strong>Phone:</strong> {{ $quotation->client->phone }}<br>@endif
+                    @if($quotation->client->email ?? false)<strong>Email:</strong> {{ $quotation->client->email }}@endif
+                    @if($quotation->quotation_for ?? false)<br><strong>For:</strong> {{ $quotation->quotation_for }}@endif
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- ===================== ITEMS TABLE ===================== --}}
+    {{-- ITEMS TABLE --}}
     <div class="table-wrap">
         <div class="sec-title">Items &amp; Pricing</div>
         <table class="items-table">
@@ -537,7 +472,10 @@
         </table>
     </div>
 
-    {{-- ===================== NOTES + SUMMARY (separated from table) ===================== --}}
+    {{-- DIVIDER --}}
+    <div class="section-divider"></div>
+
+    {{-- NOTES + SUMMARY --}}
     <div class="bottom-section">
         <div class="bottom-left">
             @if($quotation->notes)
@@ -545,7 +483,6 @@
                 <div class="notes-body">{{ $quotation->notes }}</div>
             @endif
         </div>
-
         <div class="bottom-right">
             <table class="summary-table">
                 <tr>
@@ -580,7 +517,7 @@
         </div>
     </div>
 
-    {{-- ===================== SIGNATURE ===================== --}}
+    {{-- SIGNATURE --}}
     <div class="sig-wrap">
         <div class="sig-block">
             <div class="sig-spacer"></div>
@@ -591,7 +528,7 @@
         </div>
     </div>
 
-    {{-- ===================== FOOTER (fixed, wkhtmltopdf) ===================== --}}
+    {{-- FOOTER --}}
     <div class="page-footer">
         <table class="footer-table">
             <tr>
