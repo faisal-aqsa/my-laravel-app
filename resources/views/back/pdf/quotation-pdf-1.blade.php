@@ -60,21 +60,6 @@
         display: inline-block;
     }
 
-    .status-badge {
-        display: inline-block;
-        background: #ffbd59;
-        color: #2d3743;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        padding: 4px 12px;
-        vertical-align: middle;
-        margin-left: 10px;
-        position: relative;
-        top: -3px;
-    }
-
     .meta-table { margin-top: 14px; border-collapse: collapse; }
     .meta-table td { padding: 4px 0; font-size: 13px; vertical-align: top; }
     .meta-key { color: #9aa5b0; width: 130px; font-weight: 500; }
@@ -94,9 +79,14 @@
         padding: 22px 40px;
         border-bottom: 1px solid #e8ecf0;
         border-collapse: collapse;
+        table-layout: fixed;
     }
 
-    .box-cell { display: table-cell; width: 50%; vertical-align: top; }
+    .box-cell {
+        display: table-cell;
+        width: 50%;
+        vertical-align: top;
+    }
     .box-cell:first-child { padding-right: 12px; }
     .box-cell:last-child  { padding-left: 12px; }
 
@@ -105,6 +95,7 @@
         border: 1px solid #e4e9ee;
         border-top: 3px solid #ffbd59;
         padding: 15px 18px;
+        height: 100%;
     }
 
     .box-title { font-size: 9.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #ffbd59; margin-bottom: 9px; }
@@ -307,7 +298,6 @@
         <div class="header-left">
             <div>
                 <span class="quotation-heading">Quotation</span>
-                <span class="status-badge">Created</span>
             </div>
             <table class="meta-table">
                 <tr>
