@@ -23,9 +23,6 @@
         padding-bottom: 70px;
     }
 
-    /* =============================================
-       TOP ACCENT
-    ============================================= */
     .top-accent {
         height: 5px;
         background: #ffbd59;
@@ -79,41 +76,13 @@
     }
 
     .meta-table { margin-top: 14px; border-collapse: collapse; }
-
-    .meta-table td {
-        padding: 4px 0;
-        font-size: 13px;
-        vertical-align: top;
-    }
-
+    .meta-table td { padding: 4px 0; font-size: 13px; vertical-align: top; }
     .meta-key { color: #9aa5b0; width: 130px; font-weight: 500; }
     .meta-val  { color: #2d3743; font-weight: 700; }
 
-    .logo-img {
-        width: 110px;
-        height: 110px;
-        object-fit: contain;
-        display: inline-block;
-    }
-
-    .logo-company {
-        font-size: 11px;
-        font-weight: 900;
-        letter-spacing: 3px;
-        color: #2d3743;
-        text-transform: uppercase;
-        margin-top: 6px;
-    }
-
-    .logo-tagline {
-        font-size: 8px;
-        letter-spacing: 2px;
-        color: #ffbd59;
-        text-transform: uppercase;
-        font-weight: 700;
-        margin-top: 2px;
-    }
-
+    .logo-img { width: 110px; height: 110px; object-fit: contain; display: inline-block; }
+    .logo-company { font-size: 11px; font-weight: 900; letter-spacing: 3px; color: #2d3743; text-transform: uppercase; margin-top: 6px; }
+    .logo-tagline { font-size: 8px; letter-spacing: 2px; color: #ffbd59; text-transform: uppercase; font-weight: 700; margin-top: 2px; }
     .logo-recycle { font-size: 9px; color: #b0bac5; margin-top: 2px; }
 
     /* =============================================
@@ -138,15 +107,7 @@
         padding: 15px 18px;
     }
 
-    .box-title {
-        font-size: 9.5px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #ffbd59;
-        margin-bottom: 9px;
-    }
-
+    .box-title { font-size: 9.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #ffbd59; margin-bottom: 9px; }
     .box-name  { font-size: 14px; font-weight: 800; color: #2d3743; margin-bottom: 5px; }
     .box-detail { font-size: 12.5px; color: #666; line-height: 1.65; }
     .box-detail strong { color: #2d3743; }
@@ -187,13 +148,7 @@
     .items-table tbody tr:nth-child(even) { background: #f7f9fb; }
     .items-table tbody tr:nth-child(odd)  { background: #ffffff; }
 
-    .items-table tbody td {
-        padding: 13px 14px;
-        font-size: 13px;
-        color: #2d3743;
-        vertical-align: middle;
-    }
-
+    .items-table tbody td { padding: 13px 14px; font-size: 13px; color: #2d3743; vertical-align: middle; }
     .items-table tbody td.center { text-align: center; }
     .items-table tbody td.right  { text-align: right; padding-right: 16px; font-weight: 700; }
     .items-table tbody td.num    { color: #aab0b8; font-weight: 700; font-size: 11px; width: 36px; }
@@ -210,57 +165,19 @@
     }
 
     /* =============================================
-       DIVIDER between table and bottom section
+       SUMMARY — right-aligned block, no side borders
     ============================================= */
-    .section-divider {
-        height: 1px;
-        background: #e8ecf0;
-        margin: 30px 40px 0 40px;
+    .summary-wrap {
+        padding: 26px 40px 0 40px;
+        text-align: right;
     }
 
-    /* =============================================
-       BOTTOM — notes left, summary right
-       Both get generous top padding so they sit
-       well below the divider line
-    ============================================= */
-    .bottom-section {
-        display: table;
-        width: 100%;
+    .summary-table {
+        width: 320px;
         border-collapse: collapse;
-        padding: 28px 40px 0 40px;
+        display: inline-table;
+        text-align: left;
     }
-
-    .bottom-left {
-        display: table-cell;
-        width: 50%;
-        vertical-align: top;
-        padding-right: 30px;
-    }
-
-    .bottom-right {
-        display: table-cell;
-        width: 50%;
-        vertical-align: top;
-        padding-left: 30px;
-        border-left: 1px solid #e8ecf0;
-    }
-
-    .notes-title {
-        font-size: 13px;
-        font-weight: 700;
-        color: #ffbd59;
-        margin-bottom: 10px;
-    }
-
-    .notes-body {
-        font-size: 12.5px;
-        color: #666;
-        line-height: 1.75;
-        font-style: italic;
-    }
-
-    /* Summary */
-    .summary-table { width: 100%; border-collapse: collapse; }
 
     .summary-table tr td {
         padding: 10px 0;
@@ -274,6 +191,7 @@
         text-align: right;
         font-weight: 700;
         color: #2d3743;
+        padding-left: 40px;
     }
 
     .summary-total-row td {
@@ -284,6 +202,28 @@
         padding-bottom: 13px !important;
         border-top: 2px solid #2d3743 !important;
         border-bottom: 2px solid #2d3743 !important;
+    }
+
+    /* =============================================
+       ADDITIONAL NOTES — full width, centered below summary
+    ============================================= */
+    .notes-wrap {
+        padding: 28px 40px 0 40px;
+        text-align: center;
+    }
+
+    .notes-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #ffbd59;
+        margin-bottom: 8px;
+    }
+
+    .notes-body {
+        font-size: 12.5px;
+        color: #666;
+        line-height: 1.75;
+        font-style: italic;
     }
 
     /* =============================================
@@ -321,9 +261,6 @@
 
     /* =============================================
        FOOTER
-       position:fixed bottom:0 for wkhtmltopdf.
-       padding-bottom on .page stops content
-       overlapping it.
     ============================================= */
     .page-footer {
         position: fixed;
@@ -472,50 +409,47 @@
         </table>
     </div>
 
-    {{-- DIVIDER --}}
-    <div class="section-divider"></div>
-
-    {{-- NOTES + SUMMARY --}}
-    <div class="bottom-section">
-        <div class="bottom-left">
-            @if($quotation->notes)
-                <div class="notes-title">Additional Notes</div>
-                <div class="notes-body">{{ $quotation->notes }}</div>
-            @endif
-        </div>
-        <div class="bottom-right">
-            <table class="summary-table">
-                <tr>
-                    <td>Subtotal</td>
-                    <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
-                </tr>
-                <tr>
-                    <td>Taxes</td>
-                    <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
-                </tr>
-                <tr>
-                    <td>Delivery Charges</td>
-                    <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
-                </tr>
-                <tr>
-                    <td>Printing</td>
-                    <td>{{ $quotation->is_printing_included ? 'Included' : '—' }}</td>
-                </tr>
-                <tr>
-                    <td>Plate &amp; Punch</td>
-                    <td>{{ $quotation->is_plate_and_punch ? 'Included' : '—' }}</td>
-                </tr>
-                <tr>
-                    <td>Lamination</td>
-                    <td>{{ $quotation->is_lamination ? 'Included' : '—' }}</td>
-                </tr>
-                <tr class="summary-total-row">
-                    <td>Total (INR)</td>
-                    <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
-                </tr>
-            </table>
-        </div>
+    {{-- SUMMARY — right aligned, no side borders --}}
+    <div class="summary-wrap">
+        <table class="summary-table">
+            <tr>
+                <td>Subtotal</td>
+                <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
+            </tr>
+            <tr>
+                <td>Taxes</td>
+                <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
+            </tr>
+            <tr>
+                <td>Delivery Charges</td>
+                <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
+            </tr>
+            <tr>
+                <td>Printing</td>
+                <td>{{ $quotation->is_printing_included ? 'Included' : '—' }}</td>
+            </tr>
+            <tr>
+                <td>Plate &amp; Punch</td>
+                <td>{{ $quotation->is_plate_and_punch ? 'Included' : '—' }}</td>
+            </tr>
+            <tr>
+                <td>Lamination</td>
+                <td>{{ $quotation->is_lamination ? 'Included' : '—' }}</td>
+            </tr>
+            <tr class="summary-total-row">
+                <td>Total (INR)</td>
+                <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
+            </tr>
+        </table>
     </div>
+
+    {{-- ADDITIONAL NOTES — centered below summary --}}
+    @if($quotation->notes)
+    <div class="notes-wrap">
+        <div class="notes-title">Additional Notes</div>
+        <div class="notes-body">{{ $quotation->notes }}</div>
+    </div>
+    @endif
 
     {{-- SIGNATURE --}}
     <div class="sig-wrap">
