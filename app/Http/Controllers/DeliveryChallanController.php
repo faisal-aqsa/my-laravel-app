@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
-use Illuminate\Http\Request;
-use App\Models\DeliveryChallan;
 use App\Mail\DeliveryChallanMail;
-use Illuminate\Support\Facades\DB;
+use App\Models\Client;
+use App\Models\DeliveryChallan;
 use App\Models\DeliveryChallanItem;
+use Barryvdh\Snappy\Facades\SnappyPdf;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Barryvdh\Snappy\Facades\SnappyPdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class DeliveryChallanController extends Controller
 {
@@ -342,43 +348,174 @@ class DeliveryChallanController extends Controller
 
     public function export()
     {
-        $challans = DeliveryChallan::with('client')->latest()->get();
+        $challans = DeliveryChallan::with(['client', 'items'])->latest()->get();
 
-        $filename = 'delivery_challans_' . date('Y-m-d_H-i-s') . '.csv';
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Delivery Challans');
 
-        $headers = [
-            'Content-Type'        => 'text/csv',
-            'Content-Disposition' => "attachment; filename=\"$filename\"",
-            'Pragma'              => 'no-cache',
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires'             => '0',
-        ];
+        // ── Color palette ──────────────────────────────────────────
+        $headerBg    = '1F4E79'; // dark blue  – main title
+        $subHeaderBg = '2E75B6'; // mid blue   – challan header
+        $itemHeaderBg= 'BDD7EE'; // light blue – column headers
+        $altRowBg    = 'F2F7FC'; // very light – alternating rows
+        $totalBg     = 'D6E4F0'; // summary rows
 
-        $callback = function () use ($challans) {
-            $handle = fopen('php://output', 'w');
-
-            // Header row
-            fputcsv($handle, [
-                'Client Name',
-                'Challan No',
-                'Vehicle No',
-                'Partner No',
-                'Challan Date',
-            ]);
-
-            foreach ($challans as $challan) {
-                fputcsv($handle, [
-                    $challan->client->name ?? $challan->getClient->name ?? 'N/A',
-                    $challan->challan_number,
-                    $challan->vehicle_no ?? 'N/A',
-                    $challan->delivery_partner_phone ?? 'N/A',
-                    $challan->challan_date->format('d-m-Y'),
-                ]);
-            }
-
-            fclose($handle);
+        // ── Helper: borders ────────────────────────────────────────
+        $border = function(string $range) use ($sheet) {
+            $sheet->getStyle($range)->getBorders()->getAllBorders()
+                ->setBorderStyle(Border::BORDER_THIN)
+                ->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color('AAAAAA'));
         };
 
-        return response()->stream($callback, 200, $headers);
+        // ── Helper: style header ───────────────────────────────────
+        $styleHeader = function(string $range, string $bg, bool $white = true) use ($sheet) {
+            $style = $sheet->getStyle($range);
+            $style->getFill()->setFillType(Fill::FILL_SOLID)
+                ->getStartColor()->setRGB($bg);
+            $style->getFont()->setBold(true);
+            if ($white) $style->getFont()->getColor()->setRGB('FFFFFF');
+            $style->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                ->setVertical(Alignment::VERTICAL_CENTER)
+                ->setWrapText(true);
+        };
+
+        // ── Column widths ──────────────────────────────────────────
+        $cols = ['A'=>5,'B'=>20,'C'=>15,'D'=>25,'E'=>25,'F'=>18,'G'=>18,'H'=>18,'I'=>18];
+        foreach ($cols as $col => $width) {
+            $sheet->getColumnDimension($col)->setWidth($width);
+        }
+
+        // ════════════════════════════════════════════════════════════
+        // SHEET TITLE
+        // ════════════════════════════════════════════════════════════
+        $sheet->mergeCells('A1:I1');
+        $sheet->setCellValue('A1', 'DELIVERY CHALLAN EXPORT REPORT — Generated: ' . now()->format('d M Y, H:i'));
+        $styleHeader('A1', $headerBg);
+        $sheet->getRowDimension(1)->setRowHeight(28);
+
+        $row = 3;
+
+        foreach ($challans as $challan) {
+            $client = $challan->client ?? $challan->getClient ?? null;
+
+            // ── Challan header block ───────────────────────────────
+            $sheet->mergeCells("A{$row}:I{$row}");
+            $label = 'Challan #' . $challan->challan_number
+                    . '   |   Client: '  . ($client->name ?? 'N/A')
+                    . '   |   Date: '    . $challan->challan_date->format('d M Y')
+                    . ($challan->vehicle_no ? '   |   Vehicle: ' . $challan->vehicle_no : '')
+                    . ($challan->delivery_partner_phone ? '   |   Partner Ph: ' . $challan->delivery_partner_phone : '');
+            $sheet->setCellValue("A{$row}", $label);
+            $styleHeader("A{$row}", $subHeaderBg);
+            $sheet->getRowDimension($row)->setRowHeight(22);
+            $row++;
+
+            // ── Client / delivery info row ─────────────────────────
+            $sheet->mergeCells("A{$row}:D{$row}");
+            $sheet->setCellValue("A{$row}",
+                'Client: ' . ($client->name ?? 'N/A')
+                . ($client->phone   ? ' | Ph: '    . $client->phone   : '')
+                . ($client->email   ? ' | Email: ' . $client->email   : '')
+                . ($client->address ? ' | '        . $client->address : '')
+            );
+            $sheet->getStyle("A{$row}")->getFont()->setItalic(true)->setSize(9);
+
+            $sheet->mergeCells("E{$row}:I{$row}");
+            $sheet->setCellValue("E{$row}",
+                'Delivery Address: ' . ($challan->consignee_address ?? $client->address ?? 'Same as client address')
+                . ($challan->vehicle_no            ? ' | Vehicle: '    . $challan->vehicle_no            : '')
+                . ($challan->delivery_partner_phone? ' | Partner Ph: ' . $challan->delivery_partner_phone: '')
+            );
+            $sheet->getStyle("E{$row}")->getFont()->setItalic(true)->setSize(9);
+            $sheet->getRowDimension($row)->setRowHeight(18);
+            $row++;
+
+            // ── Items column headers ───────────────────────────────
+            $itemHeaders = ['#', 'Particular', 'Quantity', 'Total Amount (₹)'];
+            $itemCols    = ['A', 'B', 'C', 'D'];
+            foreach ($itemHeaders as $i => $h) {
+                $sheet->setCellValue($itemCols[$i] . $row, $h);
+            }
+            $sheet->getStyle("A{$row}:D{$row}")->getFill()
+                ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($itemHeaderBg);
+            $sheet->getStyle("A{$row}:D{$row}")->getFont()->setBold(true);
+            $sheet->getStyle("A{$row}:D{$row}")->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+            // Summary headers (right side)
+            $sheet->setCellValue("F{$row}", 'Summary');
+            $sheet->setCellValue("G{$row}", 'Value');
+            $sheet->getStyle("F{$row}:G{$row}")->getFill()
+                ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($itemHeaderBg);
+            $sheet->getStyle("F{$row}:G{$row}")->getFont()->setBold(true);
+            $sheet->getStyle("F{$row}:G{$row}")->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $border("A{$row}:I{$row}");
+            $row++;
+
+            // ── Line items ─────────────────────────────────────────
+            $items = $challan->items ?? collect();
+            $itemStartRow = $row;
+
+            foreach ($items as $idx => $item) {
+                $isAlt = $idx % 2 === 1;
+                $sheet->setCellValue("A{$row}", $idx + 1);
+                $sheet->setCellValue("B{$row}", $item->particular);
+                $sheet->setCellValue("C{$row}", $item->quantity);
+                $sheet->setCellValue("D{$row}", $item->total_amount);
+
+                $sheet->getStyle("C{$row}")->getNumberFormat()->setFormatCode('#,##0.00');
+                $sheet->getStyle("D{$row}")->getNumberFormat()->setFormatCode('#,##0.00');
+
+                if ($isAlt) {
+                    $sheet->getStyle("A{$row}:D{$row}")->getFill()
+                        ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($altRowBg);
+                }
+                $border("A{$row}:D{$row}");
+                $row++;
+            }
+
+            // ── Summary panel (right side, aligned to items) ───────
+            $summaryRow = $itemStartRow;
+
+            $summaryItems = [
+                ['Total Items',   $items->count()],
+                ['Grand Total',   $challan->total_amount],
+            ];
+
+            foreach ($summaryItems as [$label2, $val]) {
+                $sheet->setCellValue("F{$summaryRow}", $label2);
+                $sheet->setCellValue("G{$summaryRow}", $val);
+                $sheet->getStyle("F{$summaryRow}:G{$summaryRow}")->getFont()->setBold(true);
+
+                if ($label2 === 'Grand Total') {
+                    $sheet->getStyle("F{$summaryRow}:G{$summaryRow}")->getFill()
+                        ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($totalBg);
+                    $sheet->getStyle("G{$summaryRow}")->getNumberFormat()->setFormatCode('#,##0.00');
+                }
+                $border("F{$summaryRow}:G{$summaryRow}");
+                $summaryRow++;
+            }
+
+            $row = max($row, $summaryRow);
+            $row += 2; // gap between challans
+        }
+
+        // ── Freeze top rows ────────────────────────────────────────
+        $sheet->freezePane('A3');
+
+        // ── Stream response ────────────────────────────────────────
+        $filename = 'delivery_challans_' . date('Y-m-d_H-i-s') . '.xlsx';
+
+        return new StreamedResponse(function () use ($spreadsheet) {
+            $writer = new Xlsx($spreadsheet);
+            $writer->save('php://output');
+        }, 200, [
+            'Content-Type'        => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+            'Cache-Control'       => 'max-age=0',
+        ]);
     }
 }

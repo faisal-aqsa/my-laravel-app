@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InvoiceMail;
 use App\Models\Client;
 use App\Models\Invoice;
-use App\Models\Setting;
-use App\Mail\InvoiceMail;
 use App\Models\InvoiceItem;
-use Illuminate\Http\Request;
 use App\Models\PaymentHistory;
+use App\Models\Setting;
+use Barryvdh\Snappy\Facades\SnappyPdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class InvoiceController extends Controller
 {
@@ -518,48 +524,222 @@ class InvoiceController extends Controller
 
     public function export()
     {
-        $invoices = Invoice::latest()->get();
+        $invoices = Invoice::with(['getClient', 'invoiceItems'])->latest()->get();
 
-        $filename = 'invoices_' . date('Y-m-d_H-i-s') . '.csv';
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Invoices');
 
-        $headers = [
-            'Content-Type'        => 'text/csv',
-            'Content-Disposition' => "attachment; filename=\"$filename\"",
-            'Pragma'              => 'no-cache',
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires'             => '0',
-        ];
+        // ── Color palette ─────────────────────────────────────────
+        $headerBg   = '1F4E79'; // dark blue  – section headers
+        $subHeaderBg= '2E75B6'; // mid blue   – column headers
+        $itemHeaderBg='BDD7EE'; // light blue – item sub-headers
+        $altRowBg   = 'F2F7FC'; // very light – alternating rows
+        $totalBg    = 'D6E4F0'; // summary rows
 
-        $callback = function () use ($invoices) {
-            $handle = fopen('php://output', 'w');
-
-            // Header row
-            fputcsv($handle, [
-                'Client Name',
-                'Invoice Number',
-                'Sub Total',
-                'Paid Amount',
-                'Remaining',
-                'Grand Total',
-                'Status',
-            ]);
-
-            foreach ($invoices as $invoice) {
-                $remaining = $invoice->grand_total - $invoice->paid_amount;
-                fputcsv($handle, [
-                    $invoice->getClient->name ?? 'N/A',
-                    $invoice->invoice_number,
-                    number_format($invoice->total_amount, 2),
-                    number_format($invoice->paid_amount, 2),
-                    number_format($remaining, 2),
-                    number_format($invoice->grand_total, 2),
-                    ucfirst(str_replace('_', ' ', $invoice->status)),
-                ]);
-            }
-
-            fclose($handle);
+        // ── Helper: apply border to a range ───────────────────────
+        $border = function(string $range) use ($sheet) {
+            $sheet->getStyle($range)->getBorders()->getAllBorders()
+                ->setBorderStyle(Border::BORDER_THIN)
+                ->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color('AAAAAA'));
         };
 
-        return response()->stream($callback, 200, $headers);
+        // ── Helper: style a header row ─────────────────────────────
+        $styleHeader = function(string $range, string $bg, bool $white = true) use ($sheet) {
+            $style = $sheet->getStyle($range);
+            $style->getFill()->setFillType(Fill::FILL_SOLID)
+                ->getStartColor()->setRGB($bg);
+            $style->getFont()->setBold(true);
+            if ($white) $style->getFont()->getColor()->setRGB('FFFFFF');
+            $style->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                ->setVertical(Alignment::VERTICAL_CENTER)
+                ->setWrapText(true);
+        };
+
+        // ════════════════════════════════════════════════════════════
+        // SHEET TITLE
+        // ════════════════════════════════════════════════════════════
+        $sheet->mergeCells('A1:N1');
+        $sheet->setCellValue('A1', 'INVOICE EXPORT REPORT — Generated: ' . now()->format('d M Y, H:i'));
+        $styleHeader('A1', $headerBg);
+        $sheet->getRowDimension(1)->setRowHeight(28);
+
+        // ── Column widths ──────────────────────────────────────────
+        $cols = ['A'=>5,'B'=>18,'C'=>15,'D'=>22,'E'=>22,'F'=>18,'G'=>14,
+                'H'=>14,'I'=>14,'J'=>14,'K'=>14,'L'=>12,'M'=>14,'N'=>20];
+        foreach ($cols as $col => $width) {
+            $sheet->getColumnDimension($col)->setWidth($width);
+        }
+
+        $row = 3; // start data from row 3
+
+        foreach ($invoices as $invoice) {
+            $client = $invoice->getClient;
+
+            // ── Invoice header block ───────────────────────────────
+            $sheet->mergeCells("A{$row}:N{$row}");
+            $label = ($invoice->is_performa_invoice ? '[PROFORMA] ' : '[TAX INVOICE] ')
+                    . 'Invoice #' . $invoice->invoice_number
+                    . '   |   Client: ' . ($client->name ?? 'N/A')
+                    . '   |   Date: ' . $invoice->invoice_date->format('d M Y')
+                    . '   |   Due: '  . $invoice->due_date->format('d M Y')
+                    . '   |   Status: ' . ucfirst(str_replace('_', ' ', $invoice->status));
+            $sheet->setCellValue("A{$row}", $label);
+            $styleHeader("A{$row}", $subHeaderBg);
+            $sheet->getRowDimension($row)->setRowHeight(22);
+            $row++;
+
+            // ── Client / shipping info row ─────────────────────────
+            $sheet->mergeCells("A{$row}:G{$row}");
+            $sheet->setCellValue("A{$row}",
+                'Bill To: ' . ($client->name ?? 'N/A')
+                . ' | ' . ($client->factory_address ?? '')
+                . ($client->gst_no ? ' | GST: ' . $client->gst_no : '')
+                . ($client->phone   ? ' | Ph: '  . $client->phone   : '')
+            );
+            $sheet->getStyle("A{$row}")->getFont()->setItalic(true)->setSize(9);
+
+            $sheet->mergeCells("H{$row}:N{$row}");
+            $sheet->setCellValue("H{$row}",
+                'Ship To: ' . ($invoice->consignee_address ?: 'Same as billing')
+                . ($invoice->po_number    ? ' | PO: '       . $invoice->po_number    : '')
+                . ($invoice->vehicle_no   ? ' | Vehicle: '  . $invoice->vehicle_no   : '')
+                . ($invoice->e_way_bill_no? ' | E-Way: '    . $invoice->e_way_bill_no: '')
+            );
+            $sheet->getStyle("H{$row}")->getFont()->setItalic(true)->setSize(9);
+            $sheet->getRowDimension($row)->setRowHeight(18);
+            $row++;
+
+            // ── Items column headers ───────────────────────────────
+            $itemHeaders = ['#','Particular','HSN No','Qty','Unit Price (₹)','Total (₹)'];
+            $itemCols    = ['A','B','C','D','E','F'];
+            foreach ($itemHeaders as $i => $h) {
+                $sheet->setCellValue($itemCols[$i] . $row, $h);
+            }
+            $sheet->getStyle("A{$row}:F{$row}")->getFill()
+                ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($itemHeaderBg);
+            $sheet->getStyle("A{$row}:F{$row}")->getFont()->setBold(true);
+            $sheet->getStyle("A{$row}:F{$row}")->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+            // Tax / summary headers (right side)
+            $sheet->setCellValue("H{$row}", 'Tax Type');
+            $sheet->setCellValue("I{$row}", 'Rate (%)');
+            $sheet->setCellValue("J{$row}", 'Amount (₹)');
+            $sheet->setCellValue("L{$row}", 'Summary');
+            $sheet->setCellValue("M{$row}", 'Amount (₹)');
+            $sheet->getStyle("H{$row}:M{$row}")->getFill()
+                ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($itemHeaderBg);
+            $sheet->getStyle("H{$row}:M{$row}")->getFont()->setBold(true);
+            $border("A{$row}:N{$row}");
+            $row++;
+
+            // ── Line items ─────────────────────────────────────────
+            $itemStartRow = $row;
+            foreach ($invoice->invoiceItems as $idx => $item) {
+                $isAlt = $idx % 2 === 1;
+                $lineTotal = $item->quantity * $item->unit_price;
+                $sheet->setCellValue("A{$row}", $idx + 1);
+                $sheet->setCellValue("B{$row}", $item->particular);
+                $sheet->setCellValue("C{$row}", $item->hsn_no ?? 'N/A');
+                $sheet->setCellValue("D{$row}", $item->quantity);
+                $sheet->setCellValue("E{$row}", $item->unit_price);
+                $sheet->setCellValue("F{$row}", $lineTotal);
+
+                $sheet->getStyle("E{$row}:F{$row}")->getNumberFormat()
+                    ->setFormatCode('#,##0.00');
+                $sheet->getStyle("D{$row}")->getNumberFormat()
+                    ->setFormatCode('#,##0.00');
+
+                if ($isAlt) {
+                    $sheet->getStyle("A{$row}:F{$row}")->getFill()
+                        ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($altRowBg);
+                }
+                $border("A{$row}:F{$row}");
+                $row++;
+            }
+            $itemEndRow = $row - 1;
+
+            // ── Tax info (right panel, aligned to items area) ──────
+            $taxRow = $itemStartRow;
+            $settings = Setting::first();
+
+            if ($invoice->is_sgst) {
+                $rate   = $invoice->sgst_rate ?? $settings->sgst;
+                $amount = ($invoice->total_amount * $rate) / 100;
+                $sheet->setCellValue("H{$taxRow}", 'SGST');
+                $sheet->setCellValue("I{$taxRow}", $rate . '%');
+                $sheet->setCellValue("J{$taxRow}", $amount);
+                $sheet->getStyle("J{$taxRow}")->getNumberFormat()->setFormatCode('#,##0.00');
+                $taxRow++;
+            }
+            if ($invoice->is_cgst) {
+                $rate   = $invoice->cgst_rate ?? $settings->cgst;
+                $amount = ($invoice->total_amount * $rate) / 100;
+                $sheet->setCellValue("H{$taxRow}", 'CGST');
+                $sheet->setCellValue("I{$taxRow}", $rate . '%');
+                $sheet->setCellValue("J{$taxRow}", $amount);
+                $sheet->getStyle("J{$taxRow}")->getNumberFormat()->setFormatCode('#,##0.00');
+                $taxRow++;
+            }
+            if ($invoice->is_igst) {
+                $rate   = $invoice->igst_rate ?? $settings->igst;
+                $amount = ($invoice->total_amount * $rate) / 100;
+                $sheet->setCellValue("H{$taxRow}", 'IGST');
+                $sheet->setCellValue("I{$taxRow}", $rate . '%');
+                $sheet->setCellValue("J{$taxRow}", $amount);
+                $sheet->getStyle("J{$taxRow}")->getNumberFormat()->setFormatCode('#,##0.00');
+                $taxRow++;
+            }
+            if (!$invoice->is_sgst && !$invoice->is_cgst && !$invoice->is_igst) {
+                $sheet->setCellValue("H{$taxRow}", 'No Tax');
+                $taxRow++;
+            }
+
+            // ── Amount summary (right panel) ───────────────────────
+            $summaryRow = $itemStartRow;
+            $remaining  = $invoice->grand_total - ($invoice->paid_amount ?? 0);
+
+            $summaryItems = [
+                ['Subtotal',    $invoice->total_amount],
+                ['Grand Total', $invoice->grand_total],
+                ['Paid Amount', $invoice->paid_amount ?? 0],
+                ['Remaining',   $remaining],
+            ];
+            foreach ($summaryItems as [$label2, $val]) {
+                $sheet->setCellValue("L{$summaryRow}", $label2);
+                $sheet->setCellValue("M{$summaryRow}", $val);
+                $sheet->getStyle("M{$summaryRow}")->getNumberFormat()->setFormatCode('#,##0.00');
+                $sheet->getStyle("L{$summaryRow}:M{$summaryRow}")->getFont()->setBold(true);
+                if ($label2 === 'Grand Total') {
+                    $sheet->getStyle("L{$summaryRow}:M{$summaryRow}")->getFill()
+                        ->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($totalBg);
+                }
+                if ($label2 === 'Remaining' && $remaining > 0) {
+                    $sheet->getStyle("M{$summaryRow}")->getFont()->getColor()->setRGB('C00000');
+                }
+                $border("L{$summaryRow}:M{$summaryRow}");
+                $summaryRow++;
+            }
+
+            $row = max($row, $taxRow, $summaryRow);
+            $row += 2; // gap between invoices
+        }
+
+        // ── Freeze top rows ────────────────────────────────────────
+        $sheet->freezePane('A3');
+
+        // ── Stream response ────────────────────────────────────────
+        $filename = 'invoices_' . date('Y-m-d_H-i-s') . '.xlsx';
+
+        return new StreamedResponse(function () use ($spreadsheet) {
+            $writer = new Xlsx($spreadsheet);
+            $writer->save('php://output');
+        }, 200, [
+            'Content-Type'        => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+            'Cache-Control'       => 'max-age=0',
+        ]);
     }
 }
