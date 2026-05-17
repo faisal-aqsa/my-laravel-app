@@ -17,8 +17,7 @@
 
     .page {
         width: 100%;
-        min-height: 100vh;
-        padding: 0 0 90px 0;
+        padding-bottom: 60px;
     }
 
     /* =============================================
@@ -31,13 +30,12 @@
     }
 
     /* =============================================
-       HEADER SECTION
-       Logo top-right, title + meta top-left
+       HEADER
     ============================================= */
     .header {
         display: table;
         width: 100%;
-        padding: 30px 40px 24px 40px;
+        padding: 28px 40px 22px 40px;
         border-bottom: 1px solid #e8ecf0;
     }
 
@@ -54,7 +52,6 @@
         text-align: right;
     }
 
-    /* Title row */
     .quotation-heading {
         font-size: 30px;
         font-weight: 900;
@@ -79,7 +76,6 @@
         top: -3px;
     }
 
-    /* Meta rows */
     .meta-table {
         margin-top: 14px;
         border-collapse: collapse;
@@ -102,10 +98,9 @@
         font-weight: 700;
     }
 
-    /* Logo */
     .logo-img {
-        width: 120px;
-        height: 120px;
+        width: 110px;
+        height: 110px;
         object-fit: contain;
         display: inline-block;
     }
@@ -117,7 +112,6 @@
         color: #2d3743;
         text-transform: uppercase;
         margin-top: 6px;
-        text-align: right;
     }
 
     .logo-tagline {
@@ -127,14 +121,12 @@
         text-transform: uppercase;
         font-weight: 700;
         margin-top: 2px;
-        text-align: right;
     }
 
     .logo-recycle {
         font-size: 9px;
         color: #b0bac5;
         margin-top: 2px;
-        text-align: right;
     }
 
     /* =============================================
@@ -143,10 +135,9 @@
     .boxes-wrap {
         display: table;
         width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        padding: 24px 40px;
+        padding: 22px 40px;
         border-bottom: 1px solid #e8ecf0;
+        border-collapse: collapse;
     }
 
     .box-cell {
@@ -155,29 +146,23 @@
         vertical-align: top;
     }
 
-    .box-cell:first-child {
-        padding-right: 12px;
-    }
-
-    .box-cell:last-child {
-        padding-left: 12px;
-    }
+    .box-cell:first-child { padding-right: 12px; }
+    .box-cell:last-child  { padding-left: 12px; }
 
     .info-box {
         background: #f7f9fb;
         border: 1px solid #e4e9ee;
         border-top: 3px solid #ffbd59;
-        padding: 16px 18px;
-        height: 100%;
+        padding: 15px 18px;
     }
 
     .box-title {
-        font-size: 10px;
+        font-size: 9.5px;
         font-weight: 700;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #ffbd59;
-        margin-bottom: 10px;
+        margin-bottom: 9px;
     }
 
     .box-name {
@@ -193,49 +178,13 @@
         line-height: 1.65;
     }
 
-    .box-detail strong {
-        color: #2d3743;
-    }
-
-    /* =============================================
-       SUPPLY INFO ROW
-    ============================================= */
-    .supply-row {
-        display: table;
-        width: 100%;
-        padding: 10px 40px;
-        background: #fafbfc;
-        border-bottom: 1px solid #e8ecf0;
-    }
-
-    .supply-left {
-        display: table-cell;
-        width: 50%;
-        font-size: 12.5px;
-        color: #555;
-        vertical-align: middle;
-    }
-
-    .supply-right {
-        display: table-cell;
-        width: 50%;
-        text-align: right;
-        font-size: 12.5px;
-        color: #555;
-        vertical-align: middle;
-    }
-
-    .supply-left strong,
-    .supply-right strong {
-        color: #2d3743;
-    }
+    .box-detail strong { color: #2d3743; }
 
     /* =============================================
        ITEMS TABLE
     ============================================= */
     .table-wrap {
-        padding: 0 40px;
-        margin-top: 24px;
+        padding: 22px 40px 0 40px;
     }
 
     .sec-title {
@@ -268,10 +217,7 @@
     .items-table thead tr th.center { text-align: center; }
     .items-table thead tr th.right  { text-align: right; padding-right: 16px; }
 
-    .items-table tbody tr {
-        border-bottom: 1px solid #edf0f4;
-    }
-
+    .items-table tbody tr { border-bottom: 1px solid #edf0f4; }
     .items-table tbody tr:nth-child(even) { background: #f7f9fb; }
     .items-table tbody tr:nth-child(odd)  { background: #ffffff; }
 
@@ -286,13 +232,6 @@
     .items-table tbody td.right  { text-align: right; padding-right: 16px; font-weight: 700; }
     .items-table tbody td.num    { color: #aab0b8; font-weight: 700; font-size: 11px; width: 36px; }
 
-    .hsn-small {
-        font-size: 10.5px;
-        color: #9aa5b0;
-        display: block;
-        margin-top: 2px;
-    }
-
     .gsm-pill {
         display: inline-block;
         background: #edf1f6;
@@ -305,12 +244,12 @@
     }
 
     /* =============================================
-       BOTTOM: INCLUSIONS LEFT + SUMMARY RIGHT
+       BOTTOM: NOTES LEFT + SUMMARY RIGHT
     ============================================= */
     .bottom-section {
         display: table;
         width: 100%;
-        padding: 24px 40px 0 40px;
+        padding: 22px 40px 0 40px;
         border-collapse: collapse;
     }
 
@@ -318,80 +257,39 @@
         display: table-cell;
         width: 50%;
         vertical-align: top;
-        padding-right: 20px;
+        padding-right: 24px;
     }
 
     .bottom-right {
         display: table-cell;
         width: 50%;
         vertical-align: top;
-        padding-left: 20px;
+        padding-left: 24px;
     }
 
-    /* Inclusions */
-    .inc-card {
-        border: 1px solid #e0e5ea;
-        border-top: 3px solid #ffbd59;
-    }
-
-    .inc-head {
-        background: #f7f9fb;
-        border-bottom: 1px solid #e8ecf0;
-        padding: 9px 14px;
-        font-size: 8px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #2d3743;
-    }
-
-    .inc-row {
-        display: table;
-        width: 100%;
-        padding: 9px 14px;
-        border-bottom: 1px solid #f0f3f7;
-    }
-
-    .inc-row:last-child { border-bottom: none; }
-
-    .inc-lbl {
-        display: table-cell;
+    /* Notes */
+    .notes-title {
         font-size: 12.5px;
-        color: #555;
-        vertical-align: middle;
-    }
-
-    .inc-val {
-        display: table-cell;
-        text-align: right;
-        vertical-align: middle;
-    }
-
-    .tag-yes {
-        display: inline-block;
-        background: #2d3743;
+        font-weight: 700;
         color: #ffbd59;
-        font-size: 7.5px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        padding: 4px 10px;
+        margin-bottom: 8px;
     }
 
-    .tag-no {
-        font-size: 14px;
-        color: #d5dbe0;
-        font-weight: 700;
+    .notes-body {
+        font-size: 12.5px;
+        color: #666;
+        line-height: 1.7;
+        font-style: italic;
     }
 
-    /* Summary table */
+    /* Summary table — matches reference style */
     .summary-table {
         width: 100%;
         border-collapse: collapse;
     }
 
     .summary-table tr td {
-        padding: 9px 0;
+        padding: 10px 0;
         font-size: 13px;
         color: #555;
         border-bottom: 1px solid #f0f3f7;
@@ -412,77 +310,30 @@
         font-size: 15px !important;
         font-weight: 900 !important;
         color: #2d3743 !important;
-        padding-top: 13px !important;
+        padding-top: 12px !important;
         border-top: 2px solid #2d3743 !important;
         border-bottom: 2px solid #2d3743 !important;
+        padding-bottom: 12px !important;
     }
 
     /* =============================================
-       NOTES & TERMS
-    ============================================= */
-    .notes-section {
-        padding: 20px 40px 0 40px;
-        display: table;
-        width: 100%;
-    }
-
-    .notes-left {
-        display: table-cell;
-        width: 50%;
-        vertical-align: top;
-        padding-right: 20px;
-    }
-
-    .notes-right {
-        display: table-cell;
-        width: 50%;
-        vertical-align: top;
-        padding-left: 20px;
-    }
-
-    .notes-title {
-        font-size: 12.5px;
-        font-weight: 700;
-        color: #ffbd59;
-        margin-bottom: 8px;
-        letter-spacing: 0.5px;
-    }
-
-    .notes-body {
-        font-size: 12.5px;
-        color: #666;
-        line-height: 1.7;
-    }
-
-    /* =============================================
-       SIGNATURES
+       SIGNATURE — only For Boxmaker, right side
     ============================================= */
     .sig-wrap {
-        display: table;
-        width: 100%;
-        margin-top: 40px;
-        padding: 0 40px;
-    }
-
-    .sig-l {
-        display: table-cell;
-        width: 50%;
-        vertical-align: bottom;
-        padding-right: 60px;
-    }
-
-    .sig-r {
-        display: table-cell;
-        width: 50%;
-        vertical-align: bottom;
-        padding-left: 60px;
+        padding: 36px 40px 0 40px;
         text-align: right;
     }
 
-    .sig-spacer { height: 45px; }
+    .sig-block {
+        display: inline-block;
+        width: 220px;
+        text-align: right;
+    }
+
+    .sig-spacer { height: 44px; }
 
     .sig-line {
-        border-top: 1.5px solid #2d3743;
+        border-top: 2px solid #ffbd59;
         padding-top: 8px;
         font-size: 9px;
         font-weight: 700;
@@ -490,8 +341,6 @@
         text-transform: uppercase;
         color: #2d3743;
     }
-
-    .sig-line.gold-top { border-top-color: #ffbd59; }
 
     .sig-sub {
         font-size: 8.5px;
@@ -501,15 +350,12 @@
     }
 
     /* =============================================
-       FOOTER
+       FOOTER — not fixed, stays in flow
     ============================================= */
     .page-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
         background: #2d3743;
         border-top: 4px solid #ffbd59;
+        margin-top: 36px;
     }
 
     .footer-table {
@@ -553,7 +399,6 @@
                 <span class="quotation-heading">Quotation</span>
                 <span class="status-badge">Created</span>
             </div>
-
             <table class="meta-table">
                 <tr>
                     <td class="meta-key">Quotation No</td>
@@ -596,13 +441,13 @@
                 <div class="box-name">BOXMAKER</div>
                 <div class="box-detail">
                     {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
-                    @if($settings->gst_no)
+                    @if($settings->gst_no ?? false)
                         <strong>GSTIN:</strong> {{ $settings->gst_no }}<br>
                     @endif
-                    @if($settings->phone)
+                    @if($settings->phone ?? false)
                         <strong>Phone:</strong> {{ $settings->phone }}<br>
                     @endif
-                    @if($settings->email)
+                    @if($settings->email ?? false)
                         <strong>Email:</strong> {{ $settings->email }}
                     @endif
                 </div>
@@ -626,7 +471,7 @@
                     @if($quotation->client->email ?? false)
                         <strong>Email:</strong> {{ $quotation->client->email }}
                     @endif
-                    @if($quotation->quotation_for)
+                    @if($quotation->quotation_for ?? false)
                         <br><strong>For:</strong> {{ $quotation->quotation_for }}
                     @endif
                 </div>
@@ -637,24 +482,20 @@
     {{-- ===================== ITEMS TABLE ===================== --}}
     <div class="table-wrap">
         <div class="sec-title">Items &amp; Pricing</div>
-
         <table class="items-table">
             <thead>
                 <tr>
                     <th style="width:36px;">&nbsp;</th>
                     <th>Product, Material &amp; Size</th>
                     <th class="center" style="width:100px;">GSM</th>
-                    <th class="center" style="width:90px;">Quantity</th>
-                    <th class="right" style="width:130px;">Basic Price (₹)</th>
+                    <th class="right" style="width:150px;">Basic Price (₹)</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($quotation->items as $index => $item)
                 <tr>
                     <td class="num">{{ $index + 1 }}.</td>
-                    <td>
-                        <span style="font-weight:600;">{{ $item->particular }}</span>
-                    </td>
+                    <td style="font-weight:600;">{{ $item->particular }}</td>
                     <td class="center">
                         @if($item->gsm)
                             <span class="gsm-pill">{{ $item->gsm }}</span>
@@ -662,67 +503,54 @@
                             <span style="color:#d0d5db;">—</span>
                         @endif
                     </td>
-                    <td class="center">—</td>
                     <td class="right">₹{{ number_format($item->base_price, 2) }}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" style="text-align:center; color:#aaa; padding:28px; font-style:italic;">
-                        No items found
-                    </td>
+                    <td colspan="4" style="text-align:center; color:#aaa; padding:28px; font-style:italic;">No items found</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
-    {{-- ===================== BOTTOM: INCLUSIONS + SUMMARY ===================== --}}
+    {{-- ===================== BOTTOM: NOTES + SUMMARY ===================== --}}
     <div class="bottom-section">
 
-        {{-- Inclusions --}}
+        {{-- Left: Notes --}}
         <div class="bottom-left">
-            <div class="inc-card">
-                <div class="inc-head">What's Included</div>
-                @php
-                    $inclusions = [
-                        ['Taxes',            $quotation->is_tax_included],
-                        ['Delivery Charges', $quotation->is_delivery_charges_included],
-                        ['Printing',         $quotation->is_printing_included],
-                        ['Plate & Punch',    $quotation->is_plate_and_punch],
-                        ['Lamination',       $quotation->is_lamination],
-                    ];
-                @endphp
-                @foreach($inclusions as [$label, $val])
-                <div class="inc-row">
-                    <div class="inc-lbl">{{ $label }}</div>
-                    <div class="inc-val">
-                        @if($val)
-                            <span class="tag-yes">✓ Included</span>
-                        @else
-                            <span class="tag-no">—</span>
-                        @endif
-                    </div>
-                </div>
-                @endforeach
-            </div>
+            @if($quotation->notes)
+                <div class="notes-title">Additional Notes</div>
+                <div class="notes-body">{{ $quotation->notes }}</div>
+            @endif
         </div>
 
-        {{-- Summary --}}
+        {{-- Right: Summary — inclusions listed like subtotal rows --}}
         <div class="bottom-right">
             <table class="summary-table">
                 <tr>
                     <td>Subtotal</td>
-                    <td>
-                        ₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}
-                    </td>
+                    <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
                 </tr>
                 <tr>
                     <td>Taxes</td>
                     <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
                 </tr>
                 <tr>
-                    <td>Delivery</td>
+                    <td>Delivery Charges</td>
                     <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
+                </tr>
+                <tr>
+                    <td>Printing</td>
+                    <td>{{ $quotation->is_printing_included ? 'Included' : '—' }}</td>
+                </tr>
+                <tr>
+                    <td>Plate &amp; Punch</td>
+                    <td>{{ $quotation->is_plate_and_punch ? 'Included' : '—' }}</td>
+                </tr>
+                <tr>
+                    <td>Lamination</td>
+                    <td>{{ $quotation->is_lamination ? 'Included' : '—' }}</td>
                 </tr>
                 <tr class="summary-total-row">
                     <td>Total (INR)</td>
@@ -733,43 +561,18 @@
 
     </div>
 
-    {{-- ===================== NOTES & TERMS ===================== --}}
-    <div class="notes-section" style="margin-top:20px;">
-        @if($quotation->notes)
-        <div class="notes-left">
-            <div class="notes-title">Additional Notes</div>
-            <div class="notes-body">{{ $quotation->notes }}</div>
-        </div>
-        @endif
-        <div class="{{ $quotation->notes ? 'notes-right' : 'notes-left' }}">
-            <div class="notes-title">Terms &amp; Conditions</div>
-            <div class="notes-body">
-                1. Prices are subject to change without prior notice.<br>
-                2. Delivery as per mutual agreement.<br>
-                3. This quotation is valid for the period mentioned above.
-            </div>
-        </div>
-    </div>
-
-    {{-- ===================== SIGNATURES ===================== --}}
+    {{-- ===================== SIGNATURE — For Boxmaker only ===================== --}}
     <div class="sig-wrap">
-        <div class="sig-l">
+        <div class="sig-block">
             <div class="sig-spacer"></div>
             <div class="sig-line">
-                Client Acknowledgement
-                <div class="sig-sub">Signature &amp; Company Stamp</div>
-            </div>
-        </div>
-        <div class="sig-r">
-            <div class="sig-spacer"></div>
-            <div class="sig-line gold-top">
                 For BOXMAKER
                 <div class="sig-sub">Authorised Signatory</div>
             </div>
         </div>
     </div>
 
-    {{-- ===================== FOOTER ===================== --}}
+    {{-- ===================== FOOTER — in flow, no fixed ===================== --}}
     <div class="page-footer">
         <table class="footer-table">
             <tr>
