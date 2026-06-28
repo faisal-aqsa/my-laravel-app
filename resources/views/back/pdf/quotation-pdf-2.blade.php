@@ -25,7 +25,7 @@
         height: 100vh;
         display: table;
         table-layout: fixed;
-        padding-bottom: 60px; /* space for footer */
+        padding-bottom: 60px;
     }
 
     .page-row {
@@ -43,32 +43,38 @@
     }
 
     /* =============================================
-       HEADER - NEW STYLE WITH LOGO LEFT, CONTENT RIGHT
+       HEADER - LOGO LEFT, CONTENT RIGHT
     ============================================= */
     .header {
         background: #2d3743;
-        padding: 25px 40px 25px 40px;
+        padding: 20px 40px 20px 40px;
         width: 100%;
     }
 
-    .header-inner {
-        display: flex;
-        align-items: flex-start;
-        gap: 30px;
+    .header-table {
         width: 100%;
+        border-collapse: collapse;
     }
 
-    /* Logo on left with white background */
-    .header-logo {
-        flex-shrink: 0;
+    .header-table td {
+        vertical-align: top;
+    }
+
+    /* Left column - Logo with white background */
+    .header-logo-cell {
+        width: 120px;
+        padding-right: 25px;
+    }
+
+    .logo-box {
         background: #ffffff;
         border-radius: 12px;
-        padding: 10px 15px;
+        padding: 12px 15px;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-width: 100px;
         min-height: 90px;
+        width: 100%;
     }
 
     .logo-img {
@@ -78,11 +84,9 @@
         display: block;
     }
 
-    /* Right side - company info */
-    .header-info {
-        flex: 1;
+    /* Right column - Company info */
+    .header-info-cell {
         text-align: right;
-        padding-top: 5px;
     }
 
     .company-name {
@@ -122,13 +126,12 @@
         font-weight: 700;
     }
 
-    /* Contact info row - Phone, Email, Web */
-    .contact-info-row {
+    /* Contact info - horizontal row */
+    .contact-row {
         margin-top: 10px;
         display: flex;
         justify-content: flex-end;
-        gap: 25px;
-        flex-wrap: wrap;
+        gap: 30px;
     }
 
     .contact-item {
@@ -319,7 +322,7 @@
     }
 
     /* =============================================
-       CLOSING SECTION - BOTTOM ALIGNED VIA TABLE
+       CLOSING SECTION - BOTTOM ALIGNED
     ============================================= */
     .closing-wrap {
         padding: 8px 40px 10px 40px;
@@ -449,49 +452,53 @@
                 }
             @endphp
 
-            {{-- NEW HEADER WITH LOGO LEFT, INFO RIGHT --}}
+            {{-- HEADER: LOGO LEFT, INFO RIGHT --}}
             <div class="header">
-                <div class="header-inner">
-                    <!-- Logo on left with white bg -->
-                    <div class="header-logo">
-                        @if($logoSrc)
-                            <img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img">
-                        @else
-                            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="10" y="10" width="80" height="80" rx="12" fill="#2d3743" stroke="#ffbd59" stroke-width="4"/>
-                                <text x="50" y="58" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#ffbd59" text-anchor="middle">B</text>
-                                <text x="50" y="78" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">BOX</text>
-                            </svg>
-                        @endif
-                    </div>
-
-                    <!-- Right side - company info -->
-                    <div class="header-info">
-                        <div class="company-name">Boxmaker</div>
-                        <div class="company-tagline">Packaging &amp; Printing</div>
-                        <div class="company-recycle">&#9851; We Generally Recycle</div>
-
-                        <div class="company-address">
-                            {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
-                            <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
-                        </div>
-
-                        <div class="contact-info-row">
-                            <div class="contact-item">
-                                <span class="label">Phone</span>
-                                <span class="value">{{ $settings->phone ?? '+91 9820006001' }}</span>
+                <table class="header-table">
+                    <tr>
+                        <!-- LEFT: Logo with white background -->
+                        <td class="header-logo-cell">
+                            <div class="logo-box">
+                                @if($logoSrc)
+                                    <img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img">
+                                @else
+                                    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="10" y="10" width="80" height="80" rx="12" fill="#2d3743" stroke="#ffbd59" stroke-width="4"/>
+                                        <text x="50" y="58" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#ffbd59" text-anchor="middle">B</text>
+                                        <text x="50" y="78" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">OX</text>
+                                    </svg>
+                                @endif
                             </div>
-                            <div class="contact-item">
-                                <span class="label">Email</span>
-                                <span class="value">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</span>
+                        </td>
+
+                        <!-- RIGHT: Company info -->
+                        <td class="header-info-cell">
+                            <div class="company-name">Boxmaker</div>
+                            <div class="company-tagline">Packaging &amp; Printing</div>
+                            <div class="company-recycle">&#9851; We Generally Recycle</div>
+
+                            <div class="company-address">
+                                {{ $settings->address ?? 'Office No: 307, Sai Janak Classic, Near Flyover, Devidas lane, Borivali West. Mumbai - 400092' }}<br>
+                                <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
                             </div>
-                            <div class="contact-item">
-                                <span class="label">Web</span>
-                                <span class="value">{{ $settings->website_url ?? 'www.myboxmaker.com' }}</span>
+
+                            <div class="contact-row">
+                                <div class="contact-item">
+                                    <span class="label">Phone</span>
+                                    <span class="value">{{ $settings->phone ?? '+91 9820006001' }}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="label">Email</span>
+                                    <span class="value">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="label">Web</span>
+                                    <span class="value">{{ $settings->website_url ?? 'https://boxmaker.co.in' }}</span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
             {{-- ============ TITLE / META / RECIPIENT ============ --}}
@@ -544,7 +551,7 @@
         </div>
     </div>
 
-    {{-- ============ CONTENT ROW - TAKES REMAINING SPACE ============ --}}
+    {{-- ============ CONTENT ROW ============ --}}
     <div class="page-row" style="height: 100%;">
         <div class="page-cell" style="vertical-align: top;">
 
@@ -661,7 +668,7 @@
             <tr>
                 <td class="footer-td"><strong>{{ $settings->phone ?? '+91 9820006001' }}</strong></td>
                 <td class="footer-td">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</td>
-                <td class="footer-td"><strong>{{ $settings->website_url ?? 'www.myboxmaker.com' }}</strong></td>
+                <td class="footer-td"><strong>{{ $settings->website_url ?? 'https://boxmaker.co.in' }}</strong></td>
             </tr>
         </table>
     </div>
