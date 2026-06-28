@@ -9,28 +9,32 @@
 
     html, body {
         width: 100%;
+        height: 100%;
         background: #ffffff;
         font-family: Arial, Helvetica, sans-serif;
         color: #2d3743;
-        font-size: 12px; /* reduced from 13px */
+        font-size: 12px;
         -webkit-print-color-adjust: exact;
     }
 
     .page {
         width: 100%;
-        position: relative;
-        padding-bottom: 70px; /* room for fixed footer */
         min-height: 100vh;
+        position: relative;
+        padding-bottom: 135px; /* space for fixed footer + closing section */
+        display: flex;
+        flex-direction: column;
     }
 
     /* =============================================
-       DARK WAVY HEADER - REDUCED PADDING
+       DARK WAVY HEADER
     ============================================= */
     .header {
         position: relative;
         background: #2d3743;
-        padding: 20px 40px 70px 40px; /* reduced padding */
+        padding: 20px 40px 70px 40px;
         overflow: hidden;
+        flex-shrink: 0;
     }
 
     .header-table { width: 100%; border-collapse: collapse; }
@@ -43,176 +47,188 @@
         display: inline-block;
         background: #ffffff;
         border-radius: 10px;
-        padding: 5px; /* reduced */
+        padding: 5px;
         vertical-align: middle;
         line-height: 0;
     }
-    .logo-img { width: 55px; height: 55px; object-fit: contain; display: block; } /* reduced */
+    .logo-img { width: 55px; height: 55px; object-fit: contain; display: block; }
 
-    .brand-block { display: inline-block; vertical-align: middle; padding-left: 10px; } /* reduced */
+    .brand-block { display: inline-block; vertical-align: middle; padding-left: 10px; }
     .brand-name {
-        font-size: 18px; /* reduced */
+        font-size: 18px;
         font-weight: 900;
-        letter-spacing: 2px; /* reduced */
+        letter-spacing: 2px;
         color: #ffffff;
         text-transform: uppercase;
         line-height: 1.1;
     }
     .brand-tagline {
-        font-size: 7px; /* reduced */
-        letter-spacing: 2px; /* reduced */
+        font-size: 7px;
+        letter-spacing: 2px;
         color: #ffbd59;
         text-transform: uppercase;
         font-weight: 700;
-        margin-top: 2px; /* reduced */
+        margin-top: 2px;
     }
     .brand-recycle {
-        font-size: 7px; /* reduced */
+        font-size: 7px;
         color: rgba(255,255,255,0.45);
-        margin-top: 2px; /* reduced */
+        margin-top: 2px;
         letter-spacing: 0.5px;
     }
 
     .brand-meta {
-        margin-top: 8px; /* reduced */
-        font-size: 9px; /* reduced */
+        margin-top: 8px;
+        font-size: 9px;
         color: rgba(255,255,255,0.62);
-        line-height: 1.4; /* reduced */
+        line-height: 1.4;
         max-width: 320px;
     }
     .brand-meta strong { color: #ffbd59; font-weight: 700; }
 
     .contact-table { border-collapse: collapse; display: inline-table; text-align: left; }
-    .contact-table td { padding: 0 0 0 15px; vertical-align: top; } /* reduced */
+    .contact-table td { padding: 0 0 0 15px; vertical-align: top; }
     .contact-label {
-        font-size: 7px; /* reduced */
+        font-size: 7px;
         font-weight: 700;
-        letter-spacing: 1px; /* reduced */
+        letter-spacing: 1px;
         text-transform: uppercase;
         color: #ffbd59;
-        margin-bottom: 2px; /* reduced */
+        margin-bottom: 2px;
     }
     .contact-val {
-        font-size: 9px; /* reduced */
+        font-size: 9px;
         color: rgba(255,255,255,0.82);
-        line-height: 1.4; /* reduced */
+        line-height: 1.4;
         white-space: nowrap;
     }
 
     .header-wave {
         position: absolute; left: 0; bottom: -1px;
-        width: 100%; height: 65px; display: block; /* reduced */
+        width: 100%; height: 65px; display: block;
     }
 
     /* =============================================
-       TITLE + META + RECIPIENT - REDUCED PADDING
+       TITLE + META + RECIPIENT
     ============================================= */
-    .title-wrap { padding: 18px 40px 0 40px; } /* reduced */
+    .title-wrap { padding: 18px 40px 0 40px; flex-shrink: 0; }
     .title-table { width: 100%; border-collapse: collapse; }
     .title-table td { vertical-align: top; }
-    .tt-left  { width: 56%; padding-right: 25px; } /* reduced */
+    .tt-left  { width: 56%; padding-right: 25px; }
     .tt-right { width: 44%; text-align: right; }
 
     .big-quotation {
-        font-size: 30px; /* reduced */
+        font-size: 30px;
         font-weight: 900;
         letter-spacing: 2px;
         color: #2d3743;
         line-height: 1;
-        margin-bottom: 8px; /* reduced */
+        margin-bottom: 8px;
     }
 
     .for-label {
-        font-size: 8px; /* reduced */
+        font-size: 8px;
         font-weight: 700;
-        letter-spacing: 1.5px; /* reduced */
+        letter-spacing: 1.5px;
         text-transform: uppercase;
         color: #ffbd59;
-        margin-bottom: 4px; /* reduced */
+        margin-bottom: 4px;
     }
     .for-name {
-        font-size: 14px; /* reduced */
+        font-size: 14px;
         font-weight: 800;
         color: #2d3743;
-        margin-bottom: 3px; /* reduced */
-        line-height: 1.2; /* reduced */
+        margin-bottom: 3px;
+        line-height: 1.2;
     }
     .for-detail {
-        font-size: 10px; /* reduced */
+        font-size: 10px;
         color: #6b7682;
-        line-height: 1.4; /* reduced */
+        line-height: 1.4;
     }
     .for-detail strong { color: #2d3743; }
 
     .meta-table { border-collapse: collapse; display: inline-table; text-align: left; }
-    .meta-table td { padding: 3px 0; font-size: 11px; vertical-align: top; } /* reduced */
+    .meta-table td { padding: 3px 0; font-size: 11px; vertical-align: top; }
     .meta-key { color: #9aa5b0; font-weight: 600; white-space: nowrap; }
-    .meta-gap { width: 20px; } /* reduced */
+    .meta-gap { width: 20px; }
     .meta-val { color: #2d3743; font-weight: 800; white-space: nowrap; }
 
     /* =============================================
-       ITEMS TABLE - REDUCED PADDING
+       ITEMS TABLE - FLEXIBLE CONTENT
     ============================================= */
-    .table-wrap { padding: 15px 40px 0 40px; } /* reduced */
+    .table-wrap { 
+        padding: 15px 40px 0 40px;
+        flex-shrink: 0;
+    }
 
     .sec-title {
-        font-size: 7px; /* reduced */
+        font-size: 7px;
         font-weight: 700;
-        letter-spacing: 2px; /* reduced */
+        letter-spacing: 2px;
         text-transform: uppercase;
         color: #2d3743;
-        margin-bottom: 8px; /* reduced */
-        padding-left: 8px; /* reduced */
+        margin-bottom: 8px;
+        padding-left: 8px;
         border-left: 3px solid #ffbd59;
     }
 
     .items-table { width: 100%; border-collapse: collapse; }
 
     .items-table thead th {
-        font-size: 8px; /* reduced */
+        font-size: 8px;
         font-weight: 800;
-        letter-spacing: 1px; /* reduced */
+        letter-spacing: 1px;
         text-transform: uppercase;
-        padding: 8px 10px; /* reduced */
+        padding: 8px 10px;
         text-align: left;
     }
     .th-yellow { background: #ffbd59; color: #2d3743; }
     .th-dark   { background: #2d3743; color: #ffbd59; }
     .th-dark.center { text-align: center; }
-    .th-dark.right  { text-align: right; padding-right: 12px; } /* reduced */
+    .th-dark.right  { text-align: right; padding-right: 12px; }
 
     .items-table tbody tr:nth-child(even) { background: #f5f7f9; }
     .items-table tbody tr:nth-child(odd)  { background: #ffffff; }
     .items-table tbody td {
-        padding: 8px 10px; /* reduced */
-        font-size: 11px; /* reduced */
+        padding: 8px 10px;
+        font-size: 11px;
         color: #2d3743;
         vertical-align: middle;
         border-bottom: 1px solid #eceff3;
     }
     .items-table tbody td.center { text-align: center; }
-    .items-table tbody td.right  { text-align: right; padding-right: 12px; font-weight: 800; } /* reduced */
-    .items-table tbody td.num    { color: #aeb6bf; font-weight: 800; font-size: 10px; width: 35px; } /* reduced */
+    .items-table tbody td.right  { text-align: right; padding-right: 12px; font-weight: 800; }
+    .items-table tbody td.num    { color: #aeb6bf; font-weight: 800; font-size: 10px; width: 35px; }
 
     .gsm-pill {
         display: inline-block;
         background: #ffffff;
         border: 1px solid #d9dee5;
         color: #2d3743;
-        font-size: 9px; /* reduced */
+        font-size: 9px;
         font-weight: 700;
-        padding: 2px 8px; /* reduced */
+        padding: 2px 8px;
         border-radius: 20px;
     }
 
     /* =============================================
-       SUMMARY - REDUCED PADDING
+       SUMMARY - FLEXIBLE CONTENT
     ============================================= */
-    .summary-wrap { padding: 12px 40px 0 40px; text-align: right; } /* reduced */
-    .summary-table { width: 300px; border-collapse: collapse; display: inline-table; text-align: left; } /* reduced */
+    .summary-wrap { 
+        padding: 12px 40px 0 40px; 
+        text-align: right;
+        flex-shrink: 0;
+    }
+    .summary-table { 
+        width: 300px; 
+        border-collapse: collapse; 
+        display: inline-table; 
+        text-align: left;
+    }
     .summary-table td {
-        padding: 5px 0; /* reduced */
-        font-size: 11px; /* reduced */
+        padding: 5px 0;
+        font-size: 11px;
         color: #6b7682;
         border-bottom: 1px solid #f0f3f7;
         vertical-align: middle;
@@ -221,79 +237,96 @@
         text-align: right;
         font-weight: 800;
         color: #2d3743;
-        padding-left: 30px; /* reduced */
+        padding-left: 30px;
     }
 
-    .grand-total-wrap { padding: 8px 40px 0 40px; text-align: right; } /* reduced */
+    .grand-total-wrap { 
+        padding: 8px 40px 0 40px; 
+        text-align: right;
+        flex-shrink: 0;
+    }
     .grand-total-bar {
         display: inline-table;
-        width: 300px; /* reduced */
+        width: 300px;
         background: #ffbd59;
         border-collapse: collapse;
         border-radius: 4px;
     }
     .grand-total-bar td {
-        padding: 10px 14px; /* reduced */
+        padding: 10px 14px;
         color: #2d3743;
         vertical-align: middle;
     }
     .gt-label {
-        font-size: 11px; /* reduced */
+        font-size: 11px;
         font-weight: 900;
         letter-spacing: 1px;
         text-transform: uppercase;
     }
     .gt-value {
         text-align: right;
-        font-size: 15px; /* reduced */
+        font-size: 15px;
         font-weight: 900;
     }
 
     /* =============================================
-       CLOSING - REDUCED PADDING
+       CLOSING SECTION - FIXED AT BOTTOM
     ============================================= */
-    .closing-wrap { padding: 14px 40px 0 40px; } /* reduced */
-    .closing-table { width: 100%; border-collapse: collapse; }
-    .closing-table td { vertical-align: top; }
-    .cl-left  { width: 58%; padding-right: 25px; } /* reduced */
+    .closing-wrap {
+        position: absolute;
+        bottom: 70px; /* above the footer */
+        left: 0;
+        right: 0;
+        padding: 14px 40px 0 40px;
+        background: #ffffff;
+    }
+    .closing-table { 
+        width: 100%; 
+        border-collapse: collapse;
+    }
+    .closing-table td { vertical-align: bottom; }
+    .cl-left  { width: 58%; padding-right: 25px; }
     .cl-right { width: 42%; text-align: right; }
 
     .thanks {
-        font-size: 15px; /* reduced */
+        font-size: 15px;
         font-weight: 900;
         color: #2d3743;
-        margin-bottom: 6px; /* reduced */
+        margin-bottom: 6px;
     }
 
     .notes-title {
-        font-size: 8px; /* reduced */
+        font-size: 8px;
         font-weight: 700;
-        letter-spacing: 1px; /* reduced */
+        letter-spacing: 1px;
         text-transform: uppercase;
         color: #ffbd59;
-        margin-bottom: 3px; /* reduced */
+        margin-bottom: 3px;
     }
     .notes-body {
-        font-size: 10px; /* reduced */
+        font-size: 10px;
         color: #6b7682;
-        line-height: 1.4; /* reduced */
+        line-height: 1.4;
     }
 
-    .sig-spacer { height: 25px; } /* reduced */
-    .sig-block { display: inline-block; width: 200px; text-align: center; } /* reduced */
+    .sig-block { 
+        display: inline-block; 
+        width: 200px; 
+        text-align: center;
+    }
     .sig-line {
         border-top: 2px solid #ffbd59;
-        padding-top: 6px; /* reduced */
-        font-size: 9px; /* reduced */
+        padding-top: 6px;
+        font-size: 9px;
         font-weight: 800;
-        letter-spacing: 1px; /* reduced */
+        letter-spacing: 1px;
         text-transform: uppercase;
         color: #2d3743;
     }
     .sig-sub {
-        font-size: 8px; /* reduced */
+        font-size: 8px;
         color: #aeb6bf;
-        margin-top: 1px; /* reduced */
+        margin-top: 1px;
         font-weight: 500;
         letter-spacing: 0.5px;
     }
@@ -310,17 +343,19 @@
         background: #2d3743;
         border-top: 3px solid #ffbd59;
         z-index: 999;
+        height: 70px;
     }
     .footer-table {
         width: 100%;
+        height: 100%;
         border-collapse: collapse;
         table-layout: fixed;
     }
     .footer-td {
         text-align: center;
         vertical-align: middle;
-        padding: 10px 8px; /* reduced */
-        font-size: 10px; /* reduced */
+        padding: 10px 8px;
+        font-size: 10px;
         color: rgba(255,255,255,0.72);
         border-right: 1px solid rgba(255,189,89,0.15);
         width: 33.33%;
@@ -329,6 +364,14 @@
     .footer-td:last-child { border-right: none; }
     .footer-td strong { color: #ffbd59; font-weight: 700; }
 
+    /* =============================================
+       SPACER TO PUSH CONTENT UP
+    ============================================= */
+    .content-spacer {
+        flex: 1;
+        min-height: 20px;
+    }
+
     @media print {
         .page-footer {
             position: fixed;
@@ -336,8 +379,11 @@
             left: 0;
             right: 0;
         }
-        .page {
-            padding-bottom: 70px;
+        .closing-wrap {
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            right: 0;
         }
     }
 
@@ -345,6 +391,12 @@
         .page-footer {
             position: fixed;
             bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .closing-wrap {
+            position: absolute;
+            bottom: 70px;
             left: 0;
             right: 0;
         }
@@ -532,7 +584,10 @@
         </table>
     </div>
 
-    {{-- ============ THANK YOU / NOTES / SIGNATURE ============ --}}
+    {{-- ============ SPACER TO PUSH CONTENT ============ --}}
+    <div class="content-spacer"></div>
+
+    {{-- ============ CLOSING SECTION - FIXED AT BOTTOM ============ --}}
     <div class="closing-wrap">
         <table class="closing-table">
             <tr>
@@ -544,7 +599,6 @@
                     @endif
                 </td>
                 <td class="cl-right">
-                    <div class="sig-spacer"></div>
                     <div class="sig-block">
                         <div class="sig-line">
                             For Boxmaker
