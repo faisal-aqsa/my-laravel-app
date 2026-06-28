@@ -17,11 +17,29 @@
         -webkit-print-color-adjust: exact;
     }
 
+    /* =============================================
+       PAGE AS TABLE - FORCES BOTTOM ALIGNMENT
+    ============================================= */
     .page {
         width: 100%;
-        min-height: 100vh;
-        position: relative;
+        height: 100vh;
+        display: table;
+        table-layout: fixed;
         padding-bottom: 60px; /* space for footer */
+    }
+
+    .page-row {
+        display: table-row;
+    }
+
+    .page-cell {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    .page-cell-bottom {
+        display: table-cell;
+        vertical-align: bottom;
     }
 
     /* =============================================
@@ -32,6 +50,7 @@
         background: #2d3743;
         padding: 20px 40px 70px 40px;
         overflow: hidden;
+        width: 100%;
     }
 
     .header-table { width: 100%; border-collapse: collapse; }
@@ -152,18 +171,18 @@
     .meta-val { color: #2d3743; font-weight: 800; white-space: nowrap; }
 
     /* =============================================
-       MAIN CONTENT - NEEDS TO FILL PAGE
+       CONTENT AREA
     ============================================= */
-    .main-content {
-        min-height: calc(100vh - 380px); /* Push content down */
-        position: relative;
+    .content-area {
+        padding: 0 40px;
+        width: 100%;
     }
 
     /* =============================================
        ITEMS TABLE
     ============================================= */
     .table-wrap { 
-        padding: 15px 40px 0 40px;
+        padding: 15px 0 0 0;
     }
 
     .sec-title {
@@ -220,7 +239,7 @@
        SUMMARY
     ============================================= */
     .summary-wrap { 
-        padding: 10px 40px 0 40px;
+        padding: 10px 0 0 0;
         text-align: right;
     }
     .summary-table { 
@@ -244,7 +263,7 @@
     }
 
     .grand-total-wrap { 
-        padding: 6px 40px 0 40px;
+        padding: 6px 0 0 0;
         text-align: right;
     }
     .grand-total-bar {
@@ -272,15 +291,12 @@
     }
 
     /* =============================================
-       CLOSING SECTION - FIXED AT BOTTOM WITH ABSOLUTE
+       CLOSING SECTION - BOTTOM ALIGNED VIA TABLE
     ============================================= */
     .closing-wrap {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
         padding: 8px 40px 10px 40px;
         background: #ffffff;
+        width: 100%;
     }
     .closing-table { 
         width: 100%; 
@@ -384,216 +400,231 @@
             left: 0;
             right: 0;
         }
+        .page {
+            height: 100%;
+        }
     }
 </style>
 
 <body>
 <div class="page">
 
-    {{-- ============ HEADER ============ --}}
-    @php
-        $settings = \App\Models\Setting::first();
-        $logoPath = public_path('images/black-logo.png');
-        $logoSrc  = '';
-        if (file_exists($logoPath)) {
-            $logoSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath));
-        }
-    @endphp
+    {{-- ============ HEADER ROW ============ --}}
+    <div class="page-row">
+        <div class="page-cell">
+            @php
+                $settings = \App\Models\Setting::first();
+                $logoPath = public_path('images/black-logo.png');
+                $logoSrc  = '';
+                if (file_exists($logoPath)) {
+                    $logoSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath));
+                }
+            @endphp
 
-    <div class="header">
-        <table class="header-table">
-            <tr>
-                <td class="hdr-left">
-                    @if($logoSrc)
-                        <span class="logo-badge"><img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img"></span>
-                    @endif
-                    <span class="brand-block">
-                        <div class="brand-name">Boxmaker</div>
-                        <div class="brand-tagline">Packaging &amp; Printing</div>
-                        <div class="brand-recycle">&#9851; We Generally Recycle</div>
-                    </span>
-                    <div class="brand-meta">
-                        {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
-                        <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
-                    </div>
-                </td>
-                <td class="hdr-right">
-                    <table class="contact-table">
-                        <tr>
-                            <td>
-                                <div class="contact-label">Phone</div>
-                                <div class="contact-val">{{ $settings->phone ?? '+91 9820006001' }}</div>
-                            </td>
-                            <td>
-                                <div class="contact-label">Email</div>
-                                <div class="contact-val">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</div>
-                            </td>
-                            <td>
-                                <div class="contact-label">Web</div>
-                                <div class="contact-val">{{ $settings->website_url ?? 'www.myboxmaker.com' }}</div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-
-        {{-- WAVE DIVIDER --}}
-        <svg class="header-wave" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#9aa5b0" opacity="0.30" d="M-20,52 C210,96 400,22 620,54 C820,83 1010,30 1220,56 L1220,130 L-20,130 Z"/>
-            <path fill="#ffffff" d="M-20,80 C230,116 410,54 640,82 C840,106 1020,60 1220,82 L1220,130 L-20,130 Z"/>
-        </svg>
-    </div>
-
-    {{-- ============ TITLE / META / RECIPIENT ============ --}}
-    <div class="title-wrap">
-        <table class="title-table">
-            <tr>
-                <td class="tt-left">
-                    <div class="for-label">Quotation For</div>
-                    <div class="for-name">{{ $quotation->client->name ?? 'N/A' }}</div>
-                    <div class="for-detail">
-                        @if($quotation->client->factory_address ?? $quotation->client->address ?? false)
-                            {{ $quotation->client->factory_address ?? $quotation->client->address }}<br>
-                        @endif
-                        @if($quotation->client->gst_no ?? false)<strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>@endif
-                        @if($quotation->client->phone ?? false)<strong>Phone:</strong> {{ $quotation->client->phone }}<br>@endif
-                        @if($quotation->client->email ?? false)<strong>Email:</strong> {{ $quotation->client->email }}<br>@endif
-                        @if($quotation->quotation_for ?? false)<strong>For:</strong> {{ $quotation->quotation_for }}@endif
-                    </div>
-                </td>
-                <td class="tt-right">
-                    <div class="big-quotation">QUOTATION</div>
-                    <table class="meta-table">
-                        <tr>
-                            <td class="meta-key">Quotation No</td>
-                            <td class="meta-gap"></td>
-                            <td class="meta-val">{{ $quotation->quotation_number }}</td>
-                        </tr>
-                        <tr>
-                            <td class="meta-key">Quotation Date</td>
-                            <td class="meta-gap"></td>
-                            <td class="meta-val">{{ $quotation->date->format('M d, Y') }}</td>
-                        </tr>
-                        <tr>
-                            <td class="meta-key">Valid Till Date</td>
-                            <td class="meta-gap"></td>
-                            <td class="meta-val">{{ isset($quotation->valid_until) ? $quotation->valid_until->format('M d, Y') : 'On Request' }}</td>
-                        </tr>
-                        @if($quotation->attention)
-                        <tr>
-                            <td class="meta-key">Attention</td>
-                            <td class="meta-gap"></td>
-                            <td class="meta-val">{{ $quotation->attention }}</td>
-                        </tr>
-                        @endif
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    {{-- ============ MAIN CONTENT WITH ABSOLUTE CLOSING ============ --}}
-    <div class="main-content">
-
-        {{-- ============ ITEMS TABLE ============ --}}
-        <div class="table-wrap">
-            <div class="sec-title">Items &amp; Pricing</div>
-            <table class="items-table">
-                <thead>
+            <div class="header">
+                <table class="header-table">
                     <tr>
-                        <th class="th-yellow" style="width:35px;">&nbsp;</th>
-                        <th class="th-yellow">Product, Material &amp; Size</th>
-                        <th class="th-dark center" style="width:90px;">GSM</th>
-                        <th class="th-dark right" style="width:130px;">Basic Price (₹)</th>
+                        <td class="hdr-left">
+                            @if($logoSrc)
+                                <span class="logo-badge"><img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img"></span>
+                            @endif
+                            <span class="brand-block">
+                                <div class="brand-name">Boxmaker</div>
+                                <div class="brand-tagline">Packaging &amp; Printing</div>
+                                <div class="brand-recycle">&#9851; We Generally Recycle</div>
+                            </span>
+                            <div class="brand-meta">
+                                {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
+                                <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
+                            </div>
+                        </td>
+                        <td class="hdr-right">
+                            <table class="contact-table">
+                                <tr>
+                                    <td>
+                                        <div class="contact-label">Phone</div>
+                                        <div class="contact-val">{{ $settings->phone ?? '+91 9820006001' }}</div>
+                                    </td>
+                                    <td>
+                                        <div class="contact-label">Email</div>
+                                        <div class="contact-val">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</div>
+                                    </td>
+                                    <td>
+                                        <div class="contact-label">Web</div>
+                                        <div class="contact-val">{{ $settings->website_url ?? 'www.myboxmaker.com' }}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @forelse ($quotation->items as $index => $item)
+                </table>
+
+                {{-- WAVE DIVIDER --}}
+                <svg class="header-wave" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#9aa5b0" opacity="0.30" d="M-20,52 C210,96 400,22 620,54 C820,83 1010,30 1220,56 L1220,130 L-20,130 Z"/>
+                    <path fill="#ffffff" d="M-20,80 C230,116 410,54 640,82 C840,106 1020,60 1220,82 L1220,130 L-20,130 Z"/>
+                </svg>
+            </div>
+
+            {{-- ============ TITLE / META / RECIPIENT ============ --}}
+            <div class="title-wrap">
+                <table class="title-table">
                     <tr>
-                        <td class="num">{{ $index + 1 }}.</td>
-                        <td style="font-weight:600;">{{ $item->particular }}</td>
-                        <td class="center">
-                            @if($item->gsm)
-                                <span class="gsm-pill">{{ $item->gsm }}</span>
-                            @else
-                                <span style="color:#d0d5db;">—</span>
+                        <td class="tt-left">
+                            <div class="for-label">Quotation For</div>
+                            <div class="for-name">{{ $quotation->client->name ?? 'N/A' }}</div>
+                            <div class="for-detail">
+                                @if($quotation->client->factory_address ?? $quotation->client->address ?? false)
+                                    {{ $quotation->client->factory_address ?? $quotation->client->address }}<br>
+                                @endif
+                                @if($quotation->client->gst_no ?? false)<strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>@endif
+                                @if($quotation->client->phone ?? false)<strong>Phone:</strong> {{ $quotation->client->phone }}<br>@endif
+                                @if($quotation->client->email ?? false)<strong>Email:</strong> {{ $quotation->client->email }}<br>@endif
+                                @if($quotation->quotation_for ?? false)<strong>For:</strong> {{ $quotation->quotation_for }}@endif
+                            </div>
+                        </td>
+                        <td class="tt-right">
+                            <div class="big-quotation">QUOTATION</div>
+                            <table class="meta-table">
+                                <tr>
+                                    <td class="meta-key">Quotation No</td>
+                                    <td class="meta-gap"></td>
+                                    <td class="meta-val">{{ $quotation->quotation_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="meta-key">Quotation Date</td>
+                                    <td class="meta-gap"></td>
+                                    <td class="meta-val">{{ $quotation->date->format('M d, Y') }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="meta-key">Valid Till Date</td>
+                                    <td class="meta-gap"></td>
+                                    <td class="meta-val">{{ isset($quotation->valid_until) ? $quotation->valid_until->format('M d, Y') : 'On Request' }}</td>
+                                </tr>
+                                @if($quotation->attention)
+                                <tr>
+                                    <td class="meta-key">Attention</td>
+                                    <td class="meta-gap"></td>
+                                    <td class="meta-val">{{ $quotation->attention }}</td>
+                                </tr>
+                                @endif
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{-- ============ CONTENT ROW - TAKES REMAINING SPACE ============ --}}
+    <div class="page-row" style="height: 100%;">
+        <div class="page-cell" style="vertical-align: top;">
+
+            {{-- ============ ITEMS TABLE ============ --}}
+            <div class="content-area">
+                <div class="table-wrap">
+                    <div class="sec-title">Items &amp; Pricing</div>
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th class="th-yellow" style="width:35px;">&nbsp;</th>
+                                <th class="th-yellow">Product, Material &amp; Size</th>
+                                <th class="th-dark center" style="width:90px;">GSM</th>
+                                <th class="th-dark right" style="width:130px;">Basic Price (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($quotation->items as $index => $item)
+                            <tr>
+                                <td class="num">{{ $index + 1 }}.</td>
+                                <td style="font-weight:600;">{{ $item->particular }}</td>
+                                <td class="center">
+                                    @if($item->gsm)
+                                        <span class="gsm-pill">{{ $item->gsm }}</span>
+                                    @else
+                                        <span style="color:#d0d5db;">—</span>
+                                    @endif
+                                </td>
+                                <td class="right">₹{{ number_format($item->base_price, 2) }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="4" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">No items found</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- ============ SUMMARY ============ --}}
+                <div class="summary-wrap">
+                    <table class="summary-table">
+                        <tr>
+                            <td>Subtotal</td>
+                            <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Taxes</td>
+                            <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Delivery Charges</td>
+                            <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Printing</td>
+                            <td>{{ $quotation->is_printing_included ? 'Included' : '—' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Plate &amp; Punch</td>
+                            <td>{{ $quotation->is_plate_and_punch ? 'Included' : '—' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Lamination</td>
+                            <td>{{ $quotation->is_lamination ? 'Included' : '—' }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                {{-- ============ GRAND TOTAL BAR ============ --}}
+                <div class="grand-total-wrap">
+                    <table class="grand-total-bar">
+                        <tr>
+                            <td class="gt-label">Total (INR)</td>
+                            <td class="gt-value">₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {{-- ============ CLOSING ROW - BOTTOM ALIGNED ============ --}}
+    <div class="page-row">
+        <div class="page-cell-bottom">
+            <div class="closing-wrap">
+                <table class="closing-table">
+                    <tr>
+                        <td class="cl-left">
+                            <div class="thanks">Thank you for your business!</div>
+                            @if($quotation->notes)
+                            <div class="notes-title">Additional Notes</div>
+                            <div class="notes-body">{{ $quotation->notes }}</div>
                             @endif
                         </td>
-                        <td class="right">₹{{ number_format($item->base_price, 2) }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="4" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">No items found</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-
-        {{-- ============ SUMMARY ============ --}}
-        <div class="summary-wrap">
-            <table class="summary-table">
-                <tr>
-                    <td>Subtotal</td>
-                    <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
-                </tr>
-                <tr>
-                    <td>Taxes</td>
-                    <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
-                </tr>
-                <tr>
-                    <td>Delivery Charges</td>
-                    <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
-                </tr>
-                <tr>
-                    <td>Printing</td>
-                    <td>{{ $quotation->is_printing_included ? 'Included' : '—' }}</td>
-                </tr>
-                <tr>
-                    <td>Plate &amp; Punch</td>
-                    <td>{{ $quotation->is_plate_and_punch ? 'Included' : '—' }}</td>
-                </tr>
-                <tr>
-                    <td>Lamination</td>
-                    <td>{{ $quotation->is_lamination ? 'Included' : '—' }}</td>
-                </tr>
-            </table>
-        </div>
-
-        {{-- ============ GRAND TOTAL BAR ============ --}}
-        <div class="grand-total-wrap">
-            <table class="grand-total-bar">
-                <tr>
-                    <td class="gt-label">Total (INR)</td>
-                    <td class="gt-value">₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
-                </tr>
-            </table>
-        </div>
-
-        {{-- ============ CLOSING SECTION - ABSOLUTE AT BOTTOM ============ --}}
-        <div class="closing-wrap">
-            <table class="closing-table">
-                <tr>
-                    <td class="cl-left">
-                        <div class="thanks">Thank you for your business!</div>
-                        @if($quotation->notes)
-                        <div class="notes-title">Additional Notes</div>
-                        <div class="notes-body">{{ $quotation->notes }}</div>
-                        @endif
-                    </td>
-                    <td class="cl-right">
-                        <div class="sig-block">
-                            <div class="sig-line">
-                                For Boxmaker
-                                <div class="sig-sub">Authorised Signatory</div>
+                        <td class="cl-right">
+                            <div class="sig-block">
+                                <div class="sig-line">
+                                    For Boxmaker
+                                    <div class="sig-sub">Authorised Signatory</div>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-
     </div>
 
     {{-- ============ FIXED FOOTER ============ --}}
