@@ -28,9 +28,7 @@
         padding-bottom: 60px;
     }
 
-    .page-row {
-        display: table-row;
-    }
+    .page-row { display: table-row; }
 
     .page-cell {
         display: table-cell;
@@ -43,102 +41,84 @@
     }
 
     /* =============================================
-       HEADER - LOGO LEFT, CONTENT RIGHT
+       HEADER · logo left (white) · info panel right
     ============================================= */
     .header {
-        background: #2d3743;
-        padding: 20px 40px 20px 40px;
+        background: #ffffff;
+        padding: 22px 40px 6px 40px;
         width: 100%;
     }
 
-    .header-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+    .header-table { width: 100%; border-collapse: collapse; }
+    .header-table td { vertical-align: middle; }
 
-    .header-table td {
-        vertical-align: top;
-    }
-
-    /* Left column - Logo with white background */
-    .header-logo-cell {
-        width: 120px;
-        padding-right: 25px;
-    }
+    /* LEFT: white rounded logo box */
+    .header-logo-cell { width: 134px; padding-right: 22px; }
 
     .logo-box {
         background: #ffffff;
-        border-radius: 12px;
-        padding: 12px 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 90px;
-        width: 100%;
+        border: 1px solid #edf0f3;
+        border-radius: 16px;
+        padding: 14px;
+        text-align: center;
+        box-shadow: 0 6px 16px rgba(45,55,67,0.08);
     }
 
     .logo-img {
-        width: 80px;
-        height: 80px;
+        width: 84px;
+        height: 84px;
         object-fit: contain;
-        display: block;
+        display: inline-block;
     }
 
-    /* Right column - Company info */
-    .header-info-cell {
-        text-align: right;
+    /* RIGHT: dark gradient panel with big left curve */
+    .brand-panel {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(118deg, #232c35 0%, #2d3743 52%, #394656 100%);
+        border-radius: 64px 20px 20px 64px;
+        padding: 20px 156px 20px 44px;   /* big right pad reserves room for decorations */
+        min-height: 118px;
     }
 
-    .company-name {
-        font-size: 22px;
+    .brand-name {
+        font-size: 25px;
         font-weight: 900;
         letter-spacing: 3px;
         color: #ffffff;
         text-transform: uppercase;
-        line-height: 1.1;
+        line-height: 1;
     }
 
-    .company-tagline {
+    .brand-tagline {
         font-size: 9px;
         letter-spacing: 3px;
         color: #ffbd59;
         text-transform: uppercase;
         font-weight: 700;
-        margin-top: 2px;
+        margin-top: 4px;
     }
 
-    .company-recycle {
+    .brand-recycle {
         font-size: 8px;
         color: rgba(255,255,255,0.45);
-        margin-top: 2px;
+        margin-top: 3px;
         letter-spacing: 0.5px;
     }
 
-    .company-address {
-        margin-top: 8px;
-        font-size: 10px;
-        color: rgba(255,255,255,0.7);
+    .brand-address {
+        margin-top: 9px;
+        font-size: 9.5px;
+        color: rgba(255,255,255,0.72);
         line-height: 1.5;
     }
+    .brand-address strong { color: #ffbd59; font-weight: 700; }
 
-    .company-address strong {
-        color: #ffbd59;
-        font-weight: 700;
-    }
+    .brand-contacts { margin-top: 11px; }
+    .brand-contacts-table { border-collapse: collapse; }
+    .brand-contacts-table td { padding-right: 26px; vertical-align: top; }
 
-    /* Contact info - horizontal row */
-    .contact-row {
-        margin-top: 10px;
-        display: flex;
-        justify-content: flex-end;
-        gap: 30px;
-    }
-
-    .contact-item {
-        text-align: left;
-    }
-
-    .contact-item .label {
+    .bc-label {
         font-size: 7px;
         font-weight: 700;
         letter-spacing: 1.5px;
@@ -147,13 +127,21 @@
         display: block;
         margin-bottom: 2px;
     }
-
-    .contact-item .value {
-        font-size: 10px;
-        color: rgba(255,255,255,0.85);
+    .bc-value {
+        font-size: 9.5px;
+        color: rgba(255,255,255,0.88);
         font-weight: 600;
         white-space: nowrap;
     }
+
+    /* geometric decoration clipped on the right edge */
+    .panel-decor {
+        position: absolute;
+        top: 0; right: 0; bottom: 0;
+        width: 156px;
+        pointer-events: none;
+    }
+    .panel-decor svg { display: block; width: 100%; height: 100%; }
 
     /* =============================================
        TITLE + META + RECIPIENT
@@ -188,11 +176,7 @@
         margin-bottom: 3px;
         line-height: 1.2;
     }
-    .for-detail {
-        font-size: 10px;
-        color: #6b7682;
-        line-height: 1.4;
-    }
+    .for-detail { font-size: 10px; color: #6b7682; line-height: 1.4; }
     .for-detail strong { color: #2d3743; }
 
     .meta-table { border-collapse: collapse; display: inline-table; text-align: left; }
@@ -204,17 +188,12 @@
     /* =============================================
        CONTENT AREA
     ============================================= */
-    .content-area {
-        padding: 0 40px;
-        width: 100%;
-    }
+    .content-area { padding: 0 40px; width: 100%; }
 
     /* =============================================
        ITEMS TABLE
     ============================================= */
-    .table-wrap { 
-        padding: 15px 0 0 0;
-    }
+    .table-wrap { padding: 15px 0 0 0; }
 
     .sec-title {
         font-size: 7px;
@@ -269,14 +248,11 @@
     /* =============================================
        SUMMARY
     ============================================= */
-    .summary-wrap { 
-        padding: 10px 0 0 0;
-        text-align: right;
-    }
-    .summary-table { 
-        width: 300px; 
-        border-collapse: collapse; 
-        display: inline-table; 
+    .summary-wrap { padding: 10px 0 0 0; text-align: right; }
+    .summary-table {
+        width: 300px;
+        border-collapse: collapse;
+        display: inline-table;
         text-align: left;
     }
     .summary-table td {
@@ -293,10 +269,7 @@
         padding-left: 30px;
     }
 
-    .grand-total-wrap { 
-        padding: 6px 0 0 0;
-        text-align: right;
-    }
+    .grand-total-wrap { padding: 6px 0 0 0; text-align: right; }
     .grand-total-bar {
         display: inline-table;
         width: 300px;
@@ -304,22 +277,14 @@
         border-collapse: collapse;
         border-radius: 4px;
     }
-    .grand-total-bar td {
-        padding: 8px 14px;
-        color: #2d3743;
-        vertical-align: middle;
-    }
+    .grand-total-bar td { padding: 8px 14px; color: #2d3743; vertical-align: middle; }
     .gt-label {
         font-size: 11px;
         font-weight: 900;
         letter-spacing: 1px;
         text-transform: uppercase;
     }
-    .gt-value {
-        text-align: right;
-        font-size: 15px;
-        font-weight: 900;
-    }
+    .gt-value { text-align: right; font-size: 15px; font-weight: 900; }
 
     /* =============================================
        CLOSING SECTION - BOTTOM ALIGNED
@@ -329,23 +294,10 @@
         background: #ffffff;
         width: 100%;
     }
-    .closing-table { 
-        width: 100%; 
-        border-collapse: collapse;
-    }
-    .closing-table td { 
-        vertical-align: bottom;
-    }
-    .cl-left  { 
-        width: 58%; 
-        padding-right: 25px;
-        vertical-align: bottom;
-    }
-    .cl-right { 
-        width: 42%; 
-        text-align: right;
-        vertical-align: bottom;
-    }
+    .closing-table { width: 100%; border-collapse: collapse; }
+    .closing-table td { vertical-align: bottom; }
+    .cl-left  { width: 58%; padding-right: 25px; vertical-align: bottom; }
+    .cl-right { width: 42%; text-align: right; vertical-align: bottom; }
 
     .thanks {
         font-size: 16px;
@@ -362,15 +314,11 @@
         color: #ffbd59;
         margin-bottom: 2px;
     }
-    .notes-body {
-        font-size: 11px;
-        color: #6b7682;
-        line-height: 1.4;
-    }
+    .notes-body { font-size: 11px; color: #6b7682; line-height: 1.4; }
 
-    .sig-block { 
-        display: inline-block; 
-        width: 200px; 
+    .sig-block {
+        display: inline-block;
+        width: 200px;
         text-align: center;
         vertical-align: bottom;
     }
@@ -425,15 +373,8 @@
     .footer-td strong { color: #ffbd59; font-weight: 700; }
 
     @media print {
-        .page-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-        .page {
-            height: 100%;
-        }
+        .page-footer { position: fixed; bottom: 0; left: 0; right: 0; }
+        .page { height: 100%; }
     }
 </style>
 
@@ -452,11 +393,11 @@
                 }
             @endphp
 
-            {{-- HEADER: LOGO LEFT, INFO RIGHT --}}
+            {{-- HEADER: LOGO LEFT (white) · INFO PANEL RIGHT (gradient) --}}
             <div class="header">
                 <table class="header-table">
                     <tr>
-                        <!-- LEFT: Logo with white background -->
+                        {{-- LEFT: white rounded logo box --}}
                         <td class="header-logo-cell">
                             <div class="logo-box">
                                 @if($logoSrc)
@@ -471,29 +412,51 @@
                             </div>
                         </td>
 
-                        <!-- RIGHT: Company info -->
-                        <td class="header-info-cell">
-                            <div class="company-name">Boxmaker</div>
-                            <div class="company-tagline">Packaging &amp; Printing</div>
-                            <div class="company-recycle">&#9851; We Generally Recycle</div>
+                        {{-- RIGHT: dark gradient info panel with big left curve + decorations --}}
+                        <td>
+                            <div class="brand-panel">
+                                <div class="brand-name">Boxmaker</div>
+                                <div class="brand-tagline">Packaging &amp; Printing</div>
+                                <div class="brand-recycle">&#9851; We Generally Recycle</div>
 
-                            <div class="company-address">
-                                {{ $settings->address ?? 'Office No: 307, Sai Janak Classic, Near Flyover, Devidas lane, Borivali West. Mumbai - 400092' }}<br>
-                                <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
-                            </div>
+                                <div class="brand-address">
+                                    {{ $settings->address ?? 'Office No: 307, Sai Janak Classic, Near Flyover, Devidas lane, Borivali West. Mumbai - 400092' }}<br>
+                                    <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
+                                </div>
 
-                            <div class="contact-row">
-                                <div class="contact-item">
-                                    <span class="label">Phone</span>
-                                    <span class="value">{{ $settings->phone ?? '+91 9820006001' }}</span>
+                                <div class="brand-contacts">
+                                    <table class="brand-contacts-table">
+                                        <tr>
+                                            <td>
+                                                <span class="bc-label">Phone</span>
+                                                <span class="bc-value">{{ $settings->phone ?? '+91 9820006001' }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="bc-label">Email</span>
+                                                <span class="bc-value">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="bc-label">Web</span>
+                                                <span class="bc-value">{{ $settings->website_url ?? 'boxmaker.co.in' }}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                <div class="contact-item">
-                                    <span class="label">Email</span>
-                                    <span class="value">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</span>
-                                </div>
-                                <div class="contact-item">
-                                    <span class="label">Web</span>
-                                    <span class="value">{{ $settings->website_url ?? 'https://boxmaker.co.in' }}</span>
+
+                                {{-- geometric decorations (clipped on the right edge) --}}
+                                <div class="panel-decor">
+                                    <svg viewBox="0 0 156 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="156" cy="64" r="74" fill="none" stroke="#3f4d5e" stroke-width="11"/>
+                                        <circle cx="156" cy="64" r="54" fill="none" stroke="#ffbd59" stroke-width="8"/>
+                                        <circle cx="156" cy="64" r="35" fill="none" stroke="#ffffff" stroke-opacity="0.88" stroke-width="6"/>
+                                        <circle cx="156" cy="64" r="15" fill="#ffbd59"/>
+                                        <rect x="14" y="18" width="3" height="42" rx="1.5" fill="#ffbd59" opacity="0.85"/>
+                                        <rect x="22" y="18" width="3" height="42" rx="1.5" fill="#5b6a7a"/>
+                                        <rect x="30" y="18" width="3" height="42" rx="1.5" fill="#ffbd59" opacity="0.85"/>
+                                        <circle cx="16" cy="78" r="3" fill="#5b6a7a"/>
+                                        <circle cx="25" cy="78" r="3" fill="#5b6a7a"/>
+                                        <circle cx="34" cy="78" r="3" fill="#5b6a7a"/>
+                                    </svg>
                                 </div>
                             </div>
                         </td>
