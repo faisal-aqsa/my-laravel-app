@@ -21,7 +21,7 @@
         width: 100%;
         min-height: 100vh;
         position: relative;
-        padding-bottom: 120px; /* reduced from 135px */
+        padding-bottom: 110px;
         display: flex;
         flex-direction: column;
     }
@@ -216,7 +216,7 @@
        SUMMARY - FLEXIBLE CONTENT
     ============================================= */
     .summary-wrap { 
-        padding: 10px 40px 0 40px; /* reduced from 12px */
+        padding: 10px 40px 0 40px;
         text-align: right;
         flex-shrink: 0;
     }
@@ -227,7 +227,7 @@
         text-align: left;
     }
     .summary-table td {
-        padding: 4px 0; /* reduced from 5px */
+        padding: 4px 0;
         font-size: 11px;
         color: #6b7682;
         border-bottom: 1px solid #f0f3f7;
@@ -241,7 +241,7 @@
     }
 
     .grand-total-wrap { 
-        padding: 6px 40px 0 40px; /* reduced from 8px */
+        padding: 6px 40px 0 40px;
         text-align: right;
         flex-shrink: 0;
     }
@@ -253,7 +253,7 @@
         border-radius: 4px;
     }
     .grand-total-bar td {
-        padding: 8px 14px; /* reduced from 10px */
+        padding: 8px 14px;
         color: #2d3743;
         vertical-align: middle;
     }
@@ -270,41 +270,52 @@
     }
 
     /* =============================================
-       CLOSING SECTION - FIXED AT BOTTOM
+       CLOSING SECTION - FIXED AT BOTTOM JUST ABOVE FOOTER
     ============================================= */
     .closing-wrap {
         position: absolute;
-        bottom: 60px; /* reduced from 70px */
+        bottom: 60px;
         left: 0;
         right: 0;
-        padding: 10px 40px 0 40px; /* reduced padding */
+        padding: 8px 40px 0 40px;
         background: #ffffff;
     }
     .closing-table { 
         width: 100%; 
         border-collapse: collapse;
     }
-    .closing-table td { vertical-align: bottom; }
-    .cl-left  { width: 58%; padding-right: 25px; }
-    .cl-right { width: 42%; text-align: right; }
+    .closing-table td { 
+        vertical-align: bottom;
+        padding-bottom: 0;
+    }
+    .cl-left  { 
+        width: 58%; 
+        padding-right: 25px;
+        vertical-align: bottom;
+    }
+    .cl-right { 
+        width: 42%; 
+        text-align: right;
+        vertical-align: bottom;
+    }
 
     .thanks {
-        font-size: 16px; /* increased from 15px */
+        font-size: 16px;
         font-weight: 900;
         color: #2d3743;
-        margin-bottom: 4px; /* reduced from 6px */
+        margin-bottom: 4px;
     }
 
     .notes-title {
-        font-size: 9px; /* increased from 8px */
+        font-size: 9px;
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
         color: #ffbd59;
-        margin-bottom: 2px; /* reduced from 3px */
+        margin-bottom: 2px;
     }
     .notes-body {
-        font-size: 11px; /* increased from 10px */
+        font-size: 11px;
         color: #6b7682;
         line-height: 1.4;
     }
@@ -313,18 +324,19 @@
         display: inline-block; 
         width: 200px; 
         text-align: center;
+        vertical-align: bottom;
     }
     .sig-line {
         border-top: 2px solid #ffbd59;
         padding-top: 6px;
-        font-size: 10px; /* increased from 9px */
+        font-size: 10px;
         font-weight: 800;
         letter-spacing: 1px;
         text-transform: uppercase;
         color: #2d3743;
     }
     .sig-sub {
-        font-size: 9px; /* increased from 8px */
+        font-size: 9px;
         color: #aeb6bf;
         margin-top: 1px;
         font-weight: 500;
@@ -332,7 +344,7 @@
     }
 
     /* =============================================
-       FIXED FOOTER BAR - REDUCED PADDING, BIGGER TEXT
+       FIXED FOOTER BAR
     ============================================= */
     .page-footer {
         position: fixed;
@@ -343,7 +355,7 @@
         background: #2d3743;
         border-top: 3px solid #ffbd59;
         z-index: 999;
-        height: 60px; /* reduced from 70px */
+        height: 60px;
     }
     .footer-table {
         width: 100%;
@@ -354,8 +366,8 @@
     .footer-td {
         text-align: center;
         vertical-align: middle;
-        padding: 6px 8px; /* reduced from 10px 8px */
-        font-size: 12px; /* increased from 10px */
+        padding: 6px 8px;
+        font-size: 12px;
         color: rgba(255,255,255,0.72);
         border-right: 1px solid rgba(255,189,89,0.15);
         width: 33.33%;
@@ -369,7 +381,7 @@
     ============================================= */
     .content-spacer {
         flex: 1;
-        min-height: 10px; /* reduced from 20px */
+        min-height: 5px;
     }
 
     @media print {
@@ -587,7 +599,7 @@
     {{-- ============ SPACER TO PUSH CONTENT ============ --}}
     <div class="content-spacer"></div>
 
-    {{-- ============ CLOSING SECTION - FIXED AT BOTTOM ============ --}}
+    {{-- ============ CLOSING SECTION - FIXED AT BOTTOM JUST ABOVE FOOTER ============ --}}
     <div class="closing-wrap">
         <table class="closing-table">
             <tr>
