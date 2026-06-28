@@ -1,1060 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Quotation #{{ $quotation->quotation_number }}</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-
-            font-family: Helvetica, Arial, sans-serif;
-            color: #2d3743;
-            font-size: 13px;
-            background: #ffffff;
-        }
-
-        .page {
-
-            position: relative;
-            width: 100%;
-            padding-bottom: 90px;
-        }
-
-        .watermark {
-
-            position: absolute;
-            top: 270px;
-            left: 40px;
-            font-size: 95px;
-            font-weight: bold;
-            color: #000;
-            opacity: .035;
-            letter-spacing: 10px;
-            z-index: 0;
-        }
-
-        .container {
-
-            position: relative;
-            z-index: 2;
-        }
-
-        .top-bar {
-
-            height: 10px;
-            background: #ffbd59;
-        }
-
-        .header {
-
-            background: #2d3743;
-            color: #fff;
-            padding: 35px 40px;
-        }
-
-        .header-table {
-
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .header-left {
-
-            width: 60%;
-            vertical-align: top;
-        }
-
-        .header-right {
-
-            width: 40%;
-            text-align: right;
-            vertical-align: top;
-        }
-
-        .logo {
-
-            width: 130px;
-        }
-
-        .company {
-
-            margin-top: 10px;
-            font-size: 13px;
-            letter-spacing: 4px;
-            font-weight: bold;
-        }
-
-        .tagline {
-
-            color: #ffbd59;
-            font-size: 10px;
-            letter-spacing: 3px;
-            margin-top: 4px;
-        }
-
-        .quote-box {
-
-            display: inline-block;
-            background: #ffbd59;
-            color: #2d3743;
-            padding: 10px 20px;
-            font-size: 28px;
-            font-weight: bold;
-            border-radius: 3px;
-            margin-bottom: 15px;
-        }
-
-        .info-table {
-
-            width: 100%;
-            border-collapse: collapse;
-            color: #fff;
-        }
-
-        .info-table td {
-
-            padding: 4px 0;
-            font-size: 13px;
-        }
-
-        .info-label {
-
-            color: #d2d2d2;
-            width: 120px;
-        }
-
-        .info-value {
-
-            font-weight: bold;
-        }
-
-        .section {
-
-            padding: 30px 40px;
-        }
-
-        .cards {
-
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 18px 0;
-        }
-
-        .card {
-
-            width: 50%;
-            border: 1px solid #e7e7e7;
-            border-top: 6px solid #ffbd59;
-            background: #fafafa;
-            padding: 22px;
-            vertical-align: top;
-        }
-
-        .card-title {
-
-            color: #ffbd59;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 14px;
-        }
-
-        .card-name {
-
-            font-size: 17px;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-
-        .card-text {
-
-            line-height: 1.8;
-            color: #666;
-            font-size: 13px;
-        }
-
-        .section-title {
-
-            margin-top: 30px;
-            margin-bottom: 18px;
-            border-left: 6px solid #ffbd59;
-            padding-left: 14px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .product-box {
-
-            border: 1px solid #ececec;
-            background: #fcfcfc;
-            padding: 20px;
-        }
-
-        .product-table {
-
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .product-table td {
-
-            padding: 10px;
-        }
-
-        .product-label {
-
-            color: #999;
-            font-size: 12px;
-            width: 140px;
-        }
-
-        .product-value {
-
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .items-table {
-
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .items-table thead th {
-
-            background: #2d3743;
-            color: #ffbd59;
-            padding: 14px;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
-
-        .items-table tbody td {
-
-            padding: 15px;
-            border-bottom: 1px solid #ececec;
-        }
-
-        .items-table tbody tr:nth-child(even) {
-
-            background: #fafafa;
-        }
-
-        .center {
-
-            text-align: center;
-        }
-
-        .right {
-
-            text-align: right;
-        }
-
-        .gsm {
-
-            background: #ffbd59;
-            color: #2d3743;
-            padding: 4px 10px;
-            display: inline-block;
-            font-weight: bold;
-            border-radius: 20px;
-            font-size: 11px;
-        }
-
-        .summary-box {
-
-            width: 340px;
-            border: 2px solid #ffbd59;
-            float: right;
-            margin-top: 30px;
-        }
-
-        .summary-header {
-
-            background: #2d3743;
-            color: #fff;
-            padding: 12px;
-            font-weight: bold;
-            text-align: center;
-            letter-spacing: 2px;
-        }
-
-        .summary-table {
-
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .summary-table td {
-
-            padding: 12px 18px;
-            border-bottom: 1px solid #ededed;
-        }
-
-        .summary-total {
-
-            background: #ffbd59;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .notes {
-
-            clear: both;
-            margin-top: 50px;
-            border-left: 5px solid #ffbd59;
-            background: #fff9ec;
-            padding: 20px;
-        }
-
-        .notes h3 {
-
-            margin-bottom: 10px;
-        }
-
-        .signature {
-
-            margin-top: 70px;
-            text-align: right;
-        }
-
-        .sign-line {
-
-            width: 240px;
-            border-top: 2px solid #2d3743;
-            display: inline-block;
-            padding-top: 10px;
-            font-weight: bold;
-        }
-
-        .footer {
-
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #2d3743;
-            border-top: 6px solid #ffbd59;
-        }
-
-        .footer table {
-
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .footer td {
-
-            color: #fff;
-            text-align: center;
-            padding: 18px;
-            font-size: 12px;
-        }
-
-        .footer strong {
-
-            color: #ffbd59;
-        }
-    </style>
 </head>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+        width: 100%;
+        background: #ffffff;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #2d3743;
+        font-size: 13px;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .page {
+        width: 100%;
+        position: relative;
+        padding-bottom: 64px; /* room for fixed footer */
+    }
+
+    /* =============================================
+       DARK WAVY HEADER
+    ============================================= */
+    .header {
+        position: relative;
+        background: #2d3743;
+        padding: 34px 45px 96px 45px;   /* bottom padding leaves room for the wave */
+        overflow: hidden;
+    }
+
+    .header-table { width: 100%; border-collapse: collapse; }
+    .header-table td { vertical-align: top; }
+
+    .hdr-left  { width: 58%; }
+    .hdr-right { width: 42%; text-align: right; }
+
+    /* logo badge keeps the dark logo visible on the dark header */
+    .logo-badge {
+        display: inline-block;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 8px;
+        vertical-align: middle;
+        line-height: 0;
+    }
+    .logo-img { width: 70px; height: 70px; object-fit: contain; display: block; }
+
+    .brand-block { display: inline-block; vertical-align: middle; padding-left: 14px; }
+    .brand-name {
+        font-size: 22px; font-weight: 900; letter-spacing: 3px;
+        color: #ffffff; text-transform: uppercase; line-height: 1.1;
+    }
+    .brand-tagline {
+        font-size: 8.5px; letter-spacing: 3px; color: #ffbd59;
+        text-transform: uppercase; font-weight: 700; margin-top: 3px;
+    }
+    .brand-recycle { font-size: 8.5px; color: rgba(255,255,255,0.45); margin-top: 3px; letter-spacing: 0.5px; }
+
+    .brand-meta {
+        margin-top: 12px; font-size: 10.5px; color: rgba(255,255,255,0.62);
+        line-height: 1.6; max-width: 320px;
+    }
+    .brand-meta strong { color: #ffbd59; font-weight: 700; }
+
+    /* contact columns top-right (the "from" contact, LOREM-style) */
+    .contact-table { border-collapse: collapse; display: inline-table; text-align: left; }
+    .contact-table td { padding: 0 0 0 22px; vertical-align: top; }
+    .contact-label {
+        font-size: 8px; font-weight: 700; letter-spacing: 1.5px;
+        text-transform: uppercase; color: #ffbd59; margin-bottom: 4px;
+    }
+    .contact-val { font-size: 10px; color: rgba(255,255,255,0.82); line-height: 1.5; white-space: nowrap; }
+
+    /* the wave divider sitting at the bottom of the dark header */
+    .header-wave {
+        position: absolute; left: 0; bottom: -1px;
+        width: 100%; height: 84px; display: block;
+    }
+
+    /* =============================================
+       TITLE + META + RECIPIENT
+    ============================================= */
+    .title-wrap { padding: 30px 45px 0 45px; }
+    .title-table { width: 100%; border-collapse: collapse; }
+    .title-table td { vertical-align: top; }
+    .tt-left  { width: 56%; padding-right: 30px; }
+    .tt-right { width: 44%; text-align: right; }
+
+    .big-quotation {
+        font-size: 38px; font-weight: 900; letter-spacing: 2px;
+        color: #2d3743; line-height: 1; margin-bottom: 14px;
+    }
+
+    .for-label {
+        font-size: 9px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; color: #ffbd59; margin-bottom: 8px;
+    }
+    .for-name { font-size: 16px; font-weight: 800; color: #2d3743; margin-bottom: 6px; line-height: 1.3; }
+    .for-detail { font-size: 12px; color: #6b7682; line-height: 1.7; }
+    .for-detail strong { color: #2d3743; }
+
+    .meta-table { border-collapse: collapse; display: inline-table; text-align: left; }
+    .meta-table td { padding: 5px 0; font-size: 12.5px; vertical-align: top; }
+    .meta-key { color: #9aa5b0; font-weight: 600; white-space: nowrap; }
+    .meta-gap { width: 26px; }
+    .meta-val { color: #2d3743; font-weight: 800; white-space: nowrap; }
+
+    /* =============================================
+       ITEMS TABLE
+    ============================================= */
+    .table-wrap { padding: 30px 45px 0 45px; }
+
+    .sec-title {
+        font-size: 8.5px; font-weight: 700; letter-spacing: 2.5px;
+        text-transform: uppercase; color: #2d3743; margin-bottom: 12px;
+        padding-left: 10px; border-left: 3px solid #ffbd59;
+    }
+
+    .items-table { width: 100%; border-collapse: collapse; }
+
+    .items-table thead th {
+        font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+        text-transform: uppercase; padding: 13px 14px; text-align: left;
+    }
+    .th-yellow { background: #ffbd59; color: #2d3743; }
+    .th-dark   { background: #2d3743; color: #ffbd59; }
+    .th-dark.center { text-align: center; }
+    .th-dark.right  { text-align: right; padding-right: 16px; }
+
+    .items-table tbody tr:nth-child(even) { background: #f5f7f9; }
+    .items-table tbody tr:nth-child(odd)  { background: #ffffff; }
+    .items-table tbody td {
+        padding: 14px 14px; font-size: 13px; color: #2d3743;
+        vertical-align: middle; border-bottom: 1px solid #eceff3;
+    }
+    .items-table tbody td.center { text-align: center; }
+    .items-table tbody td.right  { text-align: right; padding-right: 16px; font-weight: 800; }
+    .items-table tbody td.num    { color: #aeb6bf; font-weight: 800; font-size: 11px; width: 42px; }
+
+    .gsm-pill {
+        display: inline-block; background: #ffffff; border: 1px solid #d9dee5;
+        color: #2d3743; font-size: 10.5px; font-weight: 700;
+        padding: 3px 11px; border-radius: 20px;
+    }
+
+    /* =============================================
+       SUMMARY (right-aligned) + GRAND TOTAL BAR
+    ============================================= */
+    .summary-wrap { padding: 24px 45px 0 45px; text-align: right; }
+    .summary-table { width: 330px; border-collapse: collapse; display: inline-table; text-align: left; }
+    .summary-table td {
+        padding: 9px 0; font-size: 13px; color: #6b7682;
+        border-bottom: 1px solid #f0f3f7; vertical-align: middle;
+    }
+    .summary-table td:last-child {
+        text-align: right; font-weight: 800; color: #2d3743; padding-left: 40px;
+    }
+
+    .grand-total-wrap { padding: 14px 45px 0 45px; text-align: right; }
+    .grand-total-bar {
+        display: inline-table; width: 330px; background: #ffbd59;
+        border-collapse: collapse; border-radius: 4px;
+    }
+    .grand-total-bar td {
+        padding: 14px 16px; color: #2d3743; vertical-align: middle;
+    }
+    .gt-label { font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+    .gt-value { text-align: right; font-size: 17px; font-weight: 900; }
+
+    /* =============================================
+       FOOTER CONTENT: thank you + notes + signature
+    ============================================= */
+    .closing-wrap { padding: 36px 45px 0 45px; }
+    .closing-table { width: 100%; border-collapse: collapse; }
+    .closing-table td { vertical-align: top; }
+    .cl-left  { width: 58%; padding-right: 30px; }
+    .cl-right { width: 42%; text-align: right; }
+
+    .thanks { font-size: 18px; font-weight: 900; color: #2d3743; margin-bottom: 12px; }
+
+    .notes-title { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ffbd59; margin-bottom: 6px; }
+    .notes-body  { font-size: 12px; color: #6b7682; line-height: 1.7; }
+
+    .sig-spacer { height: 50px; }
+    .sig-block { display: inline-block; width: 220px; text-align: center; }
+    .sig-line {
+        border-top: 2px solid #ffbd59; padding-top: 8px;
+        font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+        text-transform: uppercase; color: #2d3743;
+    }
+    .sig-sub { font-size: 9px; color: #aeb6bf; margin-top: 2px; font-weight: 500; letter-spacing: 0.5px; }
+
+    /* =============================================
+       FIXED FOOTER BAR
+    ============================================= */
+    .page-footer {
+        position: fixed; bottom: 0; left: 0; width: 100%;
+        background: #2d3743; border-top: 3px solid #ffbd59;
+    }
+    .footer-table { width: 100%; border-collapse: collapse; }
+    .footer-td {
+        text-align: center; vertical-align: middle; padding: 12px 10px;
+        font-size: 11.5px; color: rgba(255,255,255,0.72);
+        border-right: 1px solid rgba(255,189,89,0.15); width: 33.33%;
+    }
+    .footer-td:last-child { border-right: none; }
+    .footer-td strong { color: #ffbd59; font-weight: 700; }
+</style>
 
 <body>
+<div class="page">
 
+    {{-- ============ HEADER ============ --}}
     @php
-
         $settings = \App\Models\Setting::first();
-
         $logoPath = public_path('images/black-logo.png');
-
-        $logoSrc = '';
-
+        $logoSrc  = '';
         if (file_exists($logoPath)) {
             $logoSrc = 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath));
         }
-
     @endphp
 
-    <div class="page">
-
-        <div class="watermark">
-
-            BOXMAKER
-
-        </div>
-
-        <div class="container">
-
-            <div class="top-bar"></div>
-
-            <div class="header">
-
-                <table class="header-table">
-
-                    <tr>
-
-                        <td class="header-left">
-
-                            @if ($logoSrc)
-                                <img src="{{ $logoSrc }}" class="logo">
-                            @endif
-
-                            <div class="company">
-                                BOXMAKER
-                            </div>
-
-                            <div class="tagline">
-                                PACKAGING • PRINTING • CUSTOM BOXES
-                            </div>
-
-                        </td>
-
-                        <td class="header-right">
-
-                            <div class="quote-box">
-
-                                QUOTATION
-
-                            </div>
-
-                            <table class="info-table">
-
-                                <tr>
-
-                                    <td class="info-label">
-
-                                        Quotation No
-
-                                    </td>
-
-                                    <td class="info-value">
-
-                                        {{ $quotation->quotation_number }}
-
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td class="info-label">
-
-                                        Date
-
-                                    </td>
-
-                                    <td class="info-value">
-
-                                        {{ $quotation->date->format('M d, Y') }}
-
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td class="info-label">
-
-                                        Valid Till
-
-                                    </td>
-
-                                    <td class="info-value">
-
-                                        {{ isset($quotation->valid_until) ? $quotation->valid_until->format('M d, Y') : 'On Request' }}
-
-                                    </td>
-
-                                </tr>
-
-                                @if ($quotation->attention)
-                                    <tr>
-
-                                        <td class="info-label">
-
-                                            Attention
-
-                                        </td>
-
-                                        <td class="info-value">
-
-                                            {{ $quotation->attention }}
-
-                                        </td>
-
-                                    </tr>
-                                @endif
-
-                            </table>
-
-                        </td>
-
-                    </tr>
-
-                </table>
-
-            </div>
-
-            <div class="section">
-
-                {{-- ===========================
-     FROM / TO
-============================ --}}
-
-                <table class="cards">
-
-                    <tr>
-
-                        <td class="card">
-
-                            <div class="card-title">
-
-                                Quotation From
-
-                            </div>
-
-                            <div class="card-name">
-
-                                BOXMAKER
-
-                            </div>
-
-                            <div class="card-text">
-
-                                {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}
-
-                                <br><br>
-
-                                @if ($settings->gst_no)
-                                    <b>GSTIN</b><br>
-
-                                    {{ $settings->gst_no }}
-
-                                    <br><br>
-                                @endif
-
-                                @if ($settings->phone)
-                                    <b>Phone</b><br>
-
-                                    {{ $settings->phone }}
-
-                                    <br><br>
-                                @endif
-
-                                @if ($settings->email)
-                                    <b>Email</b><br>
-
-                                    {{ $settings->email }}
-                                @endif
-
-                            </div>
-
-                        </td>
-
-                        <td class="card">
-
-                            <div class="card-title">
-
-                                Quotation For
-
-                            </div>
-
-                            <div class="card-name">
-
-                                {{ $quotation->client->name ?? 'N/A' }}
-
-                            </div>
-
-                            <div class="card-text">
-
-                                @if ($quotation->client->factory_address ?? $quotation->client->address)
-                                    {{ $quotation->client->factory_address ?? $quotation->client->address }}
-
-                                    <br><br>
-                                @endif
-
-                                @if ($quotation->client->gst_no)
-                                    <b>GSTIN</b><br>
-
-                                    {{ $quotation->client->gst_no }}
-
-                                    <br><br>
-                                @endif
-
-                                @if ($quotation->client->phone)
-                                    <b>Phone</b><br>
-
-                                    {{ $quotation->client->phone }}
-
-                                    <br><br>
-                                @endif
-
-                                @if ($quotation->client->email)
-                                    <b>Email</b><br>
-
-                                    {{ $quotation->client->email }}
-                                @endif
-
-                                @if ($quotation->quotation_for)
-                                    <br><br>
-
-                                    <b>Requirement</b><br>
-
-                                    {{ $quotation->quotation_for }}
-                                @endif
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                </table>
-
-
-
-
-
-                <div class="section-title">
-
-                    PRODUCT DETAILS
-
-                </div>
-
-                <div class="product-box">
-
-                    <table class="product-table">
-
-                        <tr>
-
-                            <td class="product-label">
-
-                                Quotation Number
-
-                            </td>
-
-                            <td class="product-value">
-
-                                {{ $quotation->quotation_number }}
-
-                            </td>
-
-                            <td class="product-label">
-
-                                Quotation Date
-
-                            </td>
-
-                            <td class="product-value">
-
-                                {{ $quotation->date->format('M d, Y') }}
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td class="product-label">
-
-                                Customer
-
-                            </td>
-
-                            <td class="product-value">
-
-                                {{ $quotation->client->name ?? 'N/A' }}
-
-                            </td>
-
-                            <td class="product-label">
-
-                                Product
-
-                            </td>
-
-                            <td class="product-value">
-
-                                {{ $quotation->quotation_for ?? 'Packaging Product' }}
-
-                            </td>
-
-                        </tr>
-
-                    </table>
-
-                </div>
-
-
-
-
-
-                <div class="section-title">
-
-                    ITEMS & PRICING
-
-                </div>
-
-                <table class="items-table">
-
-                    <thead>
-
-                        <tr>
-
-                            <th width="50">
-
-                                #
-
-                            </th>
-
-                            <th>
-
-                                Particular
-
-                            </th>
-
-                            <th width="120">
-
-                                GSM
-
-                            </th>
-
-                            <th width="170">
-
-                                Basic Price
-
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        @forelse($quotation->items as $index=>$item)
-                            <tr>
-
-                                <td class="center">
-
-                                    {{ $index + 1 }}
-
-                                </td>
-
-                                <td>
-
-                                    <div style="font-size:14px;font-weight:bold;color:#2d3743;">
-
-                                        {{ $item->particular }}
-
-                                    </div>
-
-                                </td>
-
-                                <td class="center">
-
-                                    @if ($item->gsm)
-                                        <span class="gsm">
-
-                                            {{ $item->gsm }}
-
-                                        </span>
-                                    @else
-                                        —
-                                    @endif
-
-                                </td>
-
-                                <td class="right">
-
-                                    <div style="font-size:15px;font-weight:bold;color:#2d3743;">
-
-                                        ₹{{ number_format($item->base_price, 2) }}
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-                        @empty
-
-                            <tr>
-
-                                <td colspan="4" style="padding:50px;text-align:center;color:#999;">
-
-                                    No Items Available
-
-                                </td>
-
-                            </tr>
-                        @endforelse
-
-                    </tbody>
-
-                </table>
-
-                {{-- ===========================
-     SUMMARY
-============================ --}}
-
-                <div class="summary-box">
-
-                    <div class="summary-header">
-                        QUOTATION SUMMARY
+    <div class="header">
+        <table class="header-table">
+            <tr>
+                <td class="hdr-left">
+                    @if($logoSrc)
+                        <span class="logo-badge"><img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img"></span>
+                    @endif
+                    <span class="brand-block">
+                        <div class="brand-name">Boxmaker</div>
+                        <div class="brand-tagline">Packaging &amp; Printing</div>
+                        <div class="brand-recycle">&#9851; We Generally Recycle</div>
+                    </span>
+                    <div class="brand-meta">
+                        {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
+                        @if($settings->gst_no ?? false)<strong>GSTIN:</strong> {{ $settings->gst_no }}@else<strong>GSTIN:</strong> 27ABDFB7083N1ZY@endif
                     </div>
-
-                    <table class="summary-table">
-
+                </td>
+                <td class="hdr-right">
+                    <table class="contact-table">
                         <tr>
-                            <td>Subtotal</td>
-                            <td align="right">
-                                ₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Taxes</td>
-                            <td align="right">
-                                {{ $quotation->is_tax_included ? 'Included' : 'Extra' }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Delivery Charges</td>
-                            <td align="right">
-                                {{ $quotation->is_delivery_charges_included ? 'Included' : 'Extra' }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Printing</td>
-                            <td align="right">
-                                {{ $quotation->is_printing_included ? 'Included' : 'Extra' }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Plate & Punch</td>
-                            <td align="right">
-                                {{ $quotation->is_plate_and_punch ? 'Included' : 'Extra' }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Lamination</td>
-                            <td align="right">
-                                {{ $quotation->is_lamination ? 'Included' : 'Extra' }}
-                            </td>
-                        </tr>
-
-                        <tr class="summary-total">
-
                             <td>
-                                TOTAL
+                                <div class="contact-label">Phone</div>
+                                <div class="contact-val">{{ $settings->phone ?? '+91 9820006001' }}</div>
                             </td>
-
-                            <td align="right">
-
-                                ₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}
-
+                            <td>
+                                <div class="contact-label">Email</div>
+                                <div class="contact-val">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</div>
                             </td>
-
+                            <td>
+                                <div class="contact-label">Web</div>
+                                <div class="contact-val">{{ $settings->website_url ?? 'www.myboxmaker.com' }}</div>
+                            </td>
                         </tr>
-
                     </table>
+                </td>
+            </tr>
+        </table>
 
-                </div>
+        {{-- WAVE DIVIDER --}}
+        <svg class="header-wave" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#9aa5b0" opacity="0.30" d="M-20,52 C210,96 400,22 620,54 C820,83 1010,30 1220,56 L1220,130 L-20,130 Z"/>
+            <path fill="#ffffff" d="M-20,80 C230,116 410,54 640,82 C840,106 1020,60 1220,82 L1220,130 L-20,130 Z"/>
+        </svg>
+    </div>
 
-                <div style="clear:both;"></div>
+    {{-- ============ TITLE / META / RECIPIENT ============ --}}
+    <div class="title-wrap">
+        <table class="title-table">
+            <tr>
+                <td class="tt-left">
+                    <div class="for-label">Quotation For</div>
+                    <div class="for-name">{{ $quotation->client->name ?? 'N/A' }}</div>
+                    <div class="for-detail">
+                        @if($quotation->client->factory_address ?? $quotation->client->address ?? false)
+                            {{ $quotation->client->factory_address ?? $quotation->client->address }}<br>
+                        @endif
+                        @if($quotation->client->gst_no ?? false)<strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>@endif
+                        @if($quotation->client->phone ?? false)<strong>Phone:</strong> {{ $quotation->client->phone }}<br>@endif
+                        @if($quotation->client->email ?? false)<strong>Email:</strong> {{ $quotation->client->email }}<br>@endif
+                        @if($quotation->quotation_for ?? false)<strong>For:</strong> {{ $quotation->quotation_for }}@endif
+                    </div>
+                </td>
+                <td class="tt-right">
+                    <div class="big-quotation">QUOTATION</div>
+                    <table class="meta-table">
+                        <tr>
+                            <td class="meta-key">Quotation No</td>
+                            <td class="meta-gap"></td>
+                            <td class="meta-val">{{ $quotation->quotation_number }}</td>
+                        </tr>
+                        <tr>
+                            <td class="meta-key">Quotation Date</td>
+                            <td class="meta-gap"></td>
+                            <td class="meta-val">{{ $quotation->date->format('M d, Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td class="meta-key">Valid Till Date</td>
+                            <td class="meta-gap"></td>
+                            <td class="meta-val">{{ isset($quotation->valid_until) ? $quotation->valid_until->format('M d, Y') : 'On Request' }}</td>
+                        </tr>
+                        @if($quotation->attention)
+                        <tr>
+                            <td class="meta-key">Attention</td>
+                            <td class="meta-gap"></td>
+                            <td class="meta-val">{{ $quotation->attention }}</td>
+                        </tr>
+                        @endif
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
 
+    {{-- ============ ITEMS TABLE ============ --}}
+    <div class="table-wrap">
+        <div class="sec-title">Items &amp; Pricing</div>
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th class="th-yellow" style="width:42px;">&nbsp;</th>
+                    <th class="th-yellow">Product, Material &amp; Size</th>
+                    <th class="th-dark center" style="width:110px;">GSM</th>
+                    <th class="th-dark right" style="width:160px;">Basic Price (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($quotation->items as $index => $item)
+                <tr>
+                    <td class="num">{{ $index + 1 }}.</td>
+                    <td style="font-weight:600;">{{ $item->particular }}</td>
+                    <td class="center">
+                        @if($item->gsm)
+                            <span class="gsm-pill">{{ $item->gsm }}</span>
+                        @else
+                            <span style="color:#d0d5db;">—</span>
+                        @endif
+                    </td>
+                    <td class="right">₹{{ number_format($item->base_price, 2) }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="4" style="text-align:center;color:#aaa;padding:28px;font-style:italic;">No items found</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 
-                @if ($quotation->notes)
-                    <div class="notes">
+    {{-- ============ SUMMARY ============ --}}
+    <div class="summary-wrap">
+        <table class="summary-table">
+            <tr>
+                <td>Subtotal</td>
+                <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
+            </tr>
+            <tr>
+                <td>Taxes</td>
+                <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
+            </tr>
+            <tr>
+                <td>Delivery Charges</td>
+                <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
+            </tr>
+            <tr>
+                <td>Printing</td>
+                <td>{{ $quotation->is_printing_included ? 'Included' : '—' }}</td>
+            </tr>
+            <tr>
+                <td>Plate &amp; Punch</td>
+                <td>{{ $quotation->is_plate_and_punch ? 'Included' : '—' }}</td>
+            </tr>
+            <tr>
+                <td>Lamination</td>
+                <td>{{ $quotation->is_lamination ? 'Included' : '—' }}</td>
+            </tr>
+        </table>
+    </div>
 
-                        <h3 style="color:#2d3743;">
+    {{-- ============ GRAND TOTAL BAR ============ --}}
+    <div class="grand-total-wrap">
+        <table class="grand-total-bar">
+            <tr>
+                <td class="gt-label">Total (INR)</td>
+                <td class="gt-value">₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
+            </tr>
+        </table>
+    </div>
 
-                            Additional Notes
-
-                        </h3>
-
-                        <div style="line-height:28px;color:#666;">
-
-                            {{ $quotation->notes }}
-
+    {{-- ============ THANK YOU / NOTES / SIGNATURE ============ --}}
+    <div class="closing-wrap">
+        <table class="closing-table">
+            <tr>
+                <td class="cl-left">
+                    <div class="thanks">Thank you for your business!</div>
+                    @if($quotation->notes)
+                    <div class="notes-title">Additional Notes</div>
+                    <div class="notes-body">{{ $quotation->notes }}</div>
+                    @endif
+                </td>
+                <td class="cl-right">
+                    <div class="sig-spacer"></div>
+                    <div class="sig-block">
+                        <div class="sig-line">
+                            For Boxmaker
+                            <div class="sig-sub">Authorised Signatory</div>
                         </div>
-
                     </div>
-                @endif
-
-
-
-                <table width="100%"
-                    style="margin-top:45px;border-collapse:collapse;background:#fafafa;border:1px solid #eeeeee;">
-
-                    <tr>
-
-                        <td style="padding:18px;width:50%;vertical-align:top;">
-
-                            <div style="font-size:12px;color:#999;margin-bottom:8px;">
-
-                                PAYMENT TERMS
-
-                            </div>
-
-                            <div style="font-size:13px;line-height:24px;">
-
-                                • Prices are in INR
-
-                                <br>
-
-                                • Taxes as applicable
-
-                                <br>
-
-                                • Freight extra unless mentioned
-
-                                <br>
-
-                                • Subject to final approval
-
-                            </div>
-
-                        </td>
-
-                        <td style="padding:18px;width:50%;vertical-align:top;">
-
-                            <div style="font-size:12px;color:#999;margin-bottom:8px;">
-
-                                DELIVERY TERMS
-
-                            </div>
-
-                            <div style="font-size:13px;line-height:24px;">
-
-                                • Delivery schedule after PO confirmation
-
-                                <br>
-
-                                • Artwork approval required
-
-                                <br>
-
-                                • Packaging suitable for transport
-
-                                <br>
-
-                                • Subject to stock availability
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                </table>
-
-
-
-                <div style="margin-top:60px;text-align:center;">
-
-                    <div style="font-size:24px;font-weight:bold;color:#2d3743;">
-
-                        THANK YOU
-
-                    </div>
-
-                    <div style="margin-top:8px;color:#999;font-size:14px;">
-
-                        We appreciate the opportunity to serve your packaging requirements.
-
-                    </div>
-
-                </div>
-
-
-
-
-                <div class="signature">
-
-                    <div style="font-size:12px;color:#999;margin-bottom:60px;">
-
-                        Authorized by
-
-                    </div>
-
-                    <div class="sign-line">
-
-                        FOR BOXMAKER
-
-                        <br>
-
-                        <span style="font-size:11px;color:#888;font-weight:normal;">
-
-                            Authorised Signatory
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-
-
-
-            </div>
-
-
-
-            <div class="footer">
-
-                <table>
-
-                    <tr>
-
-                        <td>
-
-                            <strong>
-
-                                {{ $settings->phone ?? '+91 9820006001' }}
-
-                            </strong>
-
-                        </td>
-
-                        <td>
-
-                            {{ $settings->email ?? 'boxmaker@myyahoo.com' }}
-
-                        </td>
-
-                        <td>
-
-                            <strong>
-
-                                {{ $settings->website_url ?? 'www.boxmaker.co.in' }}
-
-                            </strong>
-
-                        </td>
-
-                    </tr>
-
-                </table>
-
-            </div>
-
-        </div>
-
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    {{-- ============ FIXED FOOTER ============ --}}
+    <div class="page-footer">
+        <table class="footer-table">
+            <tr>
+                <td class="footer-td"><strong>{{ $settings->phone ?? '+91 9820006001' }}</strong></td>
+                <td class="footer-td">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</td>
+                <td class="footer-td"><strong>{{ $settings->website_url ?? 'www.myboxmaker.com' }}</strong></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
 </body>
-
 </html>
