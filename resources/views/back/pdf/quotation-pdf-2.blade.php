@@ -12,24 +12,24 @@
         background: #ffffff;
         font-family: Arial, Helvetica, sans-serif;
         color: #2d3743;
-        font-size: 13px;
+        font-size: 12px; /* reduced from 13px */
         -webkit-print-color-adjust: exact;
     }
 
     .page {
         width: 100%;
         position: relative;
-        padding-bottom: 80px; /* increased to accommodate fixed footer */
+        padding-bottom: 70px; /* room for fixed footer */
         min-height: 100vh;
     }
 
     /* =============================================
-       DARK WAVY HEADER
+       DARK WAVY HEADER - REDUCED PADDING
     ============================================= */
     .header {
         position: relative;
         background: #2d3743;
-        padding: 34px 45px 96px 45px;   /* bottom padding leaves room for the wave */
+        padding: 20px 40px 70px 40px; /* reduced padding */
         overflow: hidden;
     }
 
@@ -39,164 +39,267 @@
     .hdr-left  { width: 58%; }
     .hdr-right { width: 42%; text-align: right; }
 
-    /* logo badge keeps the dark logo visible on the dark header */
     .logo-badge {
         display: inline-block;
         background: #ffffff;
-        border-radius: 12px;
-        padding: 8px;
+        border-radius: 10px;
+        padding: 5px; /* reduced */
         vertical-align: middle;
         line-height: 0;
     }
-    .logo-img { width: 70px; height: 70px; object-fit: contain; display: block; }
+    .logo-img { width: 55px; height: 55px; object-fit: contain; display: block; } /* reduced */
 
-    .brand-block { display: inline-block; vertical-align: middle; padding-left: 14px; }
+    .brand-block { display: inline-block; vertical-align: middle; padding-left: 10px; } /* reduced */
     .brand-name {
-        font-size: 22px; font-weight: 900; letter-spacing: 3px;
-        color: #ffffff; text-transform: uppercase; line-height: 1.1;
+        font-size: 18px; /* reduced */
+        font-weight: 900;
+        letter-spacing: 2px; /* reduced */
+        color: #ffffff;
+        text-transform: uppercase;
+        line-height: 1.1;
     }
     .brand-tagline {
-        font-size: 8.5px; letter-spacing: 3px; color: #ffbd59;
-        text-transform: uppercase; font-weight: 700; margin-top: 3px;
+        font-size: 7px; /* reduced */
+        letter-spacing: 2px; /* reduced */
+        color: #ffbd59;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-top: 2px; /* reduced */
     }
-    .brand-recycle { font-size: 8.5px; color: rgba(255,255,255,0.45); margin-top: 3px; letter-spacing: 0.5px; }
+    .brand-recycle {
+        font-size: 7px; /* reduced */
+        color: rgba(255,255,255,0.45);
+        margin-top: 2px; /* reduced */
+        letter-spacing: 0.5px;
+    }
 
     .brand-meta {
-        margin-top: 12px; font-size: 10.5px; color: rgba(255,255,255,0.62);
-        line-height: 1.6; max-width: 320px;
+        margin-top: 8px; /* reduced */
+        font-size: 9px; /* reduced */
+        color: rgba(255,255,255,0.62);
+        line-height: 1.4; /* reduced */
+        max-width: 320px;
     }
     .brand-meta strong { color: #ffbd59; font-weight: 700; }
 
-    /* contact columns top-right (the "from" contact, LOREM-style) */
     .contact-table { border-collapse: collapse; display: inline-table; text-align: left; }
-    .contact-table td { padding: 0 0 0 22px; vertical-align: top; }
+    .contact-table td { padding: 0 0 0 15px; vertical-align: top; } /* reduced */
     .contact-label {
-        font-size: 8px; font-weight: 700; letter-spacing: 1.5px;
-        text-transform: uppercase; color: #ffbd59; margin-bottom: 4px;
+        font-size: 7px; /* reduced */
+        font-weight: 700;
+        letter-spacing: 1px; /* reduced */
+        text-transform: uppercase;
+        color: #ffbd59;
+        margin-bottom: 2px; /* reduced */
     }
-    .contact-val { font-size: 10px; color: rgba(255,255,255,0.82); line-height: 1.5; white-space: nowrap; }
+    .contact-val {
+        font-size: 9px; /* reduced */
+        color: rgba(255,255,255,0.82);
+        line-height: 1.4; /* reduced */
+        white-space: nowrap;
+    }
 
-    /* the wave divider sitting at the bottom of the dark header */
     .header-wave {
         position: absolute; left: 0; bottom: -1px;
-        width: 100%; height: 84px; display: block;
+        width: 100%; height: 65px; display: block; /* reduced */
     }
 
     /* =============================================
-       TITLE + META + RECIPIENT
+       TITLE + META + RECIPIENT - REDUCED PADDING
     ============================================= */
-    .title-wrap { padding: 30px 45px 0 45px; }
+    .title-wrap { padding: 18px 40px 0 40px; } /* reduced */
     .title-table { width: 100%; border-collapse: collapse; }
     .title-table td { vertical-align: top; }
-    .tt-left  { width: 56%; padding-right: 30px; }
+    .tt-left  { width: 56%; padding-right: 25px; } /* reduced */
     .tt-right { width: 44%; text-align: right; }
 
     .big-quotation {
-        font-size: 38px; font-weight: 900; letter-spacing: 2px;
-        color: #2d3743; line-height: 1; margin-bottom: 14px;
+        font-size: 30px; /* reduced */
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: #2d3743;
+        line-height: 1;
+        margin-bottom: 8px; /* reduced */
     }
 
     .for-label {
-        font-size: 9px; font-weight: 700; letter-spacing: 2px;
-        text-transform: uppercase; color: #ffbd59; margin-bottom: 8px;
+        font-size: 8px; /* reduced */
+        font-weight: 700;
+        letter-spacing: 1.5px; /* reduced */
+        text-transform: uppercase;
+        color: #ffbd59;
+        margin-bottom: 4px; /* reduced */
     }
-    .for-name { font-size: 16px; font-weight: 800; color: #2d3743; margin-bottom: 6px; line-height: 1.3; }
-    .for-detail { font-size: 12px; color: #6b7682; line-height: 1.7; }
+    .for-name {
+        font-size: 14px; /* reduced */
+        font-weight: 800;
+        color: #2d3743;
+        margin-bottom: 3px; /* reduced */
+        line-height: 1.2; /* reduced */
+    }
+    .for-detail {
+        font-size: 10px; /* reduced */
+        color: #6b7682;
+        line-height: 1.4; /* reduced */
+    }
     .for-detail strong { color: #2d3743; }
 
     .meta-table { border-collapse: collapse; display: inline-table; text-align: left; }
-    .meta-table td { padding: 5px 0; font-size: 12.5px; vertical-align: top; }
+    .meta-table td { padding: 3px 0; font-size: 11px; vertical-align: top; } /* reduced */
     .meta-key { color: #9aa5b0; font-weight: 600; white-space: nowrap; }
-    .meta-gap { width: 26px; }
+    .meta-gap { width: 20px; } /* reduced */
     .meta-val { color: #2d3743; font-weight: 800; white-space: nowrap; }
 
     /* =============================================
-       ITEMS TABLE
+       ITEMS TABLE - REDUCED PADDING
     ============================================= */
-    .table-wrap { padding: 30px 45px 0 45px; }
+    .table-wrap { padding: 15px 40px 0 40px; } /* reduced */
 
     .sec-title {
-        font-size: 8.5px; font-weight: 700; letter-spacing: 2.5px;
-        text-transform: uppercase; color: #2d3743; margin-bottom: 12px;
-        padding-left: 10px; border-left: 3px solid #ffbd59;
+        font-size: 7px; /* reduced */
+        font-weight: 700;
+        letter-spacing: 2px; /* reduced */
+        text-transform: uppercase;
+        color: #2d3743;
+        margin-bottom: 8px; /* reduced */
+        padding-left: 8px; /* reduced */
+        border-left: 3px solid #ffbd59;
     }
 
     .items-table { width: 100%; border-collapse: collapse; }
 
     .items-table thead th {
-        font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
-        text-transform: uppercase; padding: 13px 14px; text-align: left;
+        font-size: 8px; /* reduced */
+        font-weight: 800;
+        letter-spacing: 1px; /* reduced */
+        text-transform: uppercase;
+        padding: 8px 10px; /* reduced */
+        text-align: left;
     }
     .th-yellow { background: #ffbd59; color: #2d3743; }
     .th-dark   { background: #2d3743; color: #ffbd59; }
     .th-dark.center { text-align: center; }
-    .th-dark.right  { text-align: right; padding-right: 16px; }
+    .th-dark.right  { text-align: right; padding-right: 12px; } /* reduced */
 
     .items-table tbody tr:nth-child(even) { background: #f5f7f9; }
     .items-table tbody tr:nth-child(odd)  { background: #ffffff; }
     .items-table tbody td {
-        padding: 14px 14px; font-size: 13px; color: #2d3743;
-        vertical-align: middle; border-bottom: 1px solid #eceff3;
+        padding: 8px 10px; /* reduced */
+        font-size: 11px; /* reduced */
+        color: #2d3743;
+        vertical-align: middle;
+        border-bottom: 1px solid #eceff3;
     }
     .items-table tbody td.center { text-align: center; }
-    .items-table tbody td.right  { text-align: right; padding-right: 16px; font-weight: 800; }
-    .items-table tbody td.num    { color: #aeb6bf; font-weight: 800; font-size: 11px; width: 42px; }
+    .items-table tbody td.right  { text-align: right; padding-right: 12px; font-weight: 800; } /* reduced */
+    .items-table tbody td.num    { color: #aeb6bf; font-weight: 800; font-size: 10px; width: 35px; } /* reduced */
 
     .gsm-pill {
-        display: inline-block; background: #ffffff; border: 1px solid #d9dee5;
-        color: #2d3743; font-size: 10.5px; font-weight: 700;
-        padding: 3px 11px; border-radius: 20px;
+        display: inline-block;
+        background: #ffffff;
+        border: 1px solid #d9dee5;
+        color: #2d3743;
+        font-size: 9px; /* reduced */
+        font-weight: 700;
+        padding: 2px 8px; /* reduced */
+        border-radius: 20px;
     }
 
     /* =============================================
-       SUMMARY (right-aligned) + GRAND TOTAL BAR
+       SUMMARY - REDUCED PADDING
     ============================================= */
-    .summary-wrap { padding: 24px 45px 0 45px; text-align: right; }
-    .summary-table { width: 330px; border-collapse: collapse; display: inline-table; text-align: left; }
+    .summary-wrap { padding: 12px 40px 0 40px; text-align: right; } /* reduced */
+    .summary-table { width: 300px; border-collapse: collapse; display: inline-table; text-align: left; } /* reduced */
     .summary-table td {
-        padding: 9px 0; font-size: 13px; color: #6b7682;
-        border-bottom: 1px solid #f0f3f7; vertical-align: middle;
+        padding: 5px 0; /* reduced */
+        font-size: 11px; /* reduced */
+        color: #6b7682;
+        border-bottom: 1px solid #f0f3f7;
+        vertical-align: middle;
     }
     .summary-table td:last-child {
-        text-align: right; font-weight: 800; color: #2d3743; padding-left: 40px;
+        text-align: right;
+        font-weight: 800;
+        color: #2d3743;
+        padding-left: 30px; /* reduced */
     }
 
-    .grand-total-wrap { padding: 14px 45px 0 45px; text-align: right; }
+    .grand-total-wrap { padding: 8px 40px 0 40px; text-align: right; } /* reduced */
     .grand-total-bar {
-        display: inline-table; width: 330px; background: #ffbd59;
-        border-collapse: collapse; border-radius: 4px;
+        display: inline-table;
+        width: 300px; /* reduced */
+        background: #ffbd59;
+        border-collapse: collapse;
+        border-radius: 4px;
     }
     .grand-total-bar td {
-        padding: 14px 16px; color: #2d3743; vertical-align: middle;
+        padding: 10px 14px; /* reduced */
+        color: #2d3743;
+        vertical-align: middle;
     }
-    .gt-label { font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
-    .gt-value { text-align: right; font-size: 17px; font-weight: 900; }
+    .gt-label {
+        font-size: 11px; /* reduced */
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .gt-value {
+        text-align: right;
+        font-size: 15px; /* reduced */
+        font-weight: 900;
+    }
 
     /* =============================================
-       FOOTER CONTENT: thank you + notes + signature
+       CLOSING - REDUCED PADDING
     ============================================= */
-    .closing-wrap { padding: 36px 45px 0 45px; }
+    .closing-wrap { padding: 14px 40px 0 40px; } /* reduced */
     .closing-table { width: 100%; border-collapse: collapse; }
     .closing-table td { vertical-align: top; }
-    .cl-left  { width: 58%; padding-right: 30px; }
+    .cl-left  { width: 58%; padding-right: 25px; } /* reduced */
     .cl-right { width: 42%; text-align: right; }
 
-    .thanks { font-size: 18px; font-weight: 900; color: #2d3743; margin-bottom: 12px; }
-
-    .notes-title { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ffbd59; margin-bottom: 6px; }
-    .notes-body  { font-size: 12px; color: #6b7682; line-height: 1.7; }
-
-    .sig-spacer { height: 50px; }
-    .sig-block { display: inline-block; width: 220px; text-align: center; }
-    .sig-line {
-        border-top: 2px solid #ffbd59; padding-top: 8px;
-        font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
-        text-transform: uppercase; color: #2d3743;
+    .thanks {
+        font-size: 15px; /* reduced */
+        font-weight: 900;
+        color: #2d3743;
+        margin-bottom: 6px; /* reduced */
     }
-    .sig-sub { font-size: 9px; color: #aeb6bf; margin-top: 2px; font-weight: 500; letter-spacing: 0.5px; }
+
+    .notes-title {
+        font-size: 8px; /* reduced */
+        font-weight: 700;
+        letter-spacing: 1px; /* reduced */
+        text-transform: uppercase;
+        color: #ffbd59;
+        margin-bottom: 3px; /* reduced */
+    }
+    .notes-body {
+        font-size: 10px; /* reduced */
+        color: #6b7682;
+        line-height: 1.4; /* reduced */
+    }
+
+    .sig-spacer { height: 25px; } /* reduced */
+    .sig-block { display: inline-block; width: 200px; text-align: center; } /* reduced */
+    .sig-line {
+        border-top: 2px solid #ffbd59;
+        padding-top: 6px; /* reduced */
+        font-size: 9px; /* reduced */
+        font-weight: 800;
+        letter-spacing: 1px; /* reduced */
+        text-transform: uppercase;
+        color: #2d3743;
+    }
+    .sig-sub {
+        font-size: 8px; /* reduced */
+        color: #aeb6bf;
+        margin-top: 1px; /* reduced */
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
 
     /* =============================================
-       FIXED FOOTER BAR - FIXED
+       FIXED FOOTER BAR
     ============================================= */
     .page-footer {
         position: fixed;
@@ -216,8 +319,8 @@
     .footer-td {
         text-align: center;
         vertical-align: middle;
-        padding: 12px 10px;
-        font-size: 11.5px;
+        padding: 10px 8px; /* reduced */
+        font-size: 10px; /* reduced */
         color: rgba(255,255,255,0.72);
         border-right: 1px solid rgba(255,189,89,0.15);
         width: 33.33%;
@@ -226,7 +329,6 @@
     .footer-td:last-child { border-right: none; }
     .footer-td strong { color: #ffbd59; font-weight: 700; }
 
-    /* Print styles */
     @media print {
         .page-footer {
             position: fixed;
@@ -235,11 +337,10 @@
             right: 0;
         }
         .page {
-            padding-bottom: 80px;
+            padding-bottom: 70px;
         }
     }
 
-    /* Screen fix for footer visibility */
     @media screen {
         .page-footer {
             position: fixed;
@@ -362,10 +463,10 @@
         <table class="items-table">
             <thead>
                 <tr>
-                    <th class="th-yellow" style="width:42px;">&nbsp;</th>
+                    <th class="th-yellow" style="width:35px;">&nbsp;</th>
                     <th class="th-yellow">Product, Material &amp; Size</th>
-                    <th class="th-dark center" style="width:110px;">GSM</th>
-                    <th class="th-dark right" style="width:160px;">Basic Price (₹)</th>
+                    <th class="th-dark center" style="width:90px;">GSM</th>
+                    <th class="th-dark right" style="width:130px;">Basic Price (₹)</th>
                 </tr>
             </thead>
             <tbody>
@@ -384,7 +485,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" style="text-align:center;color:#aaa;padding:28px;font-style:italic;">No items found</td>
+                    <td colspan="4" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">No items found</td>
                 </tr>
                 @endforelse
             </tbody>
