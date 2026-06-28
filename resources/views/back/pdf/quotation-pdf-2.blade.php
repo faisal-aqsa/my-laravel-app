@@ -238,7 +238,7 @@
                     </span>
                     <div class="brand-meta">
                         {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
-                        @if($settings->gst_no ?? false)<strong>GSTIN:</strong> {{ $settings->gst_no }}@else<strong>GSTIN:</strong> 27ABDFB7083N1ZY@endif
+                        <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
                     </div>
                 </td>
                 <td class="hdr-right">
