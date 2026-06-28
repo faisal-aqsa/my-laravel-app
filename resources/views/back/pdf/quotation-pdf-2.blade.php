@@ -335,6 +335,13 @@
         text-align: center;
         vertical-align: bottom;
     }
+    .sig-img {
+        max-width: 130px;
+        max-height: 58px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto 6px auto;
+    }
     .sig-line {
         border-top: 2px solid #ffbd59;
         padding-top: 6px;
@@ -642,7 +649,23 @@
                             @endif
                         </td>
                         <td class="cl-right">
+                            @php
+                                $settings = $settings ?? \App\Models\Setting::first();
+                                $sigPath  = public_path('storage/' . $settings->signature);
+                                $sigSrc   = '';
+                                if ($settings->signature && file_exists($sigPath)) {
+                                    $ext  = pathinfo($sigPath, PATHINFO_EXTENSION);
+                                    $mime = in_array($ext, ['jpg','jpeg']) ? 'image/jpeg' : 'image/png';
+                                    $sigSrc = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($sigPath));
+                                }
+                            @endphp
+
                             <div class="sig-block">
+                                @if($sigSrc)
+                                    <img src="{{ $sigSrc }}" class="sig-img" alt="Signature">
+                                @else
+                                    <div style="height:60px;"></div>
+                                @endif
                                 <div class="sig-line">
                                     For Boxmaker
                                     <div class="sig-sub">Authorised Signatory</div>
