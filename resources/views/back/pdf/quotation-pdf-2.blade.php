@@ -25,7 +25,7 @@
         height: 100vh;
         display: table;
         table-layout: fixed;
-        padding-bottom: 60px;
+        padding-bottom: 150px;   /* clears the fixed closing block (~90px) + footer (60px) */
     }
 
     .page-row { display: table-row; }
@@ -298,9 +298,14 @@
        CLOSING SECTION - BOTTOM ALIGNED
     ============================================= */
     .closing-wrap {
-        padding: 8px 40px 10px 40px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 60px;            /* sits directly on top of the 60px footer */
         background: #ffffff;
+        padding: 10px 40px 12px 40px;
         width: 100%;
+        z-index: 998;            /* above content, below the footer (999) */
     }
     .closing-table { width: 100%; border-collapse: collapse; }
     .closing-table td { vertical-align: bottom; }
