@@ -52,34 +52,41 @@
     .header-table { width: 100%; border-collapse: collapse; }
     .header-table td { vertical-align: middle; }
 
-    /* LEFT: white rounded logo box */
-    .header-logo-cell { width: 134px; padding-right: 22px; }
+    /* LEFT: white rounded logo box (no border) */
+    .header-logo-cell { width: 150px; padding-right: 22px; }
 
     .logo-box {
         background: #ffffff;
-        border: 1px solid #edf0f3;
         border-radius: 16px;
-        padding: 14px;
+        padding: 6px;
         text-align: center;
-        box-shadow: 0 6px 16px rgba(45,55,67,0.08);
     }
 
     .logo-img {
-        width: 84px;
-        height: 84px;
+        width: 112px;
+        height: 112px;
         object-fit: contain;
         display: inline-block;
     }
 
-    /* RIGHT: dark gradient panel with big left curve */
+    /* RIGHT: dark panel with big left curve.
+       Solid colour is the reliable fallback; the gradient is drawn as SVG so it
+       renders even when the PDF engine ignores CSS gradients. */
     .brand-panel {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(118deg, #232c35 0%, #2d3743 52%, #394656 100%);
+        background: #2d3743;
         border-radius: 64px 20px 20px 64px;
-        padding: 20px 156px 20px 44px;   /* big right pad reserves room for decorations */
-        min-height: 118px;
+        padding: 22px 156px 22px 44px;   /* big right pad reserves room for decorations */
+        min-height: 132px;
     }
+
+    /* full-panel gradient drawn via SVG (works without CSS gradient support) */
+    .panel-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; }
+    .panel-bg svg { display: block; width: 100%; height: 100%; }
+
+    /* keep all text above the gradient layer */
+    .panel-content { position: relative; z-index: 2; }
 
     .brand-name {
         font-size: 25px;
@@ -139,6 +146,7 @@
         position: absolute;
         top: 0; right: 0; bottom: 0;
         width: 156px;
+        z-index: 2;
         pointer-events: none;
     }
     .panel-decor svg { display: block; width: 100%; height: 100%; }
@@ -403,7 +411,7 @@
                                 @if($logoSrc)
                                     <img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img">
                                 @else
-                                    <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg width="104" height="104" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect x="10" y="10" width="80" height="80" rx="12" fill="#2d3743" stroke="#ffbd59" stroke-width="4"/>
                                         <text x="50" y="58" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#ffbd59" text-anchor="middle">B</text>
                                         <text x="50" y="78" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">OX</text>
@@ -415,6 +423,22 @@
                         {{-- RIGHT: dark gradient info panel with big left curve + decorations --}}
                         <td>
                             <div class="brand-panel">
+
+                                {{-- gradient background drawn as SVG (renders where CSS gradients don't) --}}
+                                <div class="panel-bg">
+                                    <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="panelGrad" x1="0" y1="0" x2="1" y2="1">
+                                                <stop offset="0"    stop-color="#232c35"/>
+                                                <stop offset="0.55" stop-color="#2d3743"/>
+                                                <stop offset="1"    stop-color="#3b4858"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <rect x="0" y="0" width="100" height="100" fill="url(#panelGrad)"/>
+                                    </svg>
+                                </div>
+
+                                <div class="panel-content">
                                 <div class="brand-name">Boxmaker</div>
                                 <div class="brand-tagline">Packaging &amp; Printing</div>
                                 <div class="brand-recycle">&#9851; We Generally Recycle</div>
@@ -442,6 +466,7 @@
                                         </tr>
                                     </table>
                                 </div>
+                                </div>{{-- /.panel-content --}}
 
                                 {{-- geometric decorations (clipped on the right edge) --}}
                                 <div class="panel-decor">
