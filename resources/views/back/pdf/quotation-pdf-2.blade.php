@@ -21,7 +21,7 @@
         width: 100%;
         min-height: 100vh;
         position: relative;
-        padding-bottom: 135px; /* space for fixed footer + closing section */
+        padding-bottom: 120px; /* reduced from 135px */
         display: flex;
         flex-direction: column;
     }
@@ -216,7 +216,7 @@
        SUMMARY - FLEXIBLE CONTENT
     ============================================= */
     .summary-wrap { 
-        padding: 12px 40px 0 40px; 
+        padding: 10px 40px 0 40px; /* reduced from 12px */
         text-align: right;
         flex-shrink: 0;
     }
@@ -227,7 +227,7 @@
         text-align: left;
     }
     .summary-table td {
-        padding: 5px 0;
+        padding: 4px 0; /* reduced from 5px */
         font-size: 11px;
         color: #6b7682;
         border-bottom: 1px solid #f0f3f7;
@@ -241,7 +241,7 @@
     }
 
     .grand-total-wrap { 
-        padding: 8px 40px 0 40px; 
+        padding: 6px 40px 0 40px; /* reduced from 8px */
         text-align: right;
         flex-shrink: 0;
     }
@@ -253,7 +253,7 @@
         border-radius: 4px;
     }
     .grand-total-bar td {
-        padding: 10px 14px;
+        padding: 8px 14px; /* reduced from 10px */
         color: #2d3743;
         vertical-align: middle;
     }
@@ -274,10 +274,10 @@
     ============================================= */
     .closing-wrap {
         position: absolute;
-        bottom: 70px; /* above the footer */
+        bottom: 60px; /* reduced from 70px */
         left: 0;
         right: 0;
-        padding: 14px 40px 0 40px;
+        padding: 10px 40px 0 40px; /* reduced padding */
         background: #ffffff;
     }
     .closing-table { 
@@ -289,22 +289,22 @@
     .cl-right { width: 42%; text-align: right; }
 
     .thanks {
-        font-size: 15px;
+        font-size: 16px; /* increased from 15px */
         font-weight: 900;
         color: #2d3743;
-        margin-bottom: 6px;
+        margin-bottom: 4px; /* reduced from 6px */
     }
 
     .notes-title {
-        font-size: 8px;
+        font-size: 9px; /* increased from 8px */
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
         color: #ffbd59;
-        margin-bottom: 3px;
+        margin-bottom: 2px; /* reduced from 3px */
     }
     .notes-body {
-        font-size: 10px;
+        font-size: 11px; /* increased from 10px */
         color: #6b7682;
         line-height: 1.4;
     }
@@ -317,14 +317,14 @@
     .sig-line {
         border-top: 2px solid #ffbd59;
         padding-top: 6px;
-        font-size: 9px;
+        font-size: 10px; /* increased from 9px */
         font-weight: 800;
         letter-spacing: 1px;
         text-transform: uppercase;
         color: #2d3743;
     }
     .sig-sub {
-        font-size: 8px;
+        font-size: 9px; /* increased from 8px */
         color: #aeb6bf;
         margin-top: 1px;
         font-weight: 500;
@@ -332,7 +332,7 @@
     }
 
     /* =============================================
-       FIXED FOOTER BAR
+       FIXED FOOTER BAR - REDUCED PADDING, BIGGER TEXT
     ============================================= */
     .page-footer {
         position: fixed;
@@ -343,7 +343,7 @@
         background: #2d3743;
         border-top: 3px solid #ffbd59;
         z-index: 999;
-        height: 70px;
+        height: 60px; /* reduced from 70px */
     }
     .footer-table {
         width: 100%;
@@ -354,8 +354,8 @@
     .footer-td {
         text-align: center;
         vertical-align: middle;
-        padding: 10px 8px;
-        font-size: 10px;
+        padding: 6px 8px; /* reduced from 10px 8px */
+        font-size: 12px; /* increased from 10px */
         color: rgba(255,255,255,0.72);
         border-right: 1px solid rgba(255,189,89,0.15);
         width: 33.33%;
@@ -369,7 +369,7 @@
     ============================================= */
     .content-spacer {
         flex: 1;
-        min-height: 20px;
+        min-height: 10px; /* reduced from 20px */
     }
 
     @media print {
@@ -381,7 +381,7 @@
         }
         .closing-wrap {
             position: absolute;
-            bottom: 70px;
+            bottom: 60px;
             left: 0;
             right: 0;
         }
@@ -396,7 +396,7 @@
         }
         .closing-wrap {
             position: absolute;
-            bottom: 70px;
+            bottom: 60px;
             left: 0;
             right: 0;
         }
