@@ -21,7 +21,7 @@
         width: 100%;
         min-height: 100vh;
         position: relative;
-        padding-bottom: 110px;
+        padding-bottom: 60px; /* space for footer */
         display: flex;
         flex-direction: column;
     }
@@ -155,7 +155,16 @@
     .meta-val { color: #2d3743; font-weight: 800; white-space: nowrap; }
 
     /* =============================================
-       ITEMS TABLE - FLEXIBLE CONTENT
+       CONTENT WRAPPER - FLEXIBLE
+    ============================================= */
+    .content-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* =============================================
+       ITEMS TABLE
     ============================================= */
     .table-wrap { 
         padding: 15px 40px 0 40px;
@@ -213,7 +222,7 @@
     }
 
     /* =============================================
-       SUMMARY - FLEXIBLE CONTENT
+       SUMMARY
     ============================================= */
     .summary-wrap { 
         padding: 10px 40px 0 40px;
@@ -270,15 +279,21 @@
     }
 
     /* =============================================
-       CLOSING SECTION - FIXED AT BOTTOM JUST ABOVE FOOTER
+       SPACER - PUSHES CLOSING SECTION TO BOTTOM
+    ============================================= */
+    .flex-spacer {
+        flex: 1;
+        min-height: 10px;
+    }
+
+    /* =============================================
+       CLOSING SECTION - NOW AT BOTTOM VIA FLEX
     ============================================= */
     .closing-wrap {
-        position: absolute;
-        bottom: 60px;
-        left: 0;
-        right: 0;
-        padding: 8px 40px 0 40px;
+        flex-shrink: 0;
+        padding: 8px 40px 10px 40px;
         background: #ffffff;
+        margin-top: auto;
     }
     .closing-table { 
         width: 100%; 
@@ -286,7 +301,6 @@
     }
     .closing-table td { 
         vertical-align: bottom;
-        padding-bottom: 0;
     }
     .cl-left  { 
         width: 58%; 
@@ -376,24 +390,10 @@
     .footer-td:last-child { border-right: none; }
     .footer-td strong { color: #ffbd59; font-weight: 700; }
 
-    /* =============================================
-       SPACER TO PUSH CONTENT UP
-    ============================================= */
-    .content-spacer {
-        flex: 1;
-        min-height: 5px;
-    }
-
     @media print {
         .page-footer {
             position: fixed;
             bottom: 0;
-            left: 0;
-            right: 0;
-        }
-        .closing-wrap {
-            position: absolute;
-            bottom: 60px;
             left: 0;
             right: 0;
         }
@@ -403,12 +403,6 @@
         .page-footer {
             position: fixed;
             bottom: 0;
-            left: 0;
-            right: 0;
-        }
-        .closing-wrap {
-            position: absolute;
-            bottom: 60px;
             left: 0;
             right: 0;
         }
@@ -521,105 +515,110 @@
         </table>
     </div>
 
-    {{-- ============ ITEMS TABLE ============ --}}
-    <div class="table-wrap">
-        <div class="sec-title">Items &amp; Pricing</div>
-        <table class="items-table">
-            <thead>
+    {{-- ============ CONTENT WRAPPER ============ --}}
+    <div class="content-wrapper">
+
+        {{-- ============ ITEMS TABLE ============ --}}
+        <div class="table-wrap">
+            <div class="sec-title">Items &amp; Pricing</div>
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th class="th-yellow" style="width:35px;">&nbsp;</th>
+                        <th class="th-yellow">Product, Material &amp; Size</th>
+                        <th class="th-dark center" style="width:90px;">GSM</th>
+                        <th class="th-dark right" style="width:130px;">Basic Price (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($quotation->items as $index => $item)
+                    <tr>
+                        <td class="num">{{ $index + 1 }}.</td>
+                        <td style="font-weight:600;">{{ $item->particular }}</td>
+                        <td class="center">
+                            @if($item->gsm)
+                                <span class="gsm-pill">{{ $item->gsm }}</span>
+                            @else
+                                <span style="color:#d0d5db;">—</span>
+                            @endif
+                        </td>
+                        <td class="right">₹{{ number_format($item->base_price, 2) }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">No items found</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        {{-- ============ SUMMARY ============ --}}
+        <div class="summary-wrap">
+            <table class="summary-table">
                 <tr>
-                    <th class="th-yellow" style="width:35px;">&nbsp;</th>
-                    <th class="th-yellow">Product, Material &amp; Size</th>
-                    <th class="th-dark center" style="width:90px;">GSM</th>
-                    <th class="th-dark right" style="width:130px;">Basic Price (₹)</th>
+                    <td>Subtotal</td>
+                    <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @forelse ($quotation->items as $index => $item)
                 <tr>
-                    <td class="num">{{ $index + 1 }}.</td>
-                    <td style="font-weight:600;">{{ $item->particular }}</td>
-                    <td class="center">
-                        @if($item->gsm)
-                            <span class="gsm-pill">{{ $item->gsm }}</span>
-                        @else
-                            <span style="color:#d0d5db;">—</span>
+                    <td>Taxes</td>
+                    <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
+                </tr>
+                <tr>
+                    <td>Delivery Charges</td>
+                    <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
+                </tr>
+                <tr>
+                    <td>Printing</td>
+                    <td>{{ $quotation->is_printing_included ? 'Included' : '—' }}</td>
+                </tr>
+                <tr>
+                    <td>Plate &amp; Punch</td>
+                    <td>{{ $quotation->is_plate_and_punch ? 'Included' : '—' }}</td>
+                </tr>
+                <tr>
+                    <td>Lamination</td>
+                    <td>{{ $quotation->is_lamination ? 'Included' : '—' }}</td>
+                </tr>
+            </table>
+        </div>
+
+        {{-- ============ GRAND TOTAL BAR ============ --}}
+        <div class="grand-total-wrap">
+            <table class="grand-total-bar">
+                <tr>
+                    <td class="gt-label">Total (INR)</td>
+                    <td class="gt-value">₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
+                </tr>
+            </table>
+        </div>
+
+        {{-- ============ FLEX SPACER - PUSHES CLOSING TO BOTTOM ============ --}}
+        <div class="flex-spacer"></div>
+
+        {{-- ============ CLOSING SECTION - NOW AT BOTTOM VIA FLEX ============ --}}
+        <div class="closing-wrap">
+            <table class="closing-table">
+                <tr>
+                    <td class="cl-left">
+                        <div class="thanks">Thank you for your business!</div>
+                        @if($quotation->notes)
+                        <div class="notes-title">Additional Notes</div>
+                        <div class="notes-body">{{ $quotation->notes }}</div>
                         @endif
                     </td>
-                    <td class="right">₹{{ number_format($item->base_price, 2) }}</td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="4" style="text-align:center;color:#aaa;padding:20px;font-style:italic;">No items found</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-
-    {{-- ============ SUMMARY ============ --}}
-    <div class="summary-wrap">
-        <table class="summary-table">
-            <tr>
-                <td>Subtotal</td>
-                <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
-            </tr>
-            <tr>
-                <td>Taxes</td>
-                <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
-            </tr>
-            <tr>
-                <td>Delivery Charges</td>
-                <td>{{ $quotation->is_delivery_charges_included ? 'Included' : '—' }}</td>
-            </tr>
-            <tr>
-                <td>Printing</td>
-                <td>{{ $quotation->is_printing_included ? 'Included' : '—' }}</td>
-            </tr>
-            <tr>
-                <td>Plate &amp; Punch</td>
-                <td>{{ $quotation->is_plate_and_punch ? 'Included' : '—' }}</td>
-            </tr>
-            <tr>
-                <td>Lamination</td>
-                <td>{{ $quotation->is_lamination ? 'Included' : '—' }}</td>
-            </tr>
-        </table>
-    </div>
-
-    {{-- ============ GRAND TOTAL BAR ============ --}}
-    <div class="grand-total-wrap">
-        <table class="grand-total-bar">
-            <tr>
-                <td class="gt-label">Total (INR)</td>
-                <td class="gt-value">₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
-            </tr>
-        </table>
-    </div>
-
-    {{-- ============ SPACER TO PUSH CONTENT ============ --}}
-    <div class="content-spacer"></div>
-
-    {{-- ============ CLOSING SECTION - FIXED AT BOTTOM JUST ABOVE FOOTER ============ --}}
-    <div class="closing-wrap">
-        <table class="closing-table">
-            <tr>
-                <td class="cl-left">
-                    <div class="thanks">Thank you for your business!</div>
-                    @if($quotation->notes)
-                    <div class="notes-title">Additional Notes</div>
-                    <div class="notes-body">{{ $quotation->notes }}</div>
-                    @endif
-                </td>
-                <td class="cl-right">
-                    <div class="sig-block">
-                        <div class="sig-line">
-                            For Boxmaker
-                            <div class="sig-sub">Authorised Signatory</div>
+                    <td class="cl-right">
+                        <div class="sig-block">
+                            <div class="sig-line">
+                                For Boxmaker
+                                <div class="sig-sub">Authorised Signatory</div>
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 
     {{-- ============ FIXED FOOTER ============ --}}
