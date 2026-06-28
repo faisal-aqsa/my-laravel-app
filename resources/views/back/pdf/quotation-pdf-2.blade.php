@@ -22,8 +22,6 @@
         min-height: 100vh;
         position: relative;
         padding-bottom: 60px; /* space for footer */
-        display: flex;
-        flex-direction: column;
     }
 
     /* =============================================
@@ -34,7 +32,6 @@
         background: #2d3743;
         padding: 20px 40px 70px 40px;
         overflow: hidden;
-        flex-shrink: 0;
     }
 
     .header-table { width: 100%; border-collapse: collapse; }
@@ -111,7 +108,7 @@
     /* =============================================
        TITLE + META + RECIPIENT
     ============================================= */
-    .title-wrap { padding: 18px 40px 0 40px; flex-shrink: 0; }
+    .title-wrap { padding: 18px 40px 0 40px; }
     .title-table { width: 100%; border-collapse: collapse; }
     .title-table td { vertical-align: top; }
     .tt-left  { width: 56%; padding-right: 25px; }
@@ -155,12 +152,11 @@
     .meta-val { color: #2d3743; font-weight: 800; white-space: nowrap; }
 
     /* =============================================
-       CONTENT WRAPPER - FLEXIBLE
+       MAIN CONTENT - NEEDS TO FILL PAGE
     ============================================= */
-    .content-wrapper {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
+    .main-content {
+        min-height: calc(100vh - 380px); /* Push content down */
+        position: relative;
     }
 
     /* =============================================
@@ -168,7 +164,6 @@
     ============================================= */
     .table-wrap { 
         padding: 15px 40px 0 40px;
-        flex-shrink: 0;
     }
 
     .sec-title {
@@ -227,7 +222,6 @@
     .summary-wrap { 
         padding: 10px 40px 0 40px;
         text-align: right;
-        flex-shrink: 0;
     }
     .summary-table { 
         width: 300px; 
@@ -252,7 +246,6 @@
     .grand-total-wrap { 
         padding: 6px 40px 0 40px;
         text-align: right;
-        flex-shrink: 0;
     }
     .grand-total-bar {
         display: inline-table;
@@ -279,21 +272,15 @@
     }
 
     /* =============================================
-       SPACER - PUSHES CLOSING SECTION TO BOTTOM
-    ============================================= */
-    .flex-spacer {
-        flex: 1;
-        min-height: 10px;
-    }
-
-    /* =============================================
-       CLOSING SECTION - NOW AT BOTTOM VIA FLEX
+       CLOSING SECTION - FIXED AT BOTTOM WITH ABSOLUTE
     ============================================= */
     .closing-wrap {
-        flex-shrink: 0;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         padding: 8px 40px 10px 40px;
         background: #ffffff;
-        margin-top: auto;
     }
     .closing-table { 
         width: 100%; 
@@ -391,15 +378,6 @@
     .footer-td strong { color: #ffbd59; font-weight: 700; }
 
     @media print {
-        .page-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-    }
-
-    @media screen {
         .page-footer {
             position: fixed;
             bottom: 0;
@@ -515,8 +493,8 @@
         </table>
     </div>
 
-    {{-- ============ CONTENT WRAPPER ============ --}}
-    <div class="content-wrapper">
+    {{-- ============ MAIN CONTENT WITH ABSOLUTE CLOSING ============ --}}
+    <div class="main-content">
 
         {{-- ============ ITEMS TABLE ============ --}}
         <div class="table-wrap">
@@ -593,10 +571,7 @@
             </table>
         </div>
 
-        {{-- ============ FLEX SPACER - PUSHES CLOSING TO BOTTOM ============ --}}
-        <div class="flex-spacer"></div>
-
-        {{-- ============ CLOSING SECTION - NOW AT BOTTOM VIA FLEX ============ --}}
+        {{-- ============ CLOSING SECTION - ABSOLUTE AT BOTTOM ============ --}}
         <div class="closing-wrap">
             <table class="closing-table">
                 <tr>
