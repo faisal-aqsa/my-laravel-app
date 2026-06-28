@@ -43,85 +43,113 @@
     }
 
     /* =============================================
-       DARK WAVY HEADER
+       HEADER - NEW STYLE WITH LOGO LEFT, CONTENT RIGHT
     ============================================= */
     .header {
-        position: relative;
         background: #2d3743;
-        padding: 20px 40px 70px 40px;
-        overflow: hidden;
+        padding: 25px 40px 25px 40px;
         width: 100%;
     }
 
-    .header-table { width: 100%; border-collapse: collapse; }
-    .header-table td { vertical-align: top; }
-
-    .hdr-left  { width: 58%; }
-    .hdr-right { width: 42%; text-align: right; }
-
-    .logo-badge {
-        display: inline-block;
-        background: #ffffff;
-        border-radius: 10px;
-        padding: 5px;
-        vertical-align: middle;
-        line-height: 0;
+    .header-inner {
+        display: flex;
+        align-items: flex-start;
+        gap: 30px;
+        width: 100%;
     }
-    .logo-img { width: 55px; height: 55px; object-fit: contain; display: block; }
 
-    .brand-block { display: inline-block; vertical-align: middle; padding-left: 10px; }
-    .brand-name {
-        font-size: 18px;
+    /* Logo on left with white background */
+    .header-logo {
+        flex-shrink: 0;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 100px;
+        min-height: 90px;
+    }
+
+    .logo-img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* Right side - company info */
+    .header-info {
+        flex: 1;
+        text-align: right;
+        padding-top: 5px;
+    }
+
+    .company-name {
+        font-size: 22px;
         font-weight: 900;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
         color: #ffffff;
         text-transform: uppercase;
         line-height: 1.1;
     }
-    .brand-tagline {
-        font-size: 7px;
-        letter-spacing: 2px;
+
+    .company-tagline {
+        font-size: 9px;
+        letter-spacing: 3px;
         color: #ffbd59;
         text-transform: uppercase;
         font-weight: 700;
         margin-top: 2px;
     }
-    .brand-recycle {
-        font-size: 7px;
+
+    .company-recycle {
+        font-size: 8px;
         color: rgba(255,255,255,0.45);
         margin-top: 2px;
         letter-spacing: 0.5px;
     }
 
-    .brand-meta {
+    .company-address {
         margin-top: 8px;
-        font-size: 9px;
-        color: rgba(255,255,255,0.62);
-        line-height: 1.4;
-        max-width: 320px;
+        font-size: 10px;
+        color: rgba(255,255,255,0.7);
+        line-height: 1.5;
     }
-    .brand-meta strong { color: #ffbd59; font-weight: 700; }
 
-    .contact-table { border-collapse: collapse; display: inline-table; text-align: left; }
-    .contact-table td { padding: 0 0 0 15px; vertical-align: top; }
-    .contact-label {
+    .company-address strong {
+        color: #ffbd59;
+        font-weight: 700;
+    }
+
+    /* Contact info row - Phone, Email, Web */
+    .contact-info-row {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+
+    .contact-item {
+        text-align: left;
+    }
+
+    .contact-item .label {
         font-size: 7px;
         font-weight: 700;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
         text-transform: uppercase;
         color: #ffbd59;
+        display: block;
         margin-bottom: 2px;
     }
-    .contact-val {
-        font-size: 9px;
-        color: rgba(255,255,255,0.82);
-        line-height: 1.4;
-        white-space: nowrap;
-    }
 
-    .header-wave {
-        position: absolute; left: 0; bottom: -1px;
-        width: 100%; height: 65px; display: block;
+    .contact-item .value {
+        font-size: 10px;
+        color: rgba(255,255,255,0.85);
+        font-weight: 600;
+        white-space: nowrap;
     }
 
     /* =============================================
@@ -421,49 +449,49 @@
                 }
             @endphp
 
+            {{-- NEW HEADER WITH LOGO LEFT, INFO RIGHT --}}
             <div class="header">
-                <table class="header-table">
-                    <tr>
-                        <td class="hdr-left">
-                            @if($logoSrc)
-                                <span class="logo-badge"><img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img"></span>
-                            @endif
-                            <span class="brand-block">
-                                <div class="brand-name">Boxmaker</div>
-                                <div class="brand-tagline">Packaging &amp; Printing</div>
-                                <div class="brand-recycle">&#9851; We Generally Recycle</div>
-                            </span>
-                            <div class="brand-meta">
-                                {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
-                                <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
-                            </div>
-                        </td>
-                        <td class="hdr-right">
-                            <table class="contact-table">
-                                <tr>
-                                    <td>
-                                        <div class="contact-label">Phone</div>
-                                        <div class="contact-val">{{ $settings->phone ?? '+91 9820006001' }}</div>
-                                    </td>
-                                    <td>
-                                        <div class="contact-label">Email</div>
-                                        <div class="contact-val">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</div>
-                                    </td>
-                                    <td>
-                                        <div class="contact-label">Web</div>
-                                        <div class="contact-val">{{ $settings->website_url ?? 'www.myboxmaker.com' }}</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+                <div class="header-inner">
+                    <!-- Logo on left with white bg -->
+                    <div class="header-logo">
+                        @if($logoSrc)
+                            <img src="{{ $logoSrc }}" alt="Boxmaker Logo" class="logo-img">
+                        @else
+                            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="10" width="80" height="80" rx="12" fill="#2d3743" stroke="#ffbd59" stroke-width="4"/>
+                                <text x="50" y="58" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#ffbd59" text-anchor="middle">B</text>
+                                <text x="50" y="78" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">BOX</text>
+                            </svg>
+                        @endif
+                    </div>
 
-                {{-- WAVE DIVIDER --}}
-                <svg class="header-wave" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="#9aa5b0" opacity="0.30" d="M-20,52 C210,96 400,22 620,54 C820,83 1010,30 1220,56 L1220,130 L-20,130 Z"/>
-                    <path fill="#ffffff" d="M-20,80 C230,116 410,54 640,82 C840,106 1020,60 1220,82 L1220,130 L-20,130 Z"/>
-                </svg>
+                    <!-- Right side - company info -->
+                    <div class="header-info">
+                        <div class="company-name">Boxmaker</div>
+                        <div class="company-tagline">Packaging &amp; Printing</div>
+                        <div class="company-recycle">&#9851; We Generally Recycle</div>
+
+                        <div class="company-address">
+                            {{ $settings->address ?? '307, Sai Janak Classic, Near Flyover, Devidas Lane, Borivali West, Mumbai - 400092' }}<br>
+                            <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
+                        </div>
+
+                        <div class="contact-info-row">
+                            <div class="contact-item">
+                                <span class="label">Phone</span>
+                                <span class="value">{{ $settings->phone ?? '+91 9820006001' }}</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="label">Email</span>
+                                <span class="value">{{ $settings->email ?? 'boxmaker@myyahoo.com' }}</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="label">Web</span>
+                                <span class="value">{{ $settings->website_url ?? 'www.myboxmaker.com' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {{-- ============ TITLE / META / RECIPIENT ============ --}}
