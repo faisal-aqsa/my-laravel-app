@@ -19,7 +19,8 @@
     .page {
         width: 100%;
         position: relative;
-        padding-bottom: 64px; /* room for fixed footer */
+        padding-bottom: 80px; /* increased to accommodate fixed footer */
+        min-height: 100vh;
     }
 
     /* =============================================
@@ -195,20 +196,58 @@
     .sig-sub { font-size: 9px; color: #aeb6bf; margin-top: 2px; font-weight: 500; letter-spacing: 0.5px; }
 
     /* =============================================
-       FIXED FOOTER BAR
+       FIXED FOOTER BAR - FIXED
     ============================================= */
     .page-footer {
-        position: fixed; bottom: 0; left: 0; width: 100%;
-        background: #2d3743; border-top: 3px solid #ffbd59;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: #2d3743;
+        border-top: 3px solid #ffbd59;
+        z-index: 999;
     }
-    .footer-table { width: 100%; border-collapse: collapse; }
+    .footer-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
     .footer-td {
-        text-align: center; vertical-align: middle; padding: 12px 10px;
-        font-size: 11.5px; color: rgba(255,255,255,0.72);
-        border-right: 1px solid rgba(255,189,89,0.15); width: 33.33%;
+        text-align: center;
+        vertical-align: middle;
+        padding: 12px 10px;
+        font-size: 11.5px;
+        color: rgba(255,255,255,0.72);
+        border-right: 1px solid rgba(255,189,89,0.15);
+        width: 33.33%;
+        word-wrap: break-word;
     }
     .footer-td:last-child { border-right: none; }
     .footer-td strong { color: #ffbd59; font-weight: 700; }
+
+    /* Print styles */
+    @media print {
+        .page-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .page {
+            padding-bottom: 80px;
+        }
+    }
+
+    /* Screen fix for footer visibility */
+    @media screen {
+        .page-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
 </style>
 
 <body>
