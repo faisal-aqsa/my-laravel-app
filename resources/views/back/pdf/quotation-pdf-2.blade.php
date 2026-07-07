@@ -170,7 +170,7 @@
     }
 
     .for-label {
-        font-size: 8px;
+        font-size: 9px;
         font-weight: 700;
         letter-spacing: 1.5px;
         text-transform: uppercase;
@@ -178,17 +178,17 @@
         margin-bottom: 4px;
     }
     .for-name {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 800;
         color: #2d3743;
         margin-bottom: 3px;
         line-height: 1.2;
     }
-    .for-detail { font-size: 10px; color: #6b7682; line-height: 1.4; }
+    .for-detail { font-size: 11px; color: #6b7682; line-height: 1.45; }
     .for-detail strong { color: #2d3743; }
 
     .meta-table { border-collapse: collapse; display: inline-table; text-align: left; }
-    .meta-table td { padding: 3px 0; font-size: 11px; vertical-align: top; }
+    .meta-table td { padding: 3px 0; font-size: 12px; vertical-align: top; }
     .meta-key { color: #9aa5b0; font-weight: 600; white-space: nowrap; }
     .meta-gap { width: 20px; }
     .meta-val { color: #2d3743; font-weight: 800; white-space: nowrap; }
@@ -204,7 +204,7 @@
     .table-wrap { padding: 15px 0 0 0; }
 
     .sec-title {
-        font-size: 7px;
+        font-size: 8px;
         font-weight: 700;
         letter-spacing: 2px;
         text-transform: uppercase;
@@ -217,7 +217,7 @@
     .items-table { width: 100%; border-collapse: collapse; }
 
     .items-table thead th {
-        font-size: 8px;
+        font-size: 9px;
         font-weight: 800;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -233,21 +233,21 @@
     .items-table tbody tr:nth-child(odd)  { background: #ffffff; }
     .items-table tbody td {
         padding: 8px 10px;
-        font-size: 11px;
+        font-size: 12px;
         color: #2d3743;
         vertical-align: middle;
         border-bottom: 1px solid #eceff3;
     }
     .items-table tbody td.center { text-align: center; }
     .items-table tbody td.right  { text-align: right; padding-right: 12px; font-weight: 800; }
-    .items-table tbody td.num    { color: #aeb6bf; font-weight: 800; font-size: 10px; width: 35px; }
+    .items-table tbody td.num    { color: #aeb6bf; font-weight: 800; font-size: 11px; width: 35px; }
 
     .gsm-pill {
         display: inline-block;
         background: #ffffff;
         border: 1px solid #d9dee5;
         color: #2d3743;
-        font-size: 9px;
+        font-size: 10px;
         font-weight: 700;
         padding: 2px 8px;
         border-radius: 20px;
@@ -265,7 +265,7 @@
     }
     .summary-table td {
         padding: 4px 0;
-        font-size: 11px;
+        font-size: 12px;
         color: #6b7682;
         border-bottom: 1px solid #f0f3f7;
         vertical-align: middle;
