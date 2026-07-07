@@ -303,7 +303,7 @@ class QuotationController extends Controller
         $quotation = Quotation::with(['items', 'client'])->findOrFail($id);
         $settings = Setting::first();
         
-        $pdf = SnappyPdf::loadView('back.pdf.quotation-pdf', compact('quotation', 'settings'))
+        $pdf = SnappyPdf::loadView('back.pdf.quotation-pdf-2', compact('quotation', 'settings'))
                 ->setOption('enable-local-file-access', true)
                 ->setOption('margin-top', 0)
                 ->setOption('margin-bottom', 0)
