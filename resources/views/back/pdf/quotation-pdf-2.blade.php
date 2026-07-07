@@ -456,7 +456,7 @@
                                 <div class="brand-recycle">&#9851; We Generally Recycle</div> --}}
 
                                 <div class="brand-address">
-                                    {{ $settings->address ?? 'Office No: 307, Sai Janak Classic, Near Flyover, Devidas lane, Borivali West. Mumbai - 400092' }}<br>
+                                    {{ $settings->address ?? 'Office : 307, Sai Janak Classic, Near Flyover, Devidas lane, Borivali West. Mumbai - 400092' }}<br>
                                     <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
                                 </div>
 
