@@ -451,9 +451,9 @@
                                 </div>
 
                                 <div class="panel-content">
-                                <div class="brand-name">Boxmaker</div>
-                                <div class="brand-tagline">Packaging &amp; Printing</div>
-                                <div class="brand-recycle">&#9851; We Generally Recycle</div>
+                                <div class="brand-name">QUOTATION</div>
+                                {{-- <div class="brand-tagline">Packaging &amp; Printing</div>
+                                <div class="brand-recycle">&#9851; We Generally Recycle</div> --}}
 
                                 <div class="brand-address">
                                     {{ $settings->address ?? 'Office No: 307, Sai Janak Classic, Near Flyover, Devidas lane, Borivali West. Mumbai - 400092' }}<br>
@@ -519,7 +519,7 @@
                             </div>
                         </td>
                         <td class="tt-right">
-                            <div class="big-quotation">QUOTATION</div>
+                            {{-- <div class="big-quotation">QUOTATION</div> --}}
                             <table class="meta-table">
                                 <tr>
                                     <td class="meta-key">Quotation No</td>
@@ -594,10 +594,10 @@
                 {{-- ============ SUMMARY ============ --}}
                 <div class="summary-wrap">
                     <table class="summary-table">
-                        <tr>
+                        {{-- <tr>
                             <td>Subtotal</td>
                             <td>₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td>Taxes</td>
                             <td>{{ $quotation->is_tax_included ? 'Included' : '—' }}</td>
@@ -622,14 +622,14 @@
                 </div>
 
                 {{-- ============ GRAND TOTAL BAR ============ --}}
-                <div class="grand-total-wrap">
+                {{-- <div class="grand-total-wrap">
                     <table class="grand-total-bar">
                         <tr>
                             <td class="gt-label">Total (INR)</td>
                             <td class="gt-value">₹{{ number_format($quotation->items->sum(fn($i) => $i->base_price), 2) }}</td>
                         </tr>
                     </table>
-                </div>
+                </div> --}}
             </div>
 
         </div>
