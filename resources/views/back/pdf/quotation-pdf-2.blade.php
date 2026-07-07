@@ -510,12 +510,12 @@
                             <div class="for-name">{{ $quotation->client->name ?? 'N/A' }}</div>
                             <div class="for-detail">
                                 @if($quotation->client->factory_address ?? $quotation->client->address ?? false)
-                                    {{ $quotation->client->factory_address ?? $quotation->client->address }}<br>
+                                    <div style="margin-bottom:5px;">{{ $quotation->client->factory_address ?? $quotation->client->address }}</div>
                                 @endif
-                                @if($quotation->client->gst_no ?? false)<strong>GSTIN:</strong> {{ $quotation->client->gst_no }}<br>@endif
-                                @if($quotation->client->phone ?? false)<strong>Phone:</strong> {{ $quotation->client->phone }}<br>@endif
-                                @if($quotation->client->email ?? false)<strong>Email:</strong> {{ $quotation->client->email }}<br>@endif
-                                @if($quotation->quotation_for ?? false)<strong>For:</strong> {{ $quotation->quotation_for }}@endif
+                                @if($quotation->client->gst_no ?? false)<div style="margin-bottom:5px;"><strong>GSTIN:</strong> {{ $quotation->client->gst_no }}</div>@endif
+                                @if($quotation->client->phone ?? false)<div style="margin-bottom:5px;"><strong>Phone:</strong> {{ $quotation->client->phone }}</div>@endif
+                                @if($quotation->client->email ?? false)<div style="margin-bottom:5px;"><strong>Email:</strong> {{ $quotation->client->email }}</div>@endif
+                                @if($quotation->quotation_for ?? false)<div><strong>For:</strong> {{ $quotation->quotation_for }}</div>@endif
                             </div>
                         </td>
                         <td class="tt-right">
