@@ -299,6 +299,16 @@
     }
     .gt-value { text-align: right; font-size: 15px; font-weight: 900; }
 
+    .order-note {
+        width: 100%;
+        text-align: center;
+        margin-top: 140px;   /* Adjust according to your layout */
+        font-size: 28px;
+        font-weight: bold;
+        color: #2d3743;
+        line-height: 1.4;
+    }
+
     /* =============================================
        CLOSING SECTION - BOTTOM ALIGNED
     ============================================= */
@@ -640,19 +650,25 @@
         </div>
     </div>
 
+    <div class="order-note">
+        @if($quotation->notes)
+            {{ $quotation->notes }}
+        @endif
+    </div>
+
     {{-- ============ CLOSING ROW - BOTTOM ALIGNED ============ --}}
     <div class="page-row">
         <div class="page-cell-bottom">
             <div class="closing-wrap">
                 <table class="closing-table">
                     <tr>
-                        <td class="cl-left">
+                        {{-- <td class="cl-left">
                             <div class="thanks">Thank you for your business!</div>
                             @if($quotation->notes)
                             <div class="notes-title">Additional Notes</div>
                             <div class="notes-body">{{ $quotation->notes }}</div>
                             @endif
-                        </td>
+                        </td> --}}
                         <td class="cl-right">
                             @php
                                 $settings = $settings ?? \App\Models\Setting::first();
