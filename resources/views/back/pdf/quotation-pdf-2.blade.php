@@ -77,7 +77,7 @@
         overflow: hidden;
         background: #2d3743;
         border-radius: 64px 20px 20px 64px;
-        padding: 22px 156px 22px 44px;   /* big right pad reserves room for decorations */
+        padding: 22px 156px 22px 50px;   /* big right pad reserves room for decorations */
         min-height: 132px;
     }
 
