@@ -182,7 +182,7 @@
     .tt-right {
         width: 44%;
         text-align: right;
-        padding-top: 60px; 
+        padding-top: 40px; 
     }
 
     .big-quotation {
