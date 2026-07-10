@@ -231,6 +231,7 @@
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #2d3743;
+        margin-top: 20px;
         margin-bottom: 8px;
         padding-left: 8px;
         border-left: 3px solid #ffbd59;
