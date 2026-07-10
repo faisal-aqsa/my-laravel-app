@@ -192,7 +192,7 @@
     }
 
     .for-label {
-        font-size: 9px;
+        font-size: 15px;
         font-weight: 700;
         letter-spacing: 1.5px;
         text-transform: uppercase;
