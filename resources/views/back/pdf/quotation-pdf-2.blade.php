@@ -120,6 +120,9 @@
         line-height: 1.5;
     }
     .brand-address strong { color: #ffbd59; font-weight: 700; }
+    .address h5 {
+        font-size: 12px;
+    }
 
     .brand-contacts { margin-top: 11px; }
     .brand-contacts-table { border-collapse: collapse; }
@@ -489,7 +492,10 @@
                                 <div class="brand-recycle">&#9851; We Generally Recycle</div> --}}
 
                                 <div class="brand-address">
-                                    {{ $settings->address ?? 'Office : 307, Sai Janak Classic, Near Flyover, Devidas lane, Borivali West. Mumbai - 400092' }}<br>
+                                    <div class="address">
+                                        <h5>{{ $settings->address ?? 'Office : 307, Sai Janak Classic, Near Flyover, Devidas lane, Borivali West. Mumbai - 400092' }}</h5>
+                                    </div>
+                                    <br>
                                     <strong>GSTIN:</strong> {{ $settings->gst_no ?? '27ABDFB7083N1ZY' }}
                                 </div>
 
