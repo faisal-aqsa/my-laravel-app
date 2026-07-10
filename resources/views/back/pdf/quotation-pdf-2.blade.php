@@ -119,7 +119,7 @@
         color: rgba(255,255,255,0.72);
         line-height: 1.5;
     }
-    .brand-address strong { color: #ffbd59; font-weight: 700; font-size: 18px; }
+    .brand-address strong { color: #ffbd59; font-weight: 700; }
 
     .brand-contacts { margin-top: 11px; }
     .brand-contacts-table { border-collapse: collapse; }
