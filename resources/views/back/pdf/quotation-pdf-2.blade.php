@@ -303,8 +303,8 @@
         width: 100%;
         text-align: center;
         margin-top: 140px;   /* Adjust according to your layout */
-        font-size: 28px;
-        font-weight: bold;
+        font-size: 14px;
+        /* font-weight: bold; */
         color: #2d3743;
         line-height: 1.4;
     }
