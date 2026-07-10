@@ -158,7 +158,12 @@
     .title-table { width: 100%; border-collapse: collapse; }
     .title-table td { vertical-align: top; }
     .tt-left  { width: 56%; padding-right: 25px; }
-    .tt-right { width: 44%; text-align: right; }
+    /* .tt-right { width: 44%; text-align: right; } */
+    .tt-right {
+        width: 44%;
+        text-align: right;
+        padding-top: 60px; 
+    }
 
     .big-quotation {
         font-size: 30px;
