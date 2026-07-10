@@ -89,7 +89,7 @@
     .panel-content { position: relative; z-index: 2; }
 
     .brand-name {
-        font-size: 25px;
+        font-size: 30px;
         font-weight: 900;
         letter-spacing: 3px;
         color: #ffffff;
@@ -119,7 +119,7 @@
         color: rgba(255,255,255,0.72);
         line-height: 1.5;
     }
-    .brand-address strong { color: #ffbd59; font-weight: 700; }
+    .brand-address strong { color: #ffbd59; font-weight: 700; font-size: 18px; }
 
     .brand-contacts { margin-top: 11px; }
     .brand-contacts-table { border-collapse: collapse; }
@@ -513,20 +513,20 @@
                                 </div>{{-- /.panel-content --}}
 
                                 {{-- geometric decorations (clipped on the right edge) --}}
-                                <div class="panel-decor">
+                                {{-- <div class="panel-decor">
                                     <svg viewBox="0 0 156 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                                        {{-- <circle cx="156" cy="64" r="74" fill="none" stroke="#3f4d5e" stroke-width="11"/>
+                                        <circle cx="156" cy="64" r="74" fill="none" stroke="#3f4d5e" stroke-width="11"/>
                                         <circle cx="156" cy="64" r="54" fill="none" stroke="#ffbd59" stroke-width="8"/>
                                         <circle cx="156" cy="64" r="35" fill="none" stroke="#ffffff" stroke-opacity="0.88" stroke-width="6"/>
-                                        <circle cx="156" cy="64" r="15" fill="#ffbd59"/> --}}
+                                        <circle cx="156" cy="64" r="15" fill="#ffbd59"/>
                                         <rect x="14" y="18" width="3" height="42" rx="1.5" fill="#ffbd59" opacity="0.85"/>
                                         <rect x="22" y="18" width="3" height="42" rx="1.5" fill="#5b6a7a"/>
                                         <rect x="30" y="18" width="3" height="42" rx="1.5" fill="#ffbd59" opacity="0.85"/>
-                                        {{-- <circle cx="16" cy="78" r="3" fill="#5b6a7a"/>
+                                        <circle cx="16" cy="78" r="3" fill="#5b6a7a"/>
                                         <circle cx="25" cy="78" r="3" fill="#5b6a7a"/>
-                                        <circle cx="34" cy="78" r="3" fill="#5b6a7a"/> --}}
+                                        <circle cx="34" cy="78" r="3" fill="#5b6a7a"/>
                                     </svg>
-                                </div>
+                                </div> --}}
                             </div>
                         </td>
                     </tr>
