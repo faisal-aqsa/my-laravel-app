@@ -142,14 +142,31 @@
     }
 
     /* geometric decoration clipped on the right edge */
-    .panel-decor {
+    /* .panel-decor {
         position: absolute;
         top: 0; right: 0; bottom: 0;
         width: 156px;
         z-index: 2;
         pointer-events: none;
     }
-    .panel-decor svg { display: block; width: 100%; height: 100%; }
+    .panel-decor svg { display: block; width: 100%; height: 100%; } */
+
+    .panel-decor {
+        position: absolute;
+        top: 50%;
+        right: 25px;              /* Space from the right edge */
+        transform: translateY(-50%);
+        width: 40px;              /* Only enough width for the bars */
+        height: 80px;             /* Increase overall height */
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .panel-decor svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
 
     /* =============================================
        TITLE + META + RECIPIENT
