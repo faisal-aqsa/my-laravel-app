@@ -121,7 +121,7 @@
     }
     .brand-address strong { color: #ffbd59; font-weight: 700; }
     .address h5 {
-        font-size: 1px;
+        font-size: 10px;
     }
 
     .brand-contacts { margin-top: 11px; }
